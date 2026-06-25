@@ -2,30 +2,20 @@
 
 ## Completed
 
-- Created a Vite-powered React and TypeScript single-page application.
-- Added shadcn/ui-style shared components backed by Radix primitives.
-- Added a bold analytics visual system and responsive application shell.
-- Implemented browser-local seeded state, persistence, role capabilities, mock jobs,
-  notifications, editing, approval, publication, and share-token behavior.
-- Implemented the product-plan routes for workspaces, run configuration, tools,
-  baseline, snapshots, assessment editing, preview, review, jobs, notifications,
-  settings, and client-safe published reports.
-- Added four data-driven report templates/pages to prove page-set extensibility.
-- Added an organization-level admin dashboard, persistent multi-customer portfolio,
-  dynamic customer routes, and a functional create-customer workflow.
+- Migrated the runtime from Vite to Next.js App Router while keeping React and strict TypeScript.
+- Added secure server route handlers for authentication, cookie sessions, authenticated user APIs, and crawler API-key proxying.
+- Implemented login, first-admin setup, invitation activation, forgot/reset password, logout, profile, and password-change flows.
+- Implemented the operational dashboard, all crawler tool synchronization, and full admin users/invitations/audit interface.
+- Added responsive role-aware navigation, loading/error/empty states, confirmation flows, accessible labels, and neutral enterprise styling.
 
 ## Decisions
 
-- The frontend uses React Router and Vite rather than Next.js.
-- No API routes, database, server mutations, or real authentication exist.
-- Product state is authoritative in `localStorage` under `signalops-state`.
-- Lysol is one seeded customer example; customer workspace navigation is data-driven.
-- Standard product controls compose shared shadcn-style components; report-specific
-  charts and canvases are custom React components.
+- JWTs are stored only in the `dha_access_token` HTTP-only cookie.
+- `BACKEND_API_TOKEN_SECRET` and `CRAWLER_API_KEY` are read only by Next.js route handlers.
+- Visual components call typed API modules and never call backend endpoints directly.
+- The visible application only exposes features backed by the supplied APIs.
 
-## Known Limitations
+## Known Gaps
 
-- Share links only resolve in the browser that created them.
-- Timed background processing is represented through controllable mock job states.
-- Export, real integrations, email delivery, and secure access controls are visual
-  placeholders only.
+- Baseline, review, report, workspace, and publication features remain intentionally excluded until backend contracts are available.
+- Browser verification requires a reachable backend or a configured test backend.
