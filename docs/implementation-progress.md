@@ -19,3 +19,23 @@
 
 - Baseline, review, report, workspace, and publication features remain intentionally excluded until backend contracts are available.
 - Browser verification requires a reachable backend or a configured test backend.
+
+## Product Expansion Plan
+
+The complete frontend delivery plan is now documented in:
+
+- `docs/frontend/README.md`
+- `docs/frontend/phased-roadmap.md`
+- `docs/frontend/implementation-blueprint.md`
+
+The matching backend delivery plan is now documented in:
+
+- `docs/backend/README.md`
+- `docs/backend/phased-roadmap.md`
+- `docs/backend/implementation-blueprint.md`
+
+The expanded product direction is a React TypeScript single-page application with React Router, TanStack Query, page-based routing folders, feature modules, typed API services, and a Python/FastAPI backend.
+
+The previous Next.js notes above describe the existing/legacy implementation context only. New product planning should follow the React TypeScript SPA documents under `docs/frontend`.
+
+The next recommended implementation boundary is the frontend foundation and workspace shell, followed by website intake, page discovery, competitor approval, and persistent tool-run workflows.
