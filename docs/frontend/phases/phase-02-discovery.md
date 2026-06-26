@@ -89,10 +89,14 @@ src/features/scope/
 8. Add stale/discovery-failed states.
 9. Add tests for page selection and scope approval.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - Discovery survives refresh/navigation.
 - User can manually add missing pages.
 - User can classify homepage, PDP, PLP, landing, article, and other page types.
 - Approved scope is saved as a versioned record.
-

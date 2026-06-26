@@ -50,6 +50,10 @@ The frontend must not implement authoritative business logic that belongs to the
 
 Do not add explanatory text to every container/card/panel just to describe what it does. Use clean titles, labels, actions, empty states, and contextual helper text only where it genuinely helps the user make a decision. The UI should feel professional and operational, not like every box is narrating itself.
 
+Container descriptions are opt-in, not default. Do not add a `description` prop, `CardDescription`, helper paragraph, or footer tagline just because a component has a slot for it. A title, status, table header, field label, or action is enough unless the text removes real ambiguity or prevents a mistake.
+
+Do not use internal platform, security, compliance, or access-control slogans as user-facing product copy. Keep visible text focused on the product work: workspaces, discovery, tool runs, evidence, methodology, scoring, reviews, reports, and publication.
+
 If the implementation is uncertain, prefer a small, typed, clearly named UI skeleton over invented logic.
 
 ### API integration rule for every page
@@ -164,7 +168,7 @@ Each product area should have a slightly different UI personality while still fe
 | Snapshot | Executive summary, visual, trend-aware, boardroom-ready |
 | Review | Collaboration queue, comments, decisions, accountable actions |
 | Reports | Publishing studio, polished preview, careful confirmation |
-| Permissions | Enterprise control panel, explicit, safe, auditable |
+| Permissions | Enterprise control panel, explicit, controlled, clear |
 
 ### UI component tone
 

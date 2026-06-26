@@ -6,7 +6,7 @@
 - Added secure server route handlers for authentication, cookie sessions, authenticated user APIs, and crawler API-key proxying.
 - Implemented login, first-admin setup, invitation activation, forgot/reset password, logout, profile, and password-change flows.
 - Implemented the operational dashboard, all crawler tool synchronization, and full admin users/invitations/audit interface.
-- Added responsive role-aware navigation, loading/error/empty states, confirmation flows, accessible labels, and neutral enterprise styling.
+- Added responsive product navigation, loading/error/empty states, confirmation flows, accessible labels, and neutral enterprise styling.
 
 ## Decisions
 

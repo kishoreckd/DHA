@@ -11,9 +11,15 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
-      reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
+    plugins: {
+      "react-hooks": reactHooks,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+    },
     languageOptions: {
       ecmaVersion: 2022,
       globals: globals.browser,

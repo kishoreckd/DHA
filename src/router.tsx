@@ -17,6 +17,24 @@ import { ToolSyncPage } from "@/features/tools/tool-sync-page";
 import { ProfilePage } from "@/features/settings/profile-page";
 import { SecurityPage } from "@/features/settings/security-page";
 import { AdminUsersPage } from "@/features/users/admin-users-page";
+import { MethodologiesPage } from "@/pages/admin/methodologies/MethodologiesPage";
+import { MethodologyCreatePage } from "@/pages/admin/methodologies/MethodologyCreatePage";
+import { MethodologyDetailPage } from "@/pages/admin/methodologies/MethodologyDetailPage";
+import { MethodologyMetricsPage } from "@/pages/admin/methodologies/MethodologyMetricsPage";
+import { AdminToolsPage } from "@/pages/admin/tools/AdminToolsPage";
+import { CompetitorsPage } from "@/pages/competitors/CompetitorsPage";
+import { DiscoveryPage } from "@/pages/discovery/DiscoveryPage";
+import { ScopeReviewPage } from "@/pages/discovery/ScopeReviewPage";
+import { PropertiesListPage } from "@/pages/properties/PropertiesListPage";
+import { PropertyDetailPage } from "@/pages/properties/PropertyDetailPage";
+import { ToolRunDetailPage } from "@/pages/tools/ToolRunDetailPage";
+import { ToolRunsPage } from "@/pages/tools/ToolRunsPage";
+import { ToolsCatalogPage } from "@/pages/tools/ToolsCatalogPage";
+import { WorkspaceCreatePage } from "@/pages/workspaces/WorkspaceCreatePage";
+import { WorkspaceMembersPage } from "@/pages/workspaces/WorkspaceMembersPage";
+import { WorkspaceOverviewPage } from "@/pages/workspaces/WorkspaceOverviewPage";
+import { WorkspaceSettingsPage } from "@/pages/workspaces/WorkspaceSettingsPage";
+import { WorkspacesListPage } from "@/pages/workspaces/WorkspacesListPage";
 
 export function AppRouter() {
   return (
@@ -29,7 +47,7 @@ export function AppRouter() {
         <Route
           path="/login"
           element={
-            <AuthFrame title="Welcome back" description="Sign in with your DHA account.">
+            <AuthFrame title="Welcome back">
               <LoginForm />
             </AuthFrame>
           }
@@ -37,10 +55,7 @@ export function AppRouter() {
         <Route
           path="/forgot-password"
           element={
-            <AuthFrame
-              title="Reset your password"
-              description="Enter your email and we'll send a reset link."
-            >
+            <AuthFrame title="Reset your password">
               <ForgotPasswordForm />
             </AuthFrame>
           }
@@ -48,10 +63,7 @@ export function AppRouter() {
         <Route
           path="/reset-password"
           element={
-            <AuthFrame
-              title="Set a new password"
-              description="Enter and confirm your new password below."
-            >
+            <AuthFrame title="Set a new password">
               <ResetPasswordForm />
             </AuthFrame>
           }
@@ -59,10 +71,7 @@ export function AppRouter() {
         <Route
           path="/set-password"
           element={
-            <AuthFrame
-              title="Activate your account"
-              description="Set your username and password to get started."
-            >
+            <AuthFrame title="Activate your account">
               <InvitationPasswordForm />
             </AuthFrame>
           }
@@ -70,10 +79,7 @@ export function AppRouter() {
         <Route
           path="/setup/admin"
           element={
-            <AuthFrame
-              title="Initial setup"
-              description="Create the first administrator account."
-            >
+            <AuthFrame title="Initial setup">
               <AdminSetupForm />
             </AuthFrame>
           }
@@ -82,10 +88,28 @@ export function AppRouter() {
         {/* Authenticated routes — wrapped in AuthGuard + ProductShell */}
         <Route element={<AuthGuard />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/workspaces" element={<WorkspacesListPage />} />
+          <Route path="/workspaces/new" element={<WorkspaceCreatePage />} />
+          <Route path="/workspaces/:workspaceId" element={<WorkspaceOverviewPage />} />
+          <Route path="/workspaces/:workspaceId/settings" element={<WorkspaceSettingsPage />} />
+          <Route path="/workspaces/:workspaceId/members" element={<WorkspaceMembersPage />} />
+          <Route path="/workspaces/:workspaceId/properties" element={<PropertiesListPage />} />
+          <Route path="/workspaces/:workspaceId/properties/:propertyId" element={<PropertyDetailPage />} />
+          <Route path="/workspaces/:workspaceId/discovery" element={<DiscoveryPage />} />
+          <Route path="/workspaces/:workspaceId/competitors" element={<CompetitorsPage />} />
+          <Route path="/workspaces/:workspaceId/scope" element={<ScopeReviewPage />} />
+          <Route path="/workspaces/:workspaceId/tools" element={<ToolsCatalogPage />} />
+          <Route path="/workspaces/:workspaceId/tool-runs" element={<ToolRunsPage />} />
+          <Route path="/workspaces/:workspaceId/tool-runs/:runId" element={<ToolRunDetailPage />} />
           <Route path="/tools/sync" element={<ToolSyncPage />} />
           <Route path="/settings/profile" element={<ProfilePage />} />
           <Route path="/settings/security" element={<SecurityPage />} />
           <Route path="/admin/users" element={<AdminUsersPage />} />
+          <Route path="/admin/methodologies" element={<MethodologiesPage />} />
+          <Route path="/admin/methodologies/new" element={<MethodologyCreatePage />} />
+          <Route path="/admin/methodologies/:methodologyId" element={<MethodologyDetailPage />} />
+          <Route path="/admin/methodologies/:methodologyId/metrics" element={<MethodologyMetricsPage />} />
+          <Route path="/admin/tools" element={<AdminToolsPage />} />
         </Route>
 
         {/* 404 fallback */}

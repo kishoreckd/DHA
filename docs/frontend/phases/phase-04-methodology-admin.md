@@ -73,10 +73,14 @@ src/features/admin-tools/
 7. Add publish flow with warnings.
 8. Add tests for validation and immutable published versions.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - Published methodologies cannot be edited.
 - Invalid weights or broken mappings block publication.
 - Historical assessments display their original methodology version.
 - Admin-only actions are permission gated.
-

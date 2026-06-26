@@ -3,6 +3,7 @@ import { Eye, EyeOff, LoaderCircle, ShieldCheck } from "lucide-react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { z } from "zod";
 import { authApi } from "@/lib/api/auth";
@@ -23,7 +24,7 @@ export function AuthFrame({
 }: {
   children: React.ReactNode;
   title: string;
-  description: string;
+  description?: string;
 }) {
   return (
     <main className="grid min-h-screen grid-cols-1 md:grid-cols-[minmax(380px,.95fr)_minmax(500px,1.05fr)] bg-white">
@@ -40,19 +41,12 @@ export function AuthFrame({
         </div>
         <div className="hidden md:block">
           <span className="text-[10px] font-extrabold tracking-widest text-[#74a7ff] uppercase">
-            SECURE OPERATIONS WORKSPACE
+            DIGITAL ASSESSMENT PLATFORM
           </span>
           <h1 className="mt-3 mb-4 text-[clamp(38px,5vw,62px)] font-bold leading-[1.03] tracking-[-0.055em] max-w-xl">
-            Assessment work without the operational noise.
+            DHA
           </h1>
-          <p className="max-w-xl text-[17px] leading-[1.7] text-[#b8c5d8]">
-            Run assessment tools, manage secure user access, and keep authentication activity
-            auditable.
-          </p>
         </div>
-        <small className="text-[#8495ae] hidden md:block">
-          Protected sessions · Role-aware access · Auditable workflows
-        </small>
       </section>
 
       {/* Right — card */}
@@ -60,7 +54,7 @@ export function AuthFrame({
         <div className="w-full max-w-[430px]">
           <header className="mb-6">
             <h2 className="text-[29px] font-bold tracking-[-0.025em] mb-2">{title}</h2>
-            <p className="text-muted-foreground leading-relaxed">{description}</p>
+            {description && <p className="text-muted-foreground leading-relaxed">{description}</p>}
           </header>
           {children}
         </div>
@@ -71,6 +65,7 @@ export function AuthFrame({
 
 export function LoginForm() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -81,6 +76,8 @@ export function LoginForm() {
   async function submit(values: z.infer<typeof loginSchema>) {
     try {
       await authApi.login(values);
+      // Invalidate the cached session so AuthGuard re-fetches with the new cookie
+      await queryClient.invalidateQueries({ queryKey: ["session"] });
       toast.success("Signed in successfully");
       navigate(searchParams.get("returnTo") || "/dashboard", { replace: true });
     } catch (error) {

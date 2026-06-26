@@ -79,10 +79,14 @@ draft -> in_review -> approved -> published -> superseded
 6. Build publication actions with confirmations.
 7. Add tests for publication immutability.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - Published output references frozen source versions.
 - Published reports cannot change in place.
 - HTML and PDF are based on the same report version.
 - Unauthorized users cannot view restricted publications.
-

@@ -46,10 +46,14 @@ src/features/audit/
 9. Add degraded-state screens for backend/job outages.
 10. Document support playbooks.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - Core flows pass E2E tests.
 - Key pages meet agreed performance budgets.
 - Accessibility review has no critical violations.
 - Telemetry can identify failed workflows and affected users.
-

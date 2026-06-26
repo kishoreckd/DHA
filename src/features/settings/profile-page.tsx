@@ -58,7 +58,6 @@ export function ProfilePage() {
       <PageHeader
         eyebrow="ACCOUNT SETTINGS"
         title="Profile"
-        description="Keep your account identity and display information current."
       />
       <Card className="max-w-[900px]">
         <CardContent className="pt-6">

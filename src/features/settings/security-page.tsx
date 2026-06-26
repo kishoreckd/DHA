@@ -51,7 +51,6 @@ export function SecurityPage() {
       <PageHeader
         eyebrow="ACCOUNT SETTINGS"
         title="Security"
-        description="Change your password. All active access is ended after a successful change."
       />
       <Card className="max-w-[620px]">
         <CardContent className="pt-6">
@@ -62,9 +61,6 @@ export function SecurityPage() {
             </span>
             <div>
               <h2 className="font-semibold text-base m-0">Change password</h2>
-              <p className="text-sm text-muted-foreground m-0">
-                You will be signed out and must authenticate again.
-              </p>
             </div>
           </div>
 

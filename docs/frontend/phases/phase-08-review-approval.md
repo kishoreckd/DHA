@@ -71,9 +71,13 @@ draft -> submitted -> in_review -> changes_requested -> approved
 6. Add version comparison panel.
 7. Add tests for permission-gated approvals.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - Only authorized reviewers can approve.
 - Approval records exact baseline, snapshot, report, and methodology versions.
 - Changes after approval require a new review.
-

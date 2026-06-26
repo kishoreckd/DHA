@@ -65,10 +65,14 @@ src/features/audit/
 5. Build audit log browser.
 6. Add tests for hidden, disabled, and denied actions.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - Frontend receives effective permissions from backend.
 - Backend `403` remains authoritative.
 - Permission changes do not require frontend deployment.
 - Users get clear explanations when access is denied.
-

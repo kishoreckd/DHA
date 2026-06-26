@@ -69,9 +69,13 @@ src/features/evidence/
 6. Add metric/page/tool filters.
 7. Add tests for accept/reject/manual evidence flows.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - Every accepted observation links to evidence or is clearly marked manual.
 - Missing required evidence is visible before baseline generation.
-- Evidence decisions are auditable.
-
+- Evidence decisions are recorded with clear reviewer, timestamp, and rationale details.

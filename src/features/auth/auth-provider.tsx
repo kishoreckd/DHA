@@ -6,6 +6,7 @@ import type { User } from "@/types/auth";
 type AuthContextValue = {
   user: User | null;
   isLoading: boolean;
+  isFetching: boolean;
   isError: boolean;
   refetch: () => void;
 };
@@ -23,6 +24,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       value={{
         user: query.data ?? null,
         isLoading: query.isLoading,
+        isFetching: query.isFetching,
         isError: query.isError,
         refetch: () => void query.refetch(),
       }}

@@ -3,6 +3,7 @@ import { ApiError, type ApiResponse } from "@/types/api";
 export async function apiRequest<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, {
     ...init,
+    credentials: "include",
     headers: {
       ...(init?.body ? { "Content-Type": "application/json" } : {}),
       ...init?.headers,

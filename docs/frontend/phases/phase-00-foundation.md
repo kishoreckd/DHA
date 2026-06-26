@@ -101,6 +101,11 @@ src/
 9. Add a small test for API error normalization.
 10. Update the implementation progress document.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - The app builds successfully.
@@ -109,4 +114,3 @@ src/
 - Shared page states are available.
 - One existing flow uses the new API/query conventions.
 - Tests pass.
-

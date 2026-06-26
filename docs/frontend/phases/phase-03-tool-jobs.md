@@ -86,10 +86,14 @@ stale
 7. Add artifact viewer/link handling.
 8. Add tests for polling stop conditions and retry.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - Refreshing the page does not lose run state.
 - Failed runs can be retried individually.
 - Artifacts are accessible only through authorized URLs.
 - Historical runs remain visible after resync.
-

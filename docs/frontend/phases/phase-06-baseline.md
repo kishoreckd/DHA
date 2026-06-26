@@ -86,10 +86,14 @@ draft -> ready_for_review -> in_review -> approved -> archived
 8. Add version history.
 9. Add tests for autosave, conflict, and evidence linking.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - Baseline can be generated from accepted evidence.
 - Analysts can edit without losing evidence provenance.
 - Approved versions cannot be mutated.
 - A new version can be created from an older approved baseline.
-

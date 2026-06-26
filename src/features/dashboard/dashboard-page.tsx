@@ -3,7 +3,7 @@ import { ArrowRight, KeyRound, Play, ShieldCheck, UserRound, Users } from "lucid
 import { PageHeader } from "@/components/common/product-ui";
 import { useAuth } from "@/features/auth/auth-provider";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function DashboardPage() {
   const { user } = useAuth();
@@ -12,7 +12,6 @@ export function DashboardPage() {
       <PageHeader
         eyebrow="OPERATIONS OVERVIEW"
         title={`Welcome${user?.first_name ? `, ${user.first_name}` : ""}`}
-        description="Run the currently available assessment tools and manage your account."
         actions={
           <Button asChild>
             <Link to="/tools/sync">
@@ -58,9 +57,6 @@ export function DashboardPage() {
               AVAILABLE NOW
             </span>
             <CardTitle>Assessment tool synchronization</CardTitle>
-            <CardDescription>
-              Use the crawler endpoints currently provided by the backend.
-            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">

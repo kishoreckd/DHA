@@ -2,16 +2,21 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Bell,
   ChartNoAxesCombined,
+  ClipboardList,
+  Globe2,
   LayoutDashboard,
   LogOut,
   Menu,
+  Search,
   Settings,
   ShieldCheck,
   UserRound,
   Users,
+  Wrench,
   X,
 } from "lucide-react";
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { authApi } from "@/lib/api/auth";
@@ -19,9 +24,11 @@ import { useAuth } from "@/features/auth/auth-provider";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { WorkspaceSwitcher } from "@/features/workspaces/components/WorkspaceSwitcher";
 
 const navigation = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/workspaces", label: "Workspaces", icon: Globe2 },
   { href: "/tools/sync", label: "Tool sync", icon: ChartNoAxesCombined },
 ];
 
@@ -31,11 +38,29 @@ export function ProductShell({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
+  const workspaceMatch = pathname.match(/^\/workspaces\/([^/]+)/);
+  const workspaceId = workspaceMatch?.[1];
+  const workspaceNavigation =
+    workspaceId && workspaceId !== "new"
+      ? [
+          { href: `/workspaces/${workspaceId}`, label: "Overview", icon: LayoutDashboard },
+          { href: `/workspaces/${workspaceId}/properties`, label: "Properties", icon: Globe2 },
+          { href: `/workspaces/${workspaceId}/discovery`, label: "Discovery", icon: Search },
+          { href: `/workspaces/${workspaceId}/competitors`, label: "Competitors", icon: Users },
+          { href: `/workspaces/${workspaceId}/scope`, label: "Scope", icon: ShieldCheck },
+          { href: `/workspaces/${workspaceId}/tools`, label: "Tools", icon: Wrench },
+          { href: `/workspaces/${workspaceId}/tool-runs`, label: "Tool runs", icon: ClipboardList },
+        ]
+      : [];
+
+  const queryClient = useQueryClient();
 
   const title =
     [
       ...navigation,
       { href: "/admin/users", label: "User administration" },
+      { href: "/admin/methodologies", label: "Methodologies" },
+      { href: "/admin/tools", label: "Admin tools" },
       { href: "/settings/profile", label: "Profile" },
     ].find((item) => pathname.startsWith(item.href))?.label ?? "DHA";
 
@@ -45,6 +70,8 @@ export function ProductShell({ children }: { children: React.ReactNode }) {
     } catch {
       // Server clears the cookie even on backend failure
     }
+    queryClient.setQueryData(["session"], null);
+    await queryClient.invalidateQueries({ queryKey: ["session"] });
     toast.success("Signed out");
     navigate("/login");
   }
@@ -105,20 +132,69 @@ export function ProductShell({ children }: { children: React.ReactNode }) {
               {label}
             </Link>
           ))}
+          {workspaceNavigation.length > 0 && (
+            <>
+              <Separator className="my-2 bg-[hsl(var(--sidebar-border))]" />
+              {workspaceNavigation.map(({ href, label, icon: Icon }) => (
+                <Link
+                  key={href}
+                  to={href}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "flex min-h-[42px] items-center gap-3 rounded-md px-3 text-sm text-[hsl(var(--sidebar-foreground))] transition-colors",
+                    "hover:bg-[hsl(var(--sidebar-accent))] hover:text-white",
+                    pathname === href &&
+                      "bg-[hsl(var(--sidebar-accent))] text-white shadow-[inset_3px_0_0_#60a5fa]",
+                  )}
+                >
+                  <Icon />
+                  {label}
+                </Link>
+              ))}
+            </>
+          )}
           {user?.role === "admin" && (
-            <Link
-              to="/admin/users"
-              onClick={() => setOpen(false)}
-              className={cn(
-                "flex items-center gap-3 min-h-[42px] px-3 rounded-md text-sm text-[hsl(var(--sidebar-foreground))] transition-colors",
-                "hover:bg-[hsl(var(--sidebar-accent))] hover:text-white",
-                pathname.startsWith("/admin") &&
-                  "bg-[hsl(var(--sidebar-accent))] text-white shadow-[inset_3px_0_0_#60a5fa]",
-              )}
-            >
-              <Users className="h-4 w-4" />
-              Admin users
-            </Link>
+            <>
+              <Link
+                to="/admin/users"
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "flex items-center gap-3 min-h-[42px] px-3 rounded-md text-sm text-[hsl(var(--sidebar-foreground))] transition-colors",
+                  "hover:bg-[hsl(var(--sidebar-accent))] hover:text-white",
+                  pathname.startsWith("/admin/users") &&
+                    "bg-[hsl(var(--sidebar-accent))] text-white shadow-[inset_3px_0_0_#60a5fa]",
+                )}
+              >
+                <Users className="h-4 w-4" />
+                Admin users
+              </Link>
+              <Link
+                to="/admin/methodologies"
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "flex items-center gap-3 min-h-[42px] px-3 rounded-md text-sm text-[hsl(var(--sidebar-foreground))] transition-colors",
+                  "hover:bg-[hsl(var(--sidebar-accent))] hover:text-white",
+                  pathname.startsWith("/admin/methodologies") &&
+                    "bg-[hsl(var(--sidebar-accent))] text-white shadow-[inset_3px_0_0_#60a5fa]",
+                )}
+              >
+                <ClipboardList className="h-4 w-4" />
+                Methodologies
+              </Link>
+              <Link
+                to="/admin/tools"
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "flex items-center gap-3 min-h-[42px] px-3 rounded-md text-sm text-[hsl(var(--sidebar-foreground))] transition-colors",
+                  "hover:bg-[hsl(var(--sidebar-accent))] hover:text-white",
+                  pathname.startsWith("/admin/tools") &&
+                    "bg-[hsl(var(--sidebar-accent))] text-white shadow-[inset_3px_0_0_#60a5fa]",
+                )}
+              >
+                <Wrench className="h-4 w-4" />
+                Admin tools
+              </Link>
+            </>
           )}
         </nav>
 
@@ -171,6 +247,7 @@ export function ProductShell({ children }: { children: React.ReactNode }) {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <WorkspaceSwitcher />
             <Button variant="outline" size="icon" aria-label="Notifications">
               <Bell className="h-4 w-4" />
             </Button>

@@ -78,10 +78,14 @@ src/features/workspaces/
 8. Add permission-gated workspace navigation.
 9. Add tests for access denied and workspace switching.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - Users only see assigned workspaces.
 - Direct URL access shows denied/not-found correctly.
 - Workspace navigation updates when the selected workspace changes.
 - Workspace permissions are read from backend data, not hardcoded roles.
-

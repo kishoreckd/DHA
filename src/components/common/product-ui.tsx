@@ -12,7 +12,7 @@ export function PageHeader({
 }: {
   eyebrow?: string;
   title: string;
-  description: string;
+  description?: string;
   actions?: ReactNode;
 }) {
   return (
@@ -26,7 +26,9 @@ export function PageHeader({
         <h1 className="mt-1 mb-1.5 text-[clamp(25px,3vw,34px)] font-bold tracking-tight leading-none">
           {title}
         </h1>
-        <p className="text-sm text-muted-foreground max-w-2xl leading-relaxed">{description}</p>
+        {description && (
+          <p className="text-sm text-muted-foreground max-w-2xl leading-relaxed">{description}</p>
+        )}
       </div>
       {actions && <div className="flex gap-2 items-center shrink-0">{actions}</div>}
     </header>
@@ -89,14 +91,14 @@ export function EmptyState({
 }: {
   icon: ReactNode;
   title: string;
-  description: string;
+  description?: string;
   action?: ReactNode;
 }) {
   return (
     <div className="flex min-h-[180px] flex-col items-center justify-center text-center text-muted-foreground px-6 py-10 gap-2">
       <span className="text-slate-400 mb-1">{icon}</span>
       <h3 className="text-foreground font-semibold text-sm">{title}</h3>
-      <p className="max-w-md text-xs leading-relaxed">{description}</p>
+      {description && <p className="max-w-md text-xs leading-relaxed">{description}</p>}
       {action}
     </div>
   );

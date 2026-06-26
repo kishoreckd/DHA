@@ -84,7 +84,6 @@ export function ToolSyncPage() {
       <PageHeader
         eyebrow="EVIDENCE COLLECTION"
         title="Tool synchronization"
-        description="Run selected assessment services against one target website. API keys remain on the server."
       />
       <form
         className="grid grid-cols-1 md:grid-cols-[minmax(420px,.9fr)_minmax(500px,1.1fr)] gap-4"

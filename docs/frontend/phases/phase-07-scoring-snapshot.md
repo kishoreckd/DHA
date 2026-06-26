@@ -69,10 +69,14 @@ src/features/trends/
 7. Add trend charts after chart-library spike.
 8. Add tests for blank vs zero vs not-applicable states.
 
+## User-facing copy rule
+
+- Do not use internal security, compliance, or access-control slogans in visible UI. Use product workflow language instead.
+- Do not add descriptions to every page, card, panel, or container by default. Use descriptive copy only when it removes ambiguity or prevents user error.
+
 ## Acceptance gate
 
 - Frontend displays backend-calculated values without recalculating authority.
 - Adjusted scores require a reason.
 - Blank, zero, and not-applicable are visually distinct.
 - Snapshot versions are immutable after approval.
-

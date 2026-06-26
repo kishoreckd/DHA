@@ -78,7 +78,6 @@ export function AdminUsersPage() {
       <PageHeader
         eyebrow="ADMINISTRATION"
         title="Users and access"
-        description="Manage accounts, invitations, roles, status, and authentication audit activity."
         actions={
           <Button onClick={() => setInviteOpen(true)}>
             <MailPlus />
@@ -203,7 +202,7 @@ function UsersTab({
       ) : query.isError ? (
         <div className="m-5"><ErrorState message={(query.error as Error).message} retry={() => query.refetch()} /></div>
       ) : !rows.length ? (
-        <EmptyState icon={<Users />} title="No users found" description="Try another search or invite a teammate." />
+        <EmptyState icon={<Users />} title="No users found" />
       ) : (
         <div className="overflow-auto">
           <table className="w-full border-collapse min-w-[850px] text-sm">
@@ -317,7 +316,6 @@ function InvitationsTab({ query }: { query: ReturnType<typeof useQuery<Invitatio
         <EmptyState
           icon={<MailPlus />}
           title="No pending invitations"
-          description="New invitations will remain here until activated or revoked."
         />
       ) : (
         <div className="overflow-auto">
@@ -404,7 +402,6 @@ function AuditTab({ query }: { query: ReturnType<typeof useQuery<AuditLog[]>> })
         <EmptyState
           icon={<ShieldCheck />}
           title="No audit events found"
-          description="Adjust the filters or wait for authentication activity."
         />
       ) : (
         <div className="overflow-auto">

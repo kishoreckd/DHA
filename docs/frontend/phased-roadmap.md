@@ -74,4 +74,5 @@ Each phase must include:
 6. Permission-gated actions.
 7. Component tests for core behavior.
 8. A short update to implementation progress documentation.
-
+9. User-facing copy must avoid internal security, compliance, and access-control slogans; use product workflow language instead.
+10. Do not add descriptions to every page, card, panel, or container by default; use descriptive copy only when it removes ambiguity or prevents user error.
