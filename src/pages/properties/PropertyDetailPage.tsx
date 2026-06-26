@@ -3,14 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ErrorState, LoadingState, PageHeader } from "@/components/common/product-ui";
+import { DetailSkeleton, ErrorState, PageHeader } from "@/components/common/product-ui";
 import { useProperty } from "@/features/discovery/hooks";
 
 export function PropertyDetailPage() {
   const { workspaceId = "", propertyId = "" } = useParams();
   const propertyQuery = useProperty(workspaceId, propertyId);
 
-  if (propertyQuery.isLoading) return <LoadingState label="Loading property..." />;
+  if (propertyQuery.isLoading) return <DetailSkeleton cards={1} />;
   if (propertyQuery.isError || !propertyQuery.data) return <ErrorState message="Property unavailable." />;
 
   return (

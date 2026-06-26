@@ -96,3 +96,121 @@ svg {
   height: 18px;
   flex-shrink: 0;
 }
+
+@keyframes dha-loader-pulse {
+  0%,
+  100% {
+    transform: scale(0.75);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dha-loader-wave {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+@keyframes dha-skeleton-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-dha-loader-pulse {
+  animation: dha-loader-pulse 900ms ease-in-out infinite;
+}
+
+.animate-dha-loader-wave {
+  animation: dha-loader-wave 900ms ease-in-out infinite;
+}
+
+.animate-dha-skeleton-shimmer {
+  animation: dha-skeleton-shimmer 1.35s ease-in-out infinite;
+}
+
+.dha-toast {
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: var(--radius) !important;
+  background: hsl(var(--card)) !important;
+  color: hsl(var(--card-foreground)) !important;
+  box-shadow: 0 18px 45px hsl(var(--foreground) / 0.14) !important;
+  padding: 14px 16px !important;
+  gap: 12px !important;
+}
+
+.dha-toast::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  border-radius: var(--radius) 0 0 var(--radius);
+  background: hsl(var(--primary));
+}
+
+.dha-toast-title {
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+}
+
+.dha-toast-description {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.dha-toast svg {
+  color: hsl(var(--primary));
+}
+
+.dha-toast-success::before {
+  background: hsl(153 64% 42%);
+}
+
+.dha-toast-success svg {
+  color: hsl(153 64% 42%);
+}
+
+.dha-toast-error::before {
+  background: hsl(var(--destructive));
+}
+
+.dha-toast-error svg {
+  color: hsl(var(--destructive));
+}
+
+.dha-toast-warning::before {
+  background: hsl(38 92% 50%);
+}
+
+.dha-toast-warning svg {
+  color: hsl(38 92% 50%);
+}
+
+.dha-toast-info::before,
+.dha-toast-loading::before {
+  background: hsl(var(--primary));
+}
+
+.dha-toast-action,
+.dha-toast-cancel {
+  border-radius: calc(var(--radius) - 2px) !important;
+  font-weight: 700 !important;
+}
+
+.dha-toast-close {
+  background: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--muted-foreground)) !important;
+}

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Globe2, LoaderCircle, Plus } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { EmptyState, ErrorState, LoadingState, PageHeader } from "@/components/common/product-ui";
+import { DetailSkeleton, EmptyState, ErrorState, ListRowsSkeleton, PageHeader } from "@/components/common/product-ui";
 import { WorkspaceHeader } from "@/features/workspaces/components/WorkspaceHeader";
 import { useWorkspace } from "@/features/workspaces/hooks";
 import { useCreateProperty, useProperties } from "@/features/discovery/hooks";
@@ -23,12 +23,12 @@ export function PropertiesListPage() {
     event.preventDefault();
     const property = await createProperty.mutateAsync({ url });
     setUrl("");
-    toast.success("Property saved");
+    appToast.success("Property saved");
     await propertiesQuery.refetch();
     navigate(`/workspaces/${workspaceId}/properties/${property.id}`);
   }
 
-  if (workspaceQuery.isLoading) return <LoadingState label="Loading workspace..." />;
+  if (workspaceQuery.isLoading) return <DetailSkeleton cards={1} />;
   if (workspaceQuery.isError || !workspaceQuery.data) return <ErrorState message="Workspace unavailable." />;
 
   return (
@@ -68,7 +68,7 @@ export function PropertiesListPage() {
             <CardTitle>Saved properties</CardTitle>
           </CardHeader>
           <CardContent>
-            {propertiesQuery.isLoading && <LoadingState label="Loading properties..." />}
+            {propertiesQuery.isLoading && <ListRowsSkeleton actions={false} />}
             {propertiesQuery.isError && <ErrorState message="Unable to load properties." />}
             {propertiesQuery.data?.length === 0 && (
               <EmptyState

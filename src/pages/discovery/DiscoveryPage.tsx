@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { LoaderCircle, Plus, Search } from "lucide-react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,7 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ErrorState, LoadingState, PageHeader } from "@/components/common/product-ui";
+import { ErrorState, PageHeader, TableSkeleton } from "@/components/common/product-ui";
 import {
   useAddManualPage,
   useDiscoveredPages,
@@ -58,14 +58,14 @@ export function DiscoveryPage() {
   async function runDiscovery() {
     const job = await startJob.mutateAsync({ property_id: activePropertyId });
     setJobId(job.id);
-    toast.success("Discovery job queued");
+    appToast.info("Discovery job queued");
   }
 
   async function submitManual(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     await addManualPage.mutateAsync({ property_id: activePropertyId, url: manualUrl, page_type: "other" });
     setManualUrl("");
-    toast.success("Manual page added");
+    appToast.success("Manual page added");
   }
 
   return (
@@ -139,7 +139,7 @@ export function DiscoveryPage() {
             <CardTitle>Discovered pages</CardTitle>
           </CardHeader>
           <CardContent>
-            {pagesQuery.isLoading && <LoadingState label="Loading pages..." />}
+            {pagesQuery.isLoading && <TableSkeleton columns={9} />}
             {pagesQuery.isError && <ErrorState message="Unable to load discovered pages." />}
             {pagesQuery.data && (
               <div className="overflow-x-auto">
@@ -218,7 +218,7 @@ export function DiscoveryPage() {
                     },
                   });
                   setSelectedPage(null);
-                  toast.success("Page classification saved");
+                  appToast.success("Page classification saved");
                 }}
               >
                 Save classification

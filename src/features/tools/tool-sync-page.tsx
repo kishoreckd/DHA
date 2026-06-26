@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle2, ExternalLink, LoaderCircle, Play, RefreshCw, XCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { z } from "zod";
 import { useState } from "react";
 import { PageHeader, StatusBadge } from "@/components/common/product-ui";
@@ -50,7 +50,7 @@ export function ToolSyncPage() {
     setRuns((cur) =>
       cur.map((run) => (chosen.includes(run.tool) ? { ...run, state: "queued" } : run)),
     );
-    toast.message(`Queued ${chosen.length} assessment tools`);
+    appToast.info(`Queued ${chosen.length} assessment tools`);
     for (const tool of chosen) {
       const startedAt = new Date().toISOString();
       setRuns((cur) =>
@@ -76,7 +76,7 @@ export function ToolSyncPage() {
         );
       }
     }
-    toast.success("Tool synchronization finished");
+    appToast.success("Tool synchronization finished");
   }
 
   return (

@@ -13,8 +13,8 @@ import {
   Users,
 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { toast } from "sonner";
-import { EmptyState, ErrorState, LoadingState, PageHeader, StatusBadge } from "@/components/common/product-ui";
+import { appToast } from "@/lib/toast";
+import { EmptyState, ErrorState, LoadingState, PageHeader, StatusBadge, TableSkeleton } from "@/components/common/product-ui";
 import { useAuth } from "@/features/auth/auth-provider";
 import { canManageUser } from "@/lib/auth/permissions";
 import { usersApi } from "@/lib/api/users";
@@ -61,12 +61,12 @@ export function AdminUsersPage() {
     mutationFn: ({ user, patch }: NonNullable<typeof confirm>) =>
       usersApi.update(user.id, patch),
     onSuccess: () => {
-      toast.success("User updated");
+      appToast.success("User updated");
       setConfirm(null);
       void client.invalidateQueries({ queryKey: ["users"] });
     },
     onError: (error) =>
-      toast.error(error instanceof ApiError ? error.message : "Unable to update user"),
+      appToast.error(error instanceof ApiError ? error.message : "Unable to update user"),
   });
 
   if (sessionLoading) return <LoadingState label="Verifying administrator access…" />;
@@ -198,7 +198,7 @@ function UsersTab({
         </Button>
       </div>
       {query.isLoading ? (
-        <div className="m-5"><LoadingState label="Loading users…" /></div>
+        <div className="m-5"><TableSkeleton columns={8} /></div>
       ) : query.isError ? (
         <div className="m-5"><ErrorState message={(query.error as Error).message} retry={() => query.refetch()} /></div>
       ) : !rows.length ? (
@@ -295,19 +295,19 @@ function InvitationsTab({ query }: { query: ReturnType<typeof useQuery<Invitatio
   const resend = useMutation({
     mutationFn: usersApi.resendInvitation,
     onSuccess: () => {
-      toast.success("Invitation resent");
+      appToast.success("Invitation resent");
       void client.invalidateQueries({ queryKey: ["invitations"] });
     },
   });
   const revoke = useMutation({
     mutationFn: usersApi.revokeInvitation,
     onSuccess: () => {
-      toast.success("Invitation revoked");
+      appToast.success("Invitation revoked");
       void client.invalidateQueries({ queryKey: ["invitations"] });
     },
   });
 
-  if (query.isLoading) return <LoadingState label="Loading invitations…" />;
+  if (query.isLoading) return <TableSkeleton columns={7} />;
   if (query.isError) return <ErrorState message={(query.error as Error).message} retry={() => query.refetch()} />;
 
   return (
@@ -373,7 +373,7 @@ function AuditTab({ query }: { query: ReturnType<typeof useQuery<AuditLog[]>> })
         (!actor || (log.actor_email ?? "").toLowerCase().includes(actor.toLowerCase())),
     ) ?? [];
 
-  if (query.isLoading) return <LoadingState label="Loading audit logs…" />;
+  if (query.isLoading) return <TableSkeleton columns={5} />;
   if (query.isError) return <ErrorState message={(query.error as Error).message} retry={() => query.refetch()} />;
 
   return (
@@ -447,12 +447,12 @@ function InvitePanel({ close }: { close: () => void }) {
   const invite = useMutation({
     mutationFn: () => usersApi.invite(form),
     onSuccess: (data) => {
-      toast.success(`Invitation created${data.email_delivery_status ? ` · ${data.email_delivery_status}` : ""}`);
+      appToast.success(`Invitation created${data.email_delivery_status ? ` · ${data.email_delivery_status}` : ""}`);
       void client.invalidateQueries({ queryKey: ["invitations"] });
       window.setTimeout(close, 900);
     },
     onError: (error) =>
-      toast.error(error instanceof ApiError ? error.message : "Invitation could not be sent"),
+      appToast.error(error instanceof ApiError ? error.message : "Invitation could not be sent"),
   });
 
   return (

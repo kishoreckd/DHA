@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Loader } from "@/components/ui/loader";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // ─── Page Header ────────────────────────────────────────────────────────────
 
@@ -108,9 +110,175 @@ export function EmptyState({
 
 export function LoadingState({ label = "Loading…" }: { label?: string }) {
   return (
-    <div className="flex min-h-[140px] items-center justify-center gap-2.5 text-sm text-muted-foreground" role="status">
-      <span className="inline-block h-4 w-4 rounded-full border-2 border-border border-t-primary animate-spin" />
-      {label}
+    <div
+      className="flex min-h-[140px] flex-col items-center justify-center gap-3 text-sm text-muted-foreground"
+      role="status"
+      aria-live="polite"
+    >
+      <Loader variant="dots-pulse" size="lg" />
+      <span className="font-semibold tracking-wide text-foreground">{label}</span>
+    </div>
+  );
+}
+
+export function PageSkeleton() {
+  return (
+    <div className="flex flex-col gap-5" aria-hidden="true">
+      <div className="flex items-end justify-between gap-4">
+        <div className="flex flex-col gap-2">
+          <Skeleton className="h-3 w-24" />
+          <Skeleton className="h-8 w-64" />
+        </div>
+        <Skeleton className="h-9 w-28" />
+      </div>
+      <CardGridSkeleton />
+    </div>
+  );
+}
+
+export function CardGridSkeleton({ count = 6 }: { count?: number }) {
+  return (
+    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3" aria-hidden="true">
+      {Array.from({ length: count }).map((_, index) => (
+        <div key={index} className="rounded-lg border bg-card p-5">
+          <div className="flex flex-col gap-3">
+            <Skeleton className="h-5 w-2/3" />
+            <Skeleton className="h-4 w-1/2" />
+            <Skeleton className="h-16 w-full" />
+            <div className="flex justify-between">
+              <Skeleton className="h-4 w-20" />
+              <Skeleton className="h-8 w-16" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function ListRowsSkeleton({ rows = 5, actions = true }: { rows?: number; actions?: boolean }) {
+  return (
+    <div className="flex flex-col gap-2" aria-hidden="true">
+      {Array.from({ length: rows }).map((_, index) => (
+        <div
+          key={index}
+          className="flex flex-col gap-3 rounded-md border px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
+            <Skeleton className="h-4 w-2/5" />
+            <Skeleton className="h-3 w-3/5" />
+          </div>
+          {actions && (
+            <div className="flex items-center gap-2">
+              <Skeleton className="h-6 w-20 rounded-full" />
+              <Skeleton className="h-8 w-20" />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function FormSkeleton({ fields = 3 }: { fields?: number }) {
+  return (
+    <div className="flex max-w-2xl flex-col gap-4" aria-hidden="true">
+      {Array.from({ length: fields }).map((_, index) => (
+        <div key={index} className="flex flex-col gap-1.5">
+          <Skeleton className="h-3 w-28" />
+          <Skeleton className="h-9 w-full" />
+        </div>
+      ))}
+      <Skeleton className="h-9 w-32" />
+    </div>
+  );
+}
+
+export function DetailSkeleton({ cards = 2 }: { cards?: number }) {
+  return (
+    <div className="flex flex-col gap-5" aria-hidden="true">
+      <div className="flex flex-col gap-2">
+        <Skeleton className="h-3 w-24" />
+        <Skeleton className="h-8 w-72" />
+      </div>
+      <div className="grid gap-4 lg:grid-cols-2">
+        {Array.from({ length: cards }).map((_, index) => (
+          <div key={index} className="rounded-lg border bg-card p-5">
+            <div className="flex flex-col gap-4">
+              <Skeleton className="h-5 w-32" />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function PickerListSkeleton({ rows = 5 }: { rows?: number }) {
+  return (
+    <div className="max-h-56 overflow-hidden rounded-md border" aria-hidden="true">
+      {Array.from({ length: rows }).map((_, index) => (
+        <div key={index} className="flex items-center gap-2 border-b px-3 py-2 last:border-b-0">
+          <Skeleton className="size-4 rounded-sm" />
+          <Skeleton className="h-4 w-3/4" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function BadgeListSkeleton({ count = 8 }: { count?: number }) {
+  return (
+    <div className="flex flex-wrap gap-2" aria-hidden="true">
+      {Array.from({ length: count }).map((_, index) => (
+        <Skeleton key={index} className="h-7 w-24 rounded-md" />
+      ))}
+    </div>
+  );
+}
+
+export function MetricGridSkeleton({ count = 4 }: { count?: number }) {
+  return (
+    <div className="grid gap-2 sm:grid-cols-2" aria-hidden="true">
+      {Array.from({ length: count }).map((_, index) => (
+        <div key={index} className="rounded-md border px-4 py-3">
+          <div className="flex flex-col gap-2">
+            <Skeleton className="h-4 w-2/3" />
+            <Skeleton className="h-3 w-1/3" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function TableSkeleton({ rows = 7, columns = 5 }: { rows?: number; columns?: number }) {
+  return (
+    <div className="overflow-hidden rounded-lg border bg-card" aria-hidden="true">
+      <div className="grid gap-3 border-b bg-muted/40 p-3" style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}>
+        {Array.from({ length: columns }).map((_, index) => (
+          <Skeleton key={index} className="h-3 w-20" />
+        ))}
+      </div>
+      <div className="divide-y">
+        {Array.from({ length: rows }).map((_, rowIndex) => (
+          <div
+            key={rowIndex}
+            className="grid gap-3 p-3"
+            style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+          >
+            {Array.from({ length: columns }).map((_, columnIndex) => (
+              <Skeleton key={columnIndex} className={cn("h-4", columnIndex === 0 ? "w-28" : "w-full")} />
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

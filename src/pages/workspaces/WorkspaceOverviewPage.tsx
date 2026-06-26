@@ -2,7 +2,7 @@ import { Globe2, Search, ShieldCheck, Users } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ErrorState, LoadingState } from "@/components/common/product-ui";
+import { BadgeListSkeleton, DetailSkeleton, ErrorState } from "@/components/common/product-ui";
 import { WorkspaceHeader } from "@/features/workspaces/components/WorkspaceHeader";
 import { useWorkspace, useWorkspacePermissions } from "@/features/workspaces/hooks";
 
@@ -18,7 +18,7 @@ export function WorkspaceOverviewPage() {
   const workspaceQuery = useWorkspace(workspaceId);
   const permissionsQuery = useWorkspacePermissions(workspaceId);
 
-  if (workspaceQuery.isLoading) return <LoadingState label="Loading workspace..." />;
+  if (workspaceQuery.isLoading) return <DetailSkeleton />;
   if (workspaceQuery.isError || !workspaceQuery.data) {
     return <ErrorState message="This workspace was not found or you do not have access." />;
   }
@@ -47,7 +47,7 @@ export function WorkspaceOverviewPage() {
             <CardTitle>Effective permissions</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">
-            {permissionsQuery.isLoading && <span className="text-sm text-muted-foreground">Loading...</span>}
+            {permissionsQuery.isLoading && <BadgeListSkeleton />}
             {(permissionsQuery.data?.permissions ?? []).map((permission) => (
               <span
                 key={permission}

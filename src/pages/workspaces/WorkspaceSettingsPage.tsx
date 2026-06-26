@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { LoaderCircle } from "lucide-react";
 import { useParams } from "react-router-dom";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ErrorState, LoadingState } from "@/components/common/product-ui";
+import { ErrorState, FormSkeleton } from "@/components/common/product-ui";
 import { WorkspaceHeader } from "@/features/workspaces/components/WorkspaceHeader";
 import { useUpdateWorkspace, useWorkspace } from "@/features/workspaces/hooks";
 
@@ -32,10 +32,10 @@ export function WorkspaceSettingsPage() {
       primary_domain: primaryDomain || undefined,
       description: description || undefined,
     });
-    toast.success("Workspace updated");
+    appToast.success("Workspace updated");
   }
 
-  if (workspaceQuery.isLoading) return <LoadingState label="Loading workspace settings..." />;
+  if (workspaceQuery.isLoading) return <FormSkeleton />;
   if (workspaceQuery.isError || !workspaceQuery.data) {
     return <ErrorState message="Workspace settings are unavailable." />;
   }

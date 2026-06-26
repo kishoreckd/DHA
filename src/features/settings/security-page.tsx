@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { KeyRound, LoaderCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { z } from "zod";
 import { PageHeader } from "@/components/common/product-ui";
 import { usersApi } from "@/lib/api/users";
@@ -37,7 +37,7 @@ export function SecurityPage() {
         current_password: values.current_password,
         new_password: values.new_password,
       });
-      toast.success("Password changed. Sign in again.");
+      appToast.success("Password changed");
       navigate("/login?password=changed");
     } catch (error) {
       form.setError("root", {

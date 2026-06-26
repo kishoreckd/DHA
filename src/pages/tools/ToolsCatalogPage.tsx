@@ -1,10 +1,10 @@
 import { LoaderCircle, Play } from "lucide-react";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ErrorState, LoadingState, PageHeader } from "@/components/common/product-ui";
+import { CardGridSkeleton, ErrorState, PageHeader, PickerListSkeleton } from "@/components/common/product-ui";
 import { useDiscoveredPages } from "@/features/discovery/hooks";
 import { ToolCatalog } from "@/features/tools/components/ToolCatalog";
 import { useCreateToolBatch, useToolCatalog } from "@/features/tools/hooks";
@@ -23,7 +23,7 @@ export function ToolsCatalogPage() {
 
   async function submitBatch() {
     const batch = await createBatch.mutateAsync({ tool_keys: toolKeys, page_ids: pageIds });
-    toast.success(`Tool batch ${batch.status}`);
+    appToast.info(`Tool batch ${batch.status}`);
   }
 
   return (
@@ -39,7 +39,7 @@ export function ToolsCatalogPage() {
       />
       <div className="grid gap-4 xl:grid-cols-[1fr_360px]">
         <div>
-          {catalogQuery.isLoading && <LoadingState label="Loading tool catalog..." />}
+          {catalogQuery.isLoading && <CardGridSkeleton count={4} />}
           {catalogQuery.isError && <ErrorState message="Unable to load tool catalog." />}
           {catalogQuery.data && <ToolCatalog tools={catalogQuery.data} />}
         </div>
@@ -51,6 +51,7 @@ export function ToolsCatalogPage() {
             <section className="flex flex-col gap-2">
               <strong className="text-sm">Tools</strong>
               <div className="max-h-56 overflow-auto rounded-md border">
+                {catalogQuery.isLoading && <PickerListSkeleton />}
                 {catalogQuery.data?.map((tool) => (
                   <label key={tool.key} className="flex cursor-pointer items-center gap-2 border-b px-3 py-2 text-sm last:border-b-0">
                     <input
@@ -66,6 +67,7 @@ export function ToolsCatalogPage() {
             <section className="flex flex-col gap-2">
               <strong className="text-sm">Pages</strong>
               <div className="max-h-56 overflow-auto rounded-md border">
+                {pagesQuery.isLoading && <PickerListSkeleton />}
                 {pagesQuery.data?.filter((page) => page.selected_for_assessment).map((page) => (
                   <label key={page.id} className="flex cursor-pointer items-center gap-2 border-b px-3 py-2 text-sm last:border-b-0">
                     <input

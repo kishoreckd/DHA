@@ -1,9 +1,9 @@
 import { RotateCcw } from "lucide-react";
 import { useParams } from "react-router-dom";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ErrorState, LoadingState, PageHeader } from "@/components/common/product-ui";
+import { DetailSkeleton, ErrorState, MetricGridSkeleton, PageHeader } from "@/components/common/product-ui";
 import { ToolRunArtifacts } from "@/features/tools/components/ToolRunArtifacts";
 import { ToolRunStatusBadge } from "@/features/tools/components/ToolRunStatusBadge";
 import { ToolRunTimeline } from "@/features/tools/components/ToolRunTimeline";
@@ -18,7 +18,7 @@ export function ToolRunDetailPage() {
 
   async function retry() {
     await retryRun.mutateAsync(runId);
-    toast.success("Tool run retry queued");
+    appToast.info("Tool run retry queued");
   }
 
   async function openArtifact(artifactId: string) {
@@ -26,7 +26,7 @@ export function ToolRunDetailPage() {
     window.open(result.url, "_blank", "noopener,noreferrer");
   }
 
-  if (runQuery.isLoading) return <LoadingState label="Loading tool run..." />;
+  if (runQuery.isLoading) return <DetailSkeleton />;
   if (runQuery.isError || !runQuery.data) return <ErrorState message="Tool run unavailable." />;
 
   return (
@@ -69,7 +69,7 @@ export function ToolRunDetailPage() {
               <CardTitle>Extracted measurements</CardTitle>
             </CardHeader>
             <CardContent>
-              {measurementsQuery.isLoading && <LoadingState label="Loading measurements..." />}
+              {measurementsQuery.isLoading && <MetricGridSkeleton />}
               <div className="grid gap-2 sm:grid-cols-2">
                 {(measurementsQuery.data ?? runQuery.data.measurements ?? []).map((measurement) => (
                   <div key={measurement.id} className="rounded-md border px-4 py-3 text-sm">

@@ -1,7 +1,7 @@
 import { Plus, SquareStack } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { EmptyState, ErrorState, LoadingState, PageHeader } from "@/components/common/product-ui";
+import { CardGridSkeleton, EmptyState, ErrorState, PageHeader } from "@/components/common/product-ui";
 import { WorkspaceCard } from "@/features/workspaces/components/WorkspaceCard";
 import { useWorkspaces } from "@/features/workspaces/hooks";
 
@@ -22,7 +22,7 @@ export function WorkspacesListPage() {
           </Button>
         }
       />
-      {isLoading && <LoadingState label="Loading workspaces..." />}
+      {isLoading && <CardGridSkeleton />}
       {isError && <ErrorState message="Unable to load assigned workspaces." retry={() => void refetch()} />}
       {!isLoading && !isError && workspaces.length === 0 && (
         <EmptyState

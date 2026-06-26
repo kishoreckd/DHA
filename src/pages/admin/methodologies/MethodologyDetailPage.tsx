@@ -1,9 +1,9 @@
 import { CheckCircle2, ListChecks } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ErrorState, LoadingState, PageHeader } from "@/components/common/product-ui";
+import { DetailSkeleton, ErrorState, PageHeader } from "@/components/common/product-ui";
 import { useAuth } from "@/features/auth/auth-provider";
 import { MethodologyStatusBadge } from "@/features/methodologies/components/MethodologyStatusBadge";
 import {
@@ -21,19 +21,23 @@ export function MethodologyDetailPage() {
   const canManage = user?.role === "admin" || user?.permissions.includes("methodology.manage");
 
   if (!canManage) return <Navigate to="/dashboard" replace />;
-  if (methodologyQuery.isLoading) return <LoadingState label="Loading methodology..." />;
+  if (methodologyQuery.isLoading) return <DetailSkeleton />;
   if (methodologyQuery.isError || !methodologyQuery.data) return <ErrorState message="Methodology unavailable." />;
 
   const isPublished = methodologyQuery.data.status === "published";
 
   async function validate() {
     const result = await validateMethodology.mutateAsync();
-    toast[result.is_valid ? "success" : "error"](result.is_valid ? "Methodology is valid" : "Validation failed");
+    if (result.is_valid) {
+      appToast.success("Methodology is valid");
+    } else {
+      appToast.error("Validation failed");
+    }
   }
 
   async function publish() {
     await publishMethodology.mutateAsync();
-    toast.success("Methodology published");
+    appToast.success("Methodology published");
   }
 
   return (

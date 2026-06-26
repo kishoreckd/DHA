@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LoaderCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,7 +25,7 @@ export function WorkspaceCreateForm() {
         primary_domain: primaryDomain || undefined,
         description: description || undefined,
       });
-      toast.success("Workspace created");
+      appToast.success("Workspace created");
       navigate(`/workspaces/${workspace.id}`);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Unable to create workspace.");

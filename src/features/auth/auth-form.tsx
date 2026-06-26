@@ -4,7 +4,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { z } from "zod";
 import { authApi } from "@/lib/api/auth";
 import { ApiError } from "@/types/api";
@@ -78,7 +78,7 @@ export function LoginForm() {
       await authApi.login(values);
       // Invalidate the cached session so AuthGuard re-fetches with the new cookie
       await queryClient.invalidateQueries({ queryKey: ["session"] });
-      toast.success("Signed in successfully");
+      appToast.success("Signed in");
       navigate(searchParams.get("returnTo") || "/dashboard", { replace: true });
     } catch (error) {
       const message =

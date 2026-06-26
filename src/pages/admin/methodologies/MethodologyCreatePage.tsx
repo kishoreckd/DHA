@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LoaderCircle } from "lucide-react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -23,7 +23,7 @@ export function MethodologyCreatePage() {
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const methodology = await createMethodology.mutateAsync({ name, description });
-    toast.success("Methodology draft created");
+    appToast.success("Methodology draft created");
     navigate(`/admin/methodologies/${methodology.id}`);
   }
 

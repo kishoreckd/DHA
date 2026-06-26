@@ -50,7 +50,10 @@ export function useUpsertMetric(methodologyId: string) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (input: Partial<MetricDefinition>) => methodologiesApi.upsertMetric(methodologyId, input),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: methodologyKeys.metrics(methodologyId) }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: methodologyKeys.metrics(methodologyId) });
+      queryClient.invalidateQueries({ queryKey: methodologyKeys.adminTools });
+    },
   });
 }
 

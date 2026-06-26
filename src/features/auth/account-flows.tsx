@@ -3,7 +3,7 @@ import { CheckCircle2, LoaderCircle, ShieldAlert } from "lucide-react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { z } from "zod";
 import { useQuery } from "@tanstack/react-query";
 import { authApi } from "@/lib/api/auth";
@@ -37,7 +37,7 @@ export function AdminSetupForm() {
   async function submit(values: z.infer<typeof setupSchema>) {
     try {
       await authApi.signup({ username: values.username, email: values.email, password: values.password });
-      toast.success("Administrator account created");
+      appToast.success("Administrator account created");
       navigate("/dashboard", { replace: true });
     } catch (error) {
       const message = error instanceof ApiError ? error.message : "Setup could not be completed.";
@@ -115,7 +115,7 @@ export function ResetPasswordForm() {
       onSubmit={async ({ password }) => {
         try {
           await authApi.resetPassword({ token, password });
-          toast.success("Password updated");
+          appToast.success("Password updated");
           navigate("/login?reset=success", { replace: true });
         } catch (error) {
           form.setError("root", {
@@ -195,7 +195,7 @@ export function InvitationPasswordForm() {
         onSubmit={async ({ username, password }) => {
           try {
             await authApi.setPassword({ token, username, password });
-            toast.success("Account activated");
+            appToast.success("Account activated");
             navigate("/dashboard", { replace: true });
           } catch (error) {
             form.setError("root", {

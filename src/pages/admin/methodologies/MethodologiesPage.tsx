@@ -1,9 +1,9 @@
 import { Copy, Plus } from "lucide-react";
 import { Link, Navigate } from "react-router-dom";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ErrorState, LoadingState, PageHeader } from "@/components/common/product-ui";
+import { ErrorState, ListRowsSkeleton, PageHeader } from "@/components/common/product-ui";
 import { useAuth } from "@/features/auth/auth-provider";
 import { MethodologyStatusBadge } from "@/features/methodologies/components/MethodologyStatusBadge";
 import { useCloneMethodology, useMethodologies } from "@/features/methodologies/hooks";
@@ -18,7 +18,7 @@ export function MethodologiesPage() {
 
   async function clone(id: string) {
     const methodology = await cloneMethodology.mutateAsync(id);
-    toast.success(`Draft version ${methodology.version_number} created`);
+    appToast.success(`Draft version ${methodology.version_number} created`);
   }
 
   return (
@@ -40,7 +40,7 @@ export function MethodologiesPage() {
           <CardTitle>Versions</CardTitle>
         </CardHeader>
         <CardContent>
-          {methodologiesQuery.isLoading && <LoadingState label="Loading methodologies..." />}
+          {methodologiesQuery.isLoading && <ListRowsSkeleton />}
           {methodologiesQuery.isError && <ErrorState message="Unable to load methodologies." />}
           <div className="flex flex-col gap-2">
             {methodologiesQuery.data?.map((methodology) => (

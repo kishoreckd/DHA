@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 import { LoaderCircle, ShieldCheck } from "lucide-react";
 import { useParams } from "react-router-dom";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ErrorState, LoadingState, PageHeader } from "@/components/common/product-ui";
+import { ErrorState, ListRowsSkeleton, PageHeader } from "@/components/common/product-ui";
 import { useApproveScope, useCompetitors, useDiscoveredPages } from "@/features/discovery/hooks";
 
 export function ScopeReviewPage() {
@@ -27,7 +27,7 @@ export function ScopeReviewPage() {
       property_page_ids: selectedPages.map((page) => page.id),
       competitor_page_ids: [],
     });
-    toast.success(`Scope version ${scope.version_number} approved`);
+    appToast.success(`Scope version ${scope.version_number} approved`);
   }
 
   return (
@@ -48,7 +48,7 @@ export function ScopeReviewPage() {
             <CardTitle>Selected pages</CardTitle>
           </CardHeader>
           <CardContent>
-            {pagesQuery.isLoading && <LoadingState label="Loading selected pages..." />}
+            {pagesQuery.isLoading && <ListRowsSkeleton actions={false} />}
             {pagesQuery.isError && <ErrorState message="Unable to load selected pages." />}
             <div className="flex flex-col gap-2">
               {selectedPages.map((page) => (
@@ -68,7 +68,7 @@ export function ScopeReviewPage() {
             <CardTitle>Approved competitors</CardTitle>
           </CardHeader>
           <CardContent>
-            {competitorsQuery.isLoading && <LoadingState label="Loading competitors..." />}
+            {competitorsQuery.isLoading && <ListRowsSkeleton actions={false} />}
             {competitorsQuery.isError && <ErrorState message="Unable to load competitors." />}
             <div className="flex flex-col gap-2">
               {approvedCompetitors.map((competitor) => (

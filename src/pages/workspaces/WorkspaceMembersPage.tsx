@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ErrorState, LoadingState } from "@/components/common/product-ui";
+import { DetailSkeleton, ErrorState, TableSkeleton } from "@/components/common/product-ui";
 import { WorkspaceHeader } from "@/features/workspaces/components/WorkspaceHeader";
 import { useWorkspace, useWorkspaceMembers } from "@/features/workspaces/hooks";
 
@@ -10,7 +10,7 @@ export function WorkspaceMembersPage() {
   const workspaceQuery = useWorkspace(workspaceId);
   const membersQuery = useWorkspaceMembers(workspaceId);
 
-  if (workspaceQuery.isLoading) return <LoadingState label="Loading workspace..." />;
+  if (workspaceQuery.isLoading) return <DetailSkeleton cards={1} />;
   if (workspaceQuery.isError || !workspaceQuery.data) {
     return <ErrorState message="Workspace members are unavailable." />;
   }
@@ -23,7 +23,7 @@ export function WorkspaceMembersPage() {
           <CardTitle>Members</CardTitle>
         </CardHeader>
         <CardContent>
-          {membersQuery.isLoading && <LoadingState label="Loading members..." />}
+          {membersQuery.isLoading && <TableSkeleton columns={5} />}
           {membersQuery.isError && <ErrorState message="Unable to load workspace members." />}
           {membersQuery.data && (
             <div className="overflow-x-auto">

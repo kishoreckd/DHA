@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle, Save } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { z } from "zod";
 import { PageHeader } from "@/components/common/product-ui";
 import { useAuth } from "@/features/auth/auth-provider";
@@ -44,7 +44,7 @@ export function ProfilePage() {
   async function submit(values: z.infer<typeof schema>) {
     try {
       await usersApi.updateMe({ ...values, profile_image: values.profile_image || null });
-      toast.success("Profile updated");
+      appToast.success("Profile updated");
       refetch();
     } catch (error) {
       form.setError("root", {

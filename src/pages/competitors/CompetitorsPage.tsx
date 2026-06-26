@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { LoaderCircle, Plus } from "lucide-react";
 import { useParams } from "react-router-dom";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ErrorState, LoadingState, PageHeader } from "@/components/common/product-ui";
+import { ErrorState, ListRowsSkeleton, PageHeader } from "@/components/common/product-ui";
 import {
   useCompetitors,
   useCreateCompetitor,
@@ -27,12 +27,12 @@ export function CompetitorsPage() {
     await createCompetitor.mutateAsync({ name, url });
     setName("");
     setUrl("");
-    toast.success("Competitor added");
+    appToast.success("Competitor added");
   }
 
   async function setStatus(id: string, status: "approved" | "rejected") {
     await updateCompetitor.mutateAsync({ id, input: { status } });
-    toast.success(status === "approved" ? "Competitor approved" : "Competitor rejected");
+    appToast.success(status === "approved" ? "Competitor approved" : "Competitor rejected");
   }
 
   return (
@@ -74,7 +74,7 @@ export function CompetitorsPage() {
             <CardTitle>Competitors</CardTitle>
           </CardHeader>
           <CardContent>
-            {competitorsQuery.isLoading && <LoadingState label="Loading competitors..." />}
+            {competitorsQuery.isLoading && <ListRowsSkeleton />}
             {competitorsQuery.isError && <ErrorState message="Unable to load competitors." />}
             <div className="flex flex-col gap-2">
               {competitorsQuery.data?.map((competitor) => (

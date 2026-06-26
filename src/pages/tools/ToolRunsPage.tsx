@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ErrorState, LoadingState, PageHeader } from "@/components/common/product-ui";
+import { ErrorState, PageHeader, TableSkeleton } from "@/components/common/product-ui";
 import { ToolRunTable } from "@/features/tools/components/ToolRunTable";
 import { useToolRuns } from "@/features/tools/hooks";
 
@@ -47,7 +47,7 @@ export function ToolRunsPage() {
           <CardTitle>Runs</CardTitle>
         </CardHeader>
         <CardContent>
-          {runsQuery.isLoading && <LoadingState label="Loading tool runs..." />}
+          {runsQuery.isLoading && <TableSkeleton columns={7} />}
           {runsQuery.isError && <ErrorState message="Unable to load tool runs." retry={() => void runsQuery.refetch()} />}
           {runsQuery.data && <ToolRunTable runs={runsQuery.data} workspaceId={workspaceId} />}
         </CardContent>

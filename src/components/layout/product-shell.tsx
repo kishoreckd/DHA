@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { appToast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import { authApi } from "@/lib/api/auth";
 import { useAuth } from "@/features/auth/auth-provider";
@@ -72,7 +72,7 @@ export function ProductShell({ children }: { children: React.ReactNode }) {
     }
     queryClient.setQueryData(["session"], null);
     await queryClient.invalidateQueries({ queryKey: ["session"] });
-    toast.success("Signed out");
+    appToast.success("Signed out");
     navigate("/login");
   }
 
