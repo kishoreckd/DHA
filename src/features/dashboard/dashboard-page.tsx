@@ -4,7 +4,6 @@ import { PageHeader } from "@/components/common/product-ui";
 import { useAuth } from "@/features/auth/auth-provider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 
 export function DashboardPage() {
   const { user } = useAuth();
