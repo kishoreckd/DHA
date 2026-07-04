@@ -33,7 +33,7 @@ const app = express();
 const PORT = 3001;
 const ACCESS_COOKIE = "dha_access_token";
 
-const BACKEND_URL = (process.env.BACKEND_API_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
+const BACKEND_URL = (process.env.BACKEND_API_URL ?? "http://localhost:8000/").replace(/\/$/, "");
 const APP_SECRET   = process.env.BACKEND_API_TOKEN_SECRET ?? "";
 const CRAWLER_KEY  = process.env.CRAWLER_API_KEY ?? APP_SECRET;
 
