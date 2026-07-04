@@ -1,29 +1,28 @@
-import { RotateCcw } from "lucide-react";
+import { Ban, RotateCcw } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { appToast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DetailSkeleton, ErrorState, MetricGridSkeleton, PageHeader } from "@/components/common/product-ui";
+import { DetailSkeleton, ErrorState, PageHeader } from "@/components/common/product-ui";
 import { ToolRunArtifacts } from "@/features/tools/components/ToolRunArtifacts";
 import { ToolRunStatusBadge } from "@/features/tools/components/ToolRunStatusBadge";
 import { ToolRunTimeline } from "@/features/tools/components/ToolRunTimeline";
-import { useArtifactUrl, useRetryToolRun, useToolRun, useToolRunMeasurements } from "@/features/tools/hooks";
+import { useCancelToolRun, useRetryToolRun, useToolRun } from "@/features/tools/hooks";
 
 export function ToolRunDetailPage() {
   const { workspaceId = "", runId = "" } = useParams();
   const runQuery = useToolRun(workspaceId, runId);
-  const measurementsQuery = useToolRunMeasurements(workspaceId, runId);
   const retryRun = useRetryToolRun(workspaceId);
-  const artifactUrl = useArtifactUrl(workspaceId, runId);
+  const cancelRun = useCancelToolRun(workspaceId);
 
   async function retry() {
     await retryRun.mutateAsync(runId);
     appToast.info("Tool run retry queued");
   }
 
-  async function openArtifact(artifactId: string) {
-    const result = await artifactUrl.mutateAsync(artifactId);
-    window.open(result.url, "_blank", "noopener,noreferrer");
+  async function cancel() {
+    await cancelRun.mutateAsync(runId);
+    appToast.info("Tool run cancelled");
   }
 
   if (runQuery.isLoading) return <DetailSkeleton />;
@@ -41,6 +40,12 @@ export function ToolRunDetailPage() {
               <Button variant="outline" onClick={retry} disabled={retryRun.isPending}>
                 <RotateCcw data-icon="inline-start" />
                 Retry
+              </Button>
+            )}
+            {["queued", "running"].includes(runQuery.data.status) && (
+              <Button variant="outline" onClick={cancel} disabled={cancelRun.isPending}>
+                <Ban data-icon="inline-start" />
+                Cancel
               </Button>
             )}
           </>
@@ -61,7 +66,7 @@ export function ToolRunDetailPage() {
               <CardTitle>Artifacts</CardTitle>
             </CardHeader>
             <CardContent>
-              <ToolRunArtifacts artifacts={runQuery.data.artifacts ?? []} onOpen={openArtifact} />
+              <ToolRunArtifacts workspaceId={workspaceId} artifacts={runQuery.data.artifacts ?? []} />
             </CardContent>
           </Card>
           <Card>
@@ -69,9 +74,8 @@ export function ToolRunDetailPage() {
               <CardTitle>Extracted measurements</CardTitle>
             </CardHeader>
             <CardContent>
-              {measurementsQuery.isLoading && <MetricGridSkeleton />}
               <div className="grid gap-2 sm:grid-cols-2">
-                {(measurementsQuery.data ?? runQuery.data.measurements ?? []).map((measurement) => (
+                {(runQuery.data.measurements ?? []).map((measurement) => (
                   <div key={measurement.id} className="rounded-md border px-4 py-3 text-sm">
                     <strong>{measurement.label}</strong>
                     <span className="mt-1 block text-muted-foreground">

@@ -8,21 +8,44 @@ import { CardGridSkeleton, ErrorState, PageHeader, PickerListSkeleton } from "@/
 import { useDiscoveredPages } from "@/features/discovery/hooks";
 import { ToolCatalog } from "@/features/tools/components/ToolCatalog";
 import { useCreateToolBatch, useToolCatalog } from "@/features/tools/hooks";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export function ToolsCatalogPage() {
   const { workspaceId = "" } = useParams();
   const catalogQuery = useToolCatalog(workspaceId);
-  const pagesQuery = useDiscoveredPages(workspaceId);
+  const pagesQuery = useDiscoveredPages(workspaceId, undefined, "included");
   const createBatch = useCreateToolBatch(workspaceId);
   const [toolKeys, setToolKeys] = useState<string[]>([]);
   const [pageIds, setPageIds] = useState<string[]>([]);
+  const [batchName, setBatchName] = useState("Initial CWV Run");
+  const [scopeId, setScopeId] = useState("");
+  const [outputFormat, setOutputFormat] = useState<"html" | "json" | "screenshot">("html");
+  const [uploadToSharepoint, setUploadToSharepoint] = useState(false);
+  const [includeRaw, setIncludeRaw] = useState(false);
 
   function toggle(list: string[], value: string, setter: (next: string[]) => void) {
     setter(list.includes(value) ? list.filter((item) => item !== value) : [...list, value]);
   }
 
   async function submitBatch() {
-    const batch = await createBatch.mutateAsync({ tool_keys: toolKeys, page_ids: pageIds });
+    const batch = await createBatch.mutateAsync({
+      scope_id: scopeId || undefined,
+      tool_keys: toolKeys,
+      page_ids: pageIds,
+      name: batchName,
+      output_format: outputFormat,
+      upload_to_sharepoint: uploadToSharepoint,
+      include_raw: includeRaw,
+    });
     appToast.info(`Tool batch ${batch.status}`);
   }
 
@@ -48,6 +71,37 @@ export function ToolsCatalogPage() {
             <CardTitle>Batch run</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-5">
+            <section className="grid gap-3">
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="batch-name">Batch name</Label>
+                <Input id="batch-name" value={batchName} onChange={(event) => setBatchName(event.target.value)} />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="scope-id">Scope ID</Label>
+                <Input id="scope-id" value={scopeId} onChange={(event) => setScopeId(event.target.value)} placeholder="Optional assessment scope id" />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <Label>Output format</Label>
+                <Select value={outputFormat} onValueChange={(value: "html" | "json" | "screenshot") => setOutputFormat(value)}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="html">html</SelectItem>
+                      <SelectItem value="json">json</SelectItem>
+                      <SelectItem value="screenshot">screenshot</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <label className="flex items-center gap-2 text-sm">
+                <input type="checkbox" checked={uploadToSharepoint} onChange={(event) => setUploadToSharepoint(event.target.checked)} />
+                Upload to SharePoint
+              </label>
+              <label className="flex items-center gap-2 text-sm">
+                <input type="checkbox" checked={includeRaw} onChange={(event) => setIncludeRaw(event.target.checked)} />
+                Include raw response
+              </label>
+            </section>
             <section className="flex flex-col gap-2">
               <strong className="text-sm">Tools</strong>
               <div className="max-h-56 overflow-auto rounded-md border">

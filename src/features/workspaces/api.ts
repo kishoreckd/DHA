@@ -1,4 +1,4 @@
-import { staticDha } from "@/lib/static-dha";
+import { apiRequest, jsonBody } from "@/lib/api/client";
 import type {
   Workspace,
   WorkspaceCreateInput,
@@ -8,12 +8,30 @@ import type {
 } from "./types";
 
 export const workspacesApi = {
-  list: (): Promise<Workspace[]> => staticDha.workspaces.list(),
-  create: (input: WorkspaceCreateInput): Promise<Workspace> => staticDha.workspaces.create(input),
-  get: (workspaceId: string): Promise<Workspace> => staticDha.workspaces.get(workspaceId),
+  list: (): Promise<Workspace[]> => apiRequest<Workspace[]>("/api/gateway/workspaces"),
+  create: (input: WorkspaceCreateInput): Promise<Workspace> =>
+    apiRequest<Workspace>("/api/gateway/workspaces", { method: "POST", body: jsonBody(input) }),
+  get: (workspaceId: string): Promise<Workspace> =>
+    apiRequest<Workspace>(`/api/gateway/workspaces/${workspaceId}`),
   update: (workspaceId: string, input: WorkspaceUpdateInput): Promise<Workspace> =>
-    staticDha.workspaces.update(workspaceId, input),
-  members: (workspaceId: string): Promise<WorkspaceMember[]> => staticDha.workspaces.members(workspaceId),
+    apiRequest<Workspace>(`/api/gateway/workspaces/${workspaceId}`, {
+      method: "PATCH",
+      body: jsonBody(input),
+    }),
+  members: (workspaceId: string): Promise<WorkspaceMember[]> =>
+    apiRequest<WorkspaceMember[]>(`/api/gateway/workspaces/${workspaceId}/members`),
+  addMember: (workspaceId: string, input: { user_email: string; role: WorkspaceMember["role"] }): Promise<WorkspaceMember> =>
+    apiRequest<WorkspaceMember>(`/api/gateway/workspaces/${workspaceId}/members`, {
+      method: "POST",
+      body: jsonBody(input),
+    }),
+  updateMember: (workspaceId: string, memberId: string, input: { role: WorkspaceMember["role"] }): Promise<WorkspaceMember> =>
+    apiRequest<WorkspaceMember>(`/api/gateway/workspaces/${workspaceId}/members/${memberId}`, {
+      method: "PATCH",
+      body: jsonBody(input),
+    }),
+  removeMember: (workspaceId: string, memberId: string): Promise<null> =>
+    apiRequest<null>(`/api/gateway/workspaces/${workspaceId}/members/${memberId}`, { method: "DELETE" }),
   permissions: (workspaceId: string): Promise<WorkspacePermissions> =>
-    staticDha.workspaces.permissions(workspaceId),
+    apiRequest<WorkspacePermissions>(`/api/gateway/workspaces/${workspaceId}/permissions/me`),
 };

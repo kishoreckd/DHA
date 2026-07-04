@@ -3,7 +3,10 @@ import {
   Bell,
   ChartNoAxesCombined,
   ClipboardList,
+  ClipboardCheck,
+  FileText,
   Globe2,
+  HeartPulse,
   LayoutDashboard,
   LogOut,
   Menu,
@@ -12,6 +15,7 @@ import {
   ShieldCheck,
   UserRound,
   Users,
+  Bot,
   Wrench,
   X,
 } from "lucide-react";
@@ -28,7 +32,12 @@ import { WorkspaceSwitcher } from "@/features/workspaces/components/WorkspaceSwi
 
 const navigation = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/system/health", label: "System health", icon: HeartPulse },
+  { href: "/system/operations", label: "Operations", icon: Settings },
   { href: "/workspaces", label: "Workspaces", icon: Globe2 },
+  { href: "/reviews", label: "Reviews", icon: ClipboardCheck },
+  { href: "/crawler", label: "Crawler", icon: Bot },
+  { href: "/baselines", label: "Baselines", icon: ClipboardList },
   { href: "/tools/sync", label: "Tool sync", icon: ChartNoAxesCombined },
 ];
 
@@ -48,6 +57,8 @@ export function ProductShell({ children }: { children: React.ReactNode }) {
           { href: `/workspaces/${workspaceId}/discovery`, label: "Discovery", icon: Search },
           { href: `/workspaces/${workspaceId}/competitors`, label: "Competitors", icon: Users },
           { href: `/workspaces/${workspaceId}/scope`, label: "Scope", icon: ShieldCheck },
+          { href: `/workspaces/${workspaceId}/assessments`, label: "Assessments", icon: ClipboardCheck },
+          { href: `/workspaces/${workspaceId}/reports`, label: "Reports", icon: FileText },
           { href: `/workspaces/${workspaceId}/tools`, label: "Tools", icon: Wrench },
           { href: `/workspaces/${workspaceId}/tool-runs`, label: "Tool runs", icon: ClipboardList },
         ]
@@ -61,6 +72,10 @@ export function ProductShell({ children }: { children: React.ReactNode }) {
       { href: "/admin/users", label: "User administration" },
       { href: "/admin/methodologies", label: "Methodologies" },
       { href: "/admin/tools", label: "Admin tools" },
+      { href: "/admin/permissions", label: "Permissions" },
+      { href: "/system/operations", label: "Operations" },
+      { href: "/crawler", label: "Crawler" },
+      { href: "/reviews", label: "Reviews" },
       { href: "/settings/profile", label: "Profile" },
     ].find((item) => pathname.startsWith(item.href))?.label ?? "DHA";
 
@@ -193,6 +208,19 @@ export function ProductShell({ children }: { children: React.ReactNode }) {
               >
                 <Wrench className="h-4 w-4" />
                 Admin tools
+              </Link>
+              <Link
+                to="/admin/permissions"
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "flex items-center gap-3 min-h-[42px] px-3 rounded-md text-sm text-[hsl(var(--sidebar-foreground))] transition-colors",
+                  "hover:bg-[hsl(var(--sidebar-accent))] hover:text-white",
+                  pathname.startsWith("/admin/permissions") &&
+                    "bg-[hsl(var(--sidebar-accent))] text-white shadow-[inset_3px_0_0_#60a5fa]",
+                )}
+              >
+                <ShieldCheck className="h-4 w-4" />
+                Permissions
               </Link>
             </>
           )}

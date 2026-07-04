@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { LoaderCircle, ShieldCheck } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { appToast } from "@/lib/toast";
@@ -6,13 +6,29 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ErrorState, ListRowsSkeleton, PageHeader } from "@/components/common/product-ui";
-import { useApproveScope, useCompetitors, useDiscoveredPages } from "@/features/discovery/hooks";
+import {
+  useApproveExistingScope,
+  useApproveScope,
+  useCompetitors,
+  useCreateScope,
+  useDiscoveredPages,
+  useProperties,
+  useScopes,
+  useSubmitScope,
+} from "@/features/discovery/hooks";
 
 export function ScopeReviewPage() {
   const { workspaceId = "" } = useParams();
-  const pagesQuery = useDiscoveredPages(workspaceId);
-  const competitorsQuery = useCompetitors(workspaceId);
+  const propertiesQuery = useProperties(workspaceId);
+  const activePropertyId = propertiesQuery.data?.[0]?.id ?? "";
+  const pagesQuery = useDiscoveredPages(workspaceId, activePropertyId || undefined, "included");
+  const competitorsQuery = useCompetitors(workspaceId, activePropertyId || undefined);
   const approveScope = useApproveScope(workspaceId);
+  const scopesQuery = useScopes(workspaceId, activePropertyId || undefined);
+  const createScope = useCreateScope(workspaceId);
+  const submitScope = useSubmitScope(workspaceId);
+  const approveExistingScope = useApproveExistingScope(workspaceId);
+  const [notes, setNotes] = useState("Initial scope for assessment.");
   const selectedPages = useMemo(
     () => (pagesQuery.data ?? []).filter((page) => page.selected_for_assessment),
     [pagesQuery.data],
@@ -23,11 +39,23 @@ export function ScopeReviewPage() {
   );
 
   async function approve() {
-    const scope = await approveScope.mutateAsync({
-      property_page_ids: selectedPages.map((page) => page.id),
-      competitor_page_ids: [],
-    });
+    const scope = await approveScope.mutateAsync({ property_id: activePropertyId });
     appToast.success(`Scope version ${scope.version_number} approved`);
+  }
+
+  async function createDraft() {
+    await createScope.mutateAsync({ property_id: activePropertyId, notes });
+    appToast.success("Scope draft created");
+  }
+
+  async function submitDraft(scopeId: string) {
+    await submitScope.mutateAsync({ scopeId, notes: "Ready for approval." });
+    appToast.success("Scope submitted");
+  }
+
+  async function approveDraft(scopeId: string) {
+    await approveExistingScope.mutateAsync({ scopeId, notes: "Approved." });
+    appToast.success("Scope approved");
   }
 
   return (
@@ -36,7 +64,7 @@ export function ScopeReviewPage() {
         eyebrow="Assessment scope"
         title="Review and approve scope"
         actions={
-          <Button disabled={approveScope.isPending || selectedPages.length === 0} onClick={approve}>
+          <Button disabled={approveScope.isPending || !activePropertyId || selectedPages.length === 0} onClick={approve}>
             {approveScope.isPending ? <LoaderCircle data-icon="inline-start" className="animate-spin" /> : <ShieldCheck data-icon="inline-start" />}
             Approve scope
           </Button>
@@ -75,6 +103,46 @@ export function ScopeReviewPage() {
                 <div key={competitor.id} className="rounded-md border px-4 py-3 text-sm">
                   <strong className="block truncate">{competitor.name}</strong>
                   <span className="block truncate text-muted-foreground">{competitor.url}</span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle>Assessment scope APIs</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-4">
+            <textarea
+              className="min-h-24 rounded-md border bg-background p-3 text-sm"
+              value={notes}
+              onChange={(event) => setNotes(event.target.value)}
+              placeholder="Scope notes"
+            />
+            <div className="flex flex-wrap gap-2">
+              <Button onClick={createDraft} disabled={!activePropertyId || createScope.isPending}>
+                {createScope.isPending && <LoaderCircle data-icon="inline-start" className="animate-spin" />}
+                Create scope draft
+              </Button>
+            </div>
+            {scopesQuery.isLoading && <ListRowsSkeleton actions />}
+            {scopesQuery.isError && <ErrorState message="Unable to load assessment scopes." />}
+            <div className="flex flex-col gap-2">
+              {scopesQuery.data?.map((scope) => (
+                <div key={scope.id} className="flex flex-col gap-3 rounded-md border px-4 py-3 md:flex-row md:items-center md:justify-between">
+                  <div className="min-w-0 text-sm">
+                    <strong>Version {scope.version_number}</strong>
+                    <span className="ml-2 text-muted-foreground">{scope.status}</span>
+                    <p className="truncate text-muted-foreground">{scope.notes || "No notes"}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button size="sm" variant="outline" onClick={() => submitDraft(scope.id)} disabled={submitScope.isPending}>
+                      Submit
+                    </Button>
+                    <Button size="sm" onClick={() => approveDraft(scope.id)} disabled={approveExistingScope.isPending}>
+                      Approve
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>

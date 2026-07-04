@@ -130,7 +130,61 @@ app.all("/api/auth/*path", async (req, res) => {
   }
 });
 
-// ─── Crawler  /api/crawler/:tool ──────────────────────────────────────────────
+// ─── System / Crawler APIs ────────────────────────────────────────────────────
+
+app.get("/api/system/health", async (_req, res) => {
+  try {
+    const response = await fetch(beURL("/health"), { headers: { Accept: "application/json" } });
+    const payload = await response.json().catch(() => ({
+      status: response.ok ? "success" : "error",
+      message: response.ok ? "Service is healthy." : "Unreadable response",
+      data: null,
+    }));
+    send(res, payload, response.status);
+  } catch (err) {
+    send(res, { status: "error", message: err?.message ?? "Server error", data: null }, 503);
+  }
+});
+
+app.get("/api/crawler/tools", async (req, res) => {
+  try {
+    if (!CRAWLER_KEY) throw new Error("CRAWLER_API_KEY is not configured");
+    const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+    const headers = new Headers({ "X-API-Key": CRAWLER_KEY });
+    const response = await fetch(beURL(`/crawl/tools${qs}`), { headers });
+    const payload = await response.json().catch(() => ({
+      status: "error",
+      message: "Unreadable response",
+      data: null,
+    }));
+    send(res, payload, response.status);
+  } catch (err) {
+    send(res, { status: "error", message: err?.message ?? "Server error", data: null }, 503);
+  }
+});
+
+app.patch("/api/crawler/tools/:toolKey", async (req, res) => {
+  try {
+    if (!CRAWLER_KEY) throw new Error("CRAWLER_API_KEY is not configured");
+    const headers = new Headers({
+      "Content-Type": "application/json",
+      "X-API-Key": CRAWLER_KEY,
+    });
+    const response = await fetch(beURL(`/crawl/tools/${req.params.toolKey}`), {
+      method: "PATCH",
+      body: req.body,
+      headers,
+    });
+    const payload = await response.json().catch(() => ({
+      status: "error",
+      message: "Unreadable response",
+      data: null,
+    }));
+    send(res, payload, response.status);
+  } catch (err) {
+    send(res, { status: "error", message: err?.message ?? "Server error", data: null }, 503);
+  }
+});
 
 app.post("/api/crawler/:tool", async (req, res) => {
   try {
@@ -146,6 +200,62 @@ app.post("/api/crawler/:tool", async (req, res) => {
       body: req.body,
       headers,
     });
+    const payload = await response.json().catch(() => ({
+      status: "error",
+      message: "Unreadable response",
+      data: null,
+    }));
+    send(res, payload, response.status);
+  } catch (err) {
+    send(res, { status: "error", message: err?.message ?? "Server error", data: null }, 503);
+  }
+});
+
+app.post("/api/crawler/ocr/extract", async (req, res) => {
+  try {
+    if (!CRAWLER_KEY) throw new Error("CRAWLER_API_KEY is not configured");
+    const headers = new Headers({
+      "Content-Type": "application/json",
+      "X-API-Key": CRAWLER_KEY,
+    });
+    const response = await fetch(beURL("/ocr/extract"), {
+      method: "POST",
+      body: req.body,
+      headers,
+    });
+    const payload = await response.json().catch(() => ({
+      status: "error",
+      message: "Unreadable response",
+      data: null,
+    }));
+    send(res, payload, response.status);
+  } catch (err) {
+    send(res, { status: "error", message: err?.message ?? "Server error", data: null }, 503);
+  }
+});
+
+app.get("/api/crawler/jobs", async (req, res) => {
+  try {
+    if (!CRAWLER_KEY) throw new Error("CRAWLER_API_KEY is not configured");
+    const qs = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+    const headers = new Headers({ "X-API-Key": CRAWLER_KEY });
+    const response = await fetch(beURL(`/crawl/jobs${qs}`), { headers });
+    const payload = await response.json().catch(() => ({
+      status: "error",
+      message: "Unreadable response",
+      data: null,
+    }));
+    send(res, payload, response.status);
+  } catch (err) {
+    send(res, { status: "error", message: err?.message ?? "Server error", data: null }, 503);
+  }
+});
+
+app.get("/api/crawler/jobs/:jobId", async (req, res) => {
+  try {
+    if (!CRAWLER_KEY) throw new Error("CRAWLER_API_KEY is not configured");
+    const headers = new Headers({ "X-API-Key": CRAWLER_KEY });
+    const response = await fetch(beURL(`/crawl/jobs/${req.params.jobId}`), { headers });
     const payload = await response.json().catch(() => ({
       status: "error",
       message: "Unreadable response",

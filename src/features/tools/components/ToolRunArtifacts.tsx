@@ -1,14 +1,19 @@
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { ArtifactSummary } from "../types";
+import { useArtifact } from "../hooks";
+import { useState } from "react";
 
 export function ToolRunArtifacts({
+  workspaceId,
   artifacts,
-  onOpen,
 }: {
+  workspaceId: string;
   artifacts: ArtifactSummary[];
-  onOpen: (artifactId: string) => void;
 }) {
+  const [artifactId, setArtifactId] = useState("");
+  const artifactQuery = useArtifact(workspaceId, artifactId);
+
   if (artifacts.length === 0) {
     return <p className="text-sm text-muted-foreground">No artifacts were saved for this run.</p>;
   }
@@ -21,12 +26,17 @@ export function ToolRunArtifacts({
             <strong className="block truncate text-sm">{artifact.name}</strong>
             <span className="block text-xs text-muted-foreground">{artifact.artifact_type}</span>
           </div>
-          <Button variant="outline" size="sm" onClick={() => onOpen(artifact.id)}>
+          <Button variant="outline" size="sm" onClick={() => setArtifactId(artifact.id)}>
             <ExternalLink data-icon="inline-start" />
-            Open
+            Inspect
           </Button>
         </div>
       ))}
+      {artifactQuery.data && (
+        <pre className="mt-2 max-h-72 overflow-auto rounded-md bg-muted p-3 text-xs">
+          {JSON.stringify(artifactQuery.data, null, 2)}
+        </pre>
+      )}
     </div>
   );
 }

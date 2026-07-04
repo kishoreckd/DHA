@@ -13,9 +13,12 @@ export type ToolDefinition = {
 export type ToolBatch = {
   id: string;
   workspace_id: string;
+  name?: string | null;
+  scope_id?: string | null;
   status: ToolRunStatus;
   tool_keys: string[];
   page_ids: string[];
+  run_summary?: Record<string, unknown>;
   created_at: string;
 };
 

@@ -11,14 +11,13 @@ import {
 } from "@/components/ui/select";
 import { ErrorState, PageHeader, TableSkeleton } from "@/components/common/product-ui";
 import { ToolRunTable } from "@/features/tools/components/ToolRunTable";
-import { useToolRuns } from "@/features/tools/hooks";
-
-const statuses = ["all", "queued", "running", "completed", "partial", "failed", "cancelled", "stale"];
+import { useToolBatches, useToolRuns } from "@/features/tools/hooks";
 
 export function ToolRunsPage() {
   const { workspaceId = "" } = useParams();
-  const [status, setStatus] = useState("all");
-  const runsQuery = useToolRuns(workspaceId, status);
+  const [batchId, setBatchId] = useState("all");
+  const batchesQuery = useToolBatches(workspaceId);
+  const runsQuery = useToolRuns(workspaceId, batchId);
 
   return (
     <>
@@ -26,15 +25,16 @@ export function ToolRunsPage() {
         eyebrow="Tool jobs"
         title="Run history"
         actions={
-          <Select value={status} onValueChange={setStatus}>
-            <SelectTrigger className="w-[180px]" aria-label="Filter run status">
+          <Select value={batchId} onValueChange={setBatchId}>
+            <SelectTrigger className="w-[260px]" aria-label="Filter by batch">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {statuses.map((item) => (
-                  <SelectItem key={item} value={item}>
-                    {item}
+                <SelectItem value="all">All batches</SelectItem>
+                {batchesQuery.data?.map((batch) => (
+                  <SelectItem key={batch.id} value={batch.id}>
+                    {batch.name || batch.id}
                   </SelectItem>
                 ))}
               </SelectGroup>

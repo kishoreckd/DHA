@@ -7,24 +7,38 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ErrorState, ListRowsSkeleton, PageHeader } from "@/components/common/product-ui";
 import {
   useCompetitors,
   useCreateCompetitor,
+  useProperties,
+  useSuggestCompetitors,
   useUpdateCompetitor,
 } from "@/features/discovery/hooks";
 
 export function CompetitorsPage() {
   const { workspaceId = "" } = useParams();
-  const competitorsQuery = useCompetitors(workspaceId);
+  const propertiesQuery = useProperties(workspaceId);
+  const [propertyId, setPropertyId] = useState("");
+  const activePropertyId = propertyId || propertiesQuery.data?.[0]?.id || "";
+  const competitorsQuery = useCompetitors(workspaceId, activePropertyId || undefined);
   const createCompetitor = useCreateCompetitor(workspaceId);
+  const suggestCompetitors = useSuggestCompetitors(workspaceId);
   const updateCompetitor = useUpdateCompetitor(workspaceId);
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    await createCompetitor.mutateAsync({ name, url });
+    await createCompetitor.mutateAsync({ name, url, property_id: activePropertyId });
     setName("");
     setUrl("");
     appToast.success("Competitor added");
@@ -35,11 +49,22 @@ export function CompetitorsPage() {
     appToast.success(status === "approved" ? "Competitor approved" : "Competitor rejected");
   }
 
+  async function suggest() {
+    await suggestCompetitors.mutateAsync({ property_id: activePropertyId });
+    appToast.info("Competitor suggestion request sent");
+  }
+
   return (
     <>
       <PageHeader
         eyebrow="Competitors"
         title="Competitor review"
+        actions={
+          <Button variant="outline" onClick={suggest} disabled={!activePropertyId || suggestCompetitors.isPending}>
+            {suggestCompetitors.isPending && <LoaderCircle data-icon="inline-start" className="animate-spin" />}
+            Suggest competitors
+          </Button>
+        }
       />
       <div className="grid gap-4 lg:grid-cols-[.8fr_1.2fr]">
         <Card>
@@ -48,6 +73,23 @@ export function CompetitorsPage() {
           </CardHeader>
           <CardContent>
             <form onSubmit={submit} className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1.5">
+                <Label>Property</Label>
+                <Select value={activePropertyId} onValueChange={setPropertyId}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select property" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {propertiesQuery.data?.map((property) => (
+                        <SelectItem key={property.id} value={property.id}>
+                          {property.normalized_domain}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="competitor-name">Name</Label>
                 <Input id="competitor-name" value={name} onChange={(event) => setName(event.target.value)} required />
@@ -62,7 +104,7 @@ export function CompetitorsPage() {
                   required
                 />
               </div>
-              <Button type="submit" className="w-fit" disabled={createCompetitor.isPending || !name || !url}>
+              <Button type="submit" className="w-fit" disabled={createCompetitor.isPending || !activePropertyId || !name || !url}>
                 {createCompetitor.isPending && <LoaderCircle data-icon="inline-start" className="animate-spin" />}
                 Add competitor
               </Button>

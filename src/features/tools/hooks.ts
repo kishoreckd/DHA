@@ -4,10 +4,10 @@ import type { ToolRunStatus } from "./types";
 
 export const toolJobKeys = {
   catalog: (workspaceId: string) => ["workspaces", workspaceId, "tools"] as const,
-  runs: (workspaceId: string, status = "all") => ["workspaces", workspaceId, "tool-runs", status] as const,
+  batches: (workspaceId: string) => ["workspaces", workspaceId, "tool-batches"] as const,
+  runs: (workspaceId: string, batchId = "all") => ["workspaces", workspaceId, "tool-runs", batchId] as const,
   run: (workspaceId: string, runId: string) => ["workspaces", workspaceId, "tool-runs", runId] as const,
-  measurements: (workspaceId: string, runId: string) =>
-    ["workspaces", workspaceId, "tool-runs", runId, "measurements"] as const,
+  artifact: (workspaceId: string, artifactId: string) => ["workspaces", workspaceId, "artifacts", artifactId] as const,
 };
 
 const liveStatuses: ToolRunStatus[] = ["queued", "running"];
@@ -15,15 +15,23 @@ const liveStatuses: ToolRunStatus[] = ["queued", "running"];
 export function useToolCatalog(workspaceId?: string) {
   return useQuery({
     queryKey: toolJobKeys.catalog(workspaceId ?? ""),
-    queryFn: () => toolJobsApi.catalog(workspaceId ?? ""),
+    queryFn: () => toolJobsApi.catalog(),
     enabled: Boolean(workspaceId),
   });
 }
 
-export function useToolRuns(workspaceId?: string, status = "all") {
+export function useToolBatches(workspaceId?: string) {
   return useQuery({
-    queryKey: toolJobKeys.runs(workspaceId ?? "", status),
-    queryFn: () => toolJobsApi.runs(workspaceId ?? "", status),
+    queryKey: toolJobKeys.batches(workspaceId ?? ""),
+    queryFn: () => toolJobsApi.batches(workspaceId ?? ""),
+    enabled: Boolean(workspaceId),
+  });
+}
+
+export function useToolRuns(workspaceId?: string, batchId = "all") {
+  return useQuery({
+    queryKey: toolJobKeys.runs(workspaceId ?? "", batchId),
+    queryFn: () => toolJobsApi.runs(workspaceId ?? "", batchId),
     enabled: Boolean(workspaceId),
     refetchInterval: (query) =>
       query.state.data?.some((run) => liveStatuses.includes(run.status)) ? 3000 : false,
@@ -42,20 +50,15 @@ export function useToolRun(workspaceId?: string, runId?: string) {
   });
 }
 
-export function useToolRunMeasurements(workspaceId?: string, runId?: string) {
-  return useQuery({
-    queryKey: toolJobKeys.measurements(workspaceId ?? "", runId ?? ""),
-    queryFn: () => toolJobsApi.measurements(workspaceId ?? "", runId ?? ""),
-    enabled: Boolean(workspaceId && runId),
-  });
-}
-
 export function useCreateToolBatch(workspaceId: string) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (input: { tool_keys: string[]; page_ids: string[] }) =>
+    mutationFn: (input: Parameters<typeof toolJobsApi.createBatch>[1]) =>
       toolJobsApi.createBatch(workspaceId, input),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["workspaces", workspaceId, "tool-runs"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: toolJobKeys.batches(workspaceId) });
+      queryClient.invalidateQueries({ queryKey: ["workspaces", workspaceId, "tool-runs"] });
+    },
   });
 }
 
@@ -70,8 +73,21 @@ export function useRetryToolRun(workspaceId: string) {
   });
 }
 
-export function useArtifactUrl(workspaceId: string, runId: string) {
+export function useCancelToolRun(workspaceId: string) {
+  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (artifactId: string) => toolJobsApi.artifactUrl(workspaceId, runId, artifactId),
+    mutationFn: (runId: string) => toolJobsApi.cancelRun(workspaceId, runId),
+    onSuccess: (run) => {
+      queryClient.setQueryData(toolJobKeys.run(workspaceId, run.id), run);
+      queryClient.invalidateQueries({ queryKey: ["workspaces", workspaceId, "tool-runs"] });
+    },
+  });
+}
+
+export function useArtifact(workspaceId?: string, artifactId?: string) {
+  return useQuery({
+    queryKey: toolJobKeys.artifact(workspaceId ?? "", artifactId ?? ""),
+    queryFn: () => toolJobsApi.artifact(workspaceId ?? "", artifactId ?? ""),
+    enabled: Boolean(workspaceId && artifactId),
   });
 }

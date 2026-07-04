@@ -44,16 +44,15 @@ export function DiscoveryPage() {
   const [jobId, setJobId] = useState("");
   const [manualUrl, setManualUrl] = useState("");
   const [selectedPage, setSelectedPage] = useState<DiscoveredPage | null>(null);
-  const pagesQuery = useDiscoveredPages(workspaceId, propertyId || undefined);
-  const startJob = useStartDiscoveryJob(workspaceId);
-  const jobQuery = useDiscoveryJob(workspaceId, jobId);
-  const updatePage = useUpdateDiscoveredPage(workspaceId, propertyId || undefined);
-  const addManualPage = useAddManualPage(workspaceId, propertyId || undefined);
-
   const activePropertyId = useMemo(
     () => propertyId || propertiesQuery.data?.[0]?.id || "",
     [propertyId, propertiesQuery.data],
   );
+  const pagesQuery = useDiscoveredPages(workspaceId, activePropertyId || undefined, "pending");
+  const startJob = useStartDiscoveryJob(workspaceId);
+  const jobQuery = useDiscoveryJob(workspaceId, jobId);
+  const updatePage = useUpdateDiscoveredPage(workspaceId);
+  const addManualPage = useAddManualPage(workspaceId);
 
   async function runDiscovery() {
     const job = await startJob.mutateAsync({ property_id: activePropertyId });
@@ -213,8 +212,7 @@ export function DiscoveryPage() {
                     id: selectedPage.id,
                     input: {
                       page_type: selectedPage.page_type,
-                      selected_for_assessment: true,
-                      status: "selected",
+                      scope_status: "included",
                     },
                   });
                   setSelectedPage(null);

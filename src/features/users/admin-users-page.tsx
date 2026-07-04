@@ -437,12 +437,23 @@ function AuditTab({ query }: { query: ReturnType<typeof useQuery<AuditLog[]>> })
 
 // ─── Invite Panel (inside Dialog) ────────────────────────────────────────────
 
+const defaultInvitePermissions = ["dashboard:view", "tools:sync"];
+const invitePermissionOptions = [
+  "dashboard:view",
+  "tools:sync",
+  "baselines:create",
+  "reviews:create",
+  "reviews:update",
+  "reviews:publish",
+];
+
 function InvitePanel({ close }: { close: () => void }) {
   const client = useQueryClient();
-  const [form, setForm] = useState<{ email: string; display_name: string; role: UserRole }>({
+  const [form, setForm] = useState<{ email: string; display_name: string; role: UserRole; permissions: string[] }>({
     email: "",
     display_name: "",
     role: "user",
+    permissions: defaultInvitePermissions,
   });
   const invite = useMutation({
     mutationFn: () => usersApi.invite(form),
@@ -511,6 +522,26 @@ function InvitePanel({ close }: { close: () => void }) {
               ? "Can manage users, invitations, and audit logs."
               : "Can sign in, manage their profile, and run assessment tools."}
           </p>
+        </div>
+        <div className="flex flex-col gap-2 rounded-md border p-3">
+          <Label>Permissions</Label>
+          {invitePermissionOptions.map((permission) => (
+            <label key={permission} className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={form.permissions.includes(permission)}
+                onChange={(event) =>
+                  setForm((cur) => ({
+                    ...cur,
+                    permissions: event.target.checked
+                      ? [...cur.permissions, permission]
+                      : cur.permissions.filter((item) => item !== permission),
+                  }))
+                }
+              />
+              {permission}
+            </label>
+          ))}
         </div>
       </div>
 

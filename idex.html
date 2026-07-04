@@ -1,0 +1,2985 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CXOntology — A holistic partner for digital and customer experience.</title>
+<meta name="description" content="CXOntology engineers digital ecosystems, go-to-market outcomes, and AI activation — for organizations investing in their digital maturity.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.cxontology.com/home">
+<meta property="og:title" content="CXOntology — A holistic partner for digital and customer experience.">
+<meta property="og:description" content="CXOntology engineers digital ecosystems, go-to-market outcomes, and AI activation — for organizations investing in their digital maturity.">
+<meta property="og:url" content="https://www.cxontology.com/home">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CXONTOLOGY — LIGHT THEME · BOLD VARIANT
+   White-dominant. Bold cobalt blue + brand purple as equal partners.
+   ============================================================ */
+:root {
+  /* Surfaces */
+  --bg-pure:      #FFFFFF;
+  --bg-paper:     #FAFBFE;
+  --bg-lavender:  #F2EDFC;       /* purple-tinted panel */
+  --bg-ice:       #EAF0FF;       /* blue-tinted panel */
+  --bg-deep:      #021333;       /* dark accents (footer/spotlight only) */
+  --bg-elev-d:    #0A1840;
+
+  /* Bold blue (companion to brand purple) */
+  --blue:         #1E3FE3;
+  --blue-bright:  #3D5BFF;
+  --blue-deep:    #122B9E;
+  --blue-soft:    rgba(30, 63, 227, 0.10);
+  --blue-glow:    rgba(30, 63, 227, 0.35);
+
+  /* Body-text italic emphasis — distinct from header blues, indigo-leaning */
+  --accent-emphasis:      #5B47E8;
+  --accent-emphasis-soft: rgba(91, 71, 232, 0.12);
+
+  /* Brand purple (on-brand from logo) */
+  --brand:        #1E3FE3;
+  --brand-deep:   #62195F;
+  --brand-bright: #C977C7;
+  --brand-soft:   rgba(146, 39, 143, 0.10);
+  --brand-glow:   rgba(146, 39, 143, 0.40);
+
+  /* Sky / pale blue */
+  --sky:          #B0CBFF;
+
+  /* Ink (text on white) */
+  --ink:          #021333;
+  --ink-2:        #2C3A5E;
+  --ink-3:        #5C6B8E;
+  --ink-4:        #8696BC;
+  --ink-5:        #B5C0D6;
+
+  /* On-dark text (footer) */
+  --td-primary:   #F2F4FA;
+  --td-secondary: #C8D4F0;
+  --td-muted:     #8696BC;
+  --td-faint:     #5C6B8E;
+
+  /* Borders */
+  --bd-subtle:  rgba(2, 19, 51, 0.06);
+  --bd-soft:    rgba(2, 19, 51, 0.10);
+  --bd-strong:  rgba(2, 19, 51, 0.20);
+  --bd-d-subtle: rgba(176, 203, 255, 0.10);
+
+  /* Type */
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SF Mono', Menlo, monospace;
+
+  /* Radii */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  /* Layout */
+  --max-w: 1240px;
+  --gutter: 32px;
+}
+
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  background: var(--bg-pure);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+img, svg { display: block; max-width: 100%; }
+input, textarea { font-family: inherit; }
+::selection { background: var(--blue); color: #FFFFFF; }
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  width: 100%;
+}
+
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(234, 240, 255, 0.78);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-bottom: 1px solid rgba(30, 63, 227, 0.10);
+  transition: transform 0.3s ease;
+}
+.nav.is-hidden { transform: translateY(-100%); }
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px;
+}
+.logo {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 600; font-size: 17px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.logo-mark { width: 32px; height: 32px; flex-shrink: 0; }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 14px; color: var(--ink-2);
+  transition: color 0.18s ease;
+}
+.nav-links a:hover, .nav-links a.is-active { color: var(--blue); }
+
+/* Assessment CTA — differentiated from Contact CXO */
+.nav-assessment {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--accent-emphasis) 100%);
+  border: none;
+  border-radius: 9999px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+.nav-assessment::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(30, 63, 227, 0.08) 0%, rgba(91, 71, 232, 0.08) 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.nav-assessment:hover {
+  background: linear-gradient(135deg, var(--blue-bright) 0%, var(--accent-emphasis) 100%);
+  color: #FFFFFF;
+  box-shadow: 0 0 28px rgba(30, 63, 227, 0.30);
+  transform: translateY(-1px);
+}
+.nav-assessment:hover::before { opacity: 0; }
+.nav-assessment-icon {
+  width: 14px; height: 14px;
+  flex-shrink: 0;
+}
+.nav-assessment-arrow {
+  width: 12px; height: 12px;
+  flex-shrink: 0;
+  transition: transform 0.18s ease;
+}
+.nav-assessment:hover .nav-assessment-arrow {
+  transform: translateX(2px);
+}
+
+.nav-assessment-pulse {
+  position: absolute;
+  top: -1px; right: -1px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  animation: assessment-ping 2s ease-in-out infinite;
+}
+@keyframes assessment-ping {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 18px;
+  background: var(--blue); color: #FFFFFF;
+  border-radius: var(--r-pill);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: -0.005em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.nav-cta:hover {
+  transform: translateY(-1px);
+  background: var(--blue-deep);
+  box-shadow: 0 6px 24px var(--blue-glow);
+}
+.nav-cta-arrow { width: 14px; height: 14px; }
+
+/* SECTIONS */
+section { position: relative; }
+.section { padding: 88px 0; }
+
+/* EYEBROW + HEADINGS */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  color: var(--blue-deep);
+}
+.eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--blue);
+}
+.eyebrow.blue { color: var(--blue-deep); }
+.eyebrow.blue .eyebrow-dot { background: var(--blue); }
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  font-weight: 500;
+  color: var(--ink);
+}
+.h-display {
+  font-size: clamp(44px, 6vw, 80px);
+  font-weight: 400; line-height: 1.0;
+  letter-spacing: -0.035em;
+}
+.h-section {
+  font-size: clamp(34px, 4.2vw, 54px);
+  font-weight: 400; line-height: 1.05;
+  letter-spacing: -0.03em;
+  max-width: 30ch;
+}
+.h-section em {
+  font-style: italic; font-weight: 400;
+  color: var(--blue);
+}
+.h-section em.blue { color: var(--blue); }
+.lede {
+  font-size: 18px; line-height: 1.55;
+  font-weight: 300; max-width: 68ch;
+  color: var(--ink-2);
+}
+
+/* HERO */
+.hero { position: relative; padding: 120px 0 80px; overflow: hidden; }
+.hero::before {
+  content: ''; position: absolute;
+  top: -20%; left: -10%; width: 70%; height: 90%;
+  background: radial-gradient(ellipse at 30% 50%, var(--brand-soft) 0%, transparent 55%);
+  pointer-events: none; z-index: 0;
+}
+.hero::after {
+  content: ''; position: absolute;
+  bottom: -30%; right: -10%; width: 65%; height: 85%;
+  background: radial-gradient(ellipse at 70% 50%, var(--blue-soft) 0%, transparent 55%);
+  pointer-events: none; z-index: 0;
+}
+.hero .container { position: relative; z-index: 1; }
+.hero-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 48px;
+  position: relative;
+  z-index: 2;
+}
+.hero-grid > div:first-child {
+  max-width: 880px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero h1 { text-align: center; }
+.br-desk { display: inline; }
+@media (max-width: 700px) { .br-desk { display: none; } }
+.hero-subheadline { text-align: center; max-width: 32ch; }
+.hero-lede { text-align: center; max-width: 64ch; margin-left: auto; margin-right: auto; }
+
+/* Hero scroll cue — "Read on to see how" with down arrow */
+.hero-scroll-cue {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  text-decoration: none;
+  transition: opacity 0.25s ease;
+  opacity: 0.7;
+}
+.hero-scroll-cue:hover { opacity: 1; }
+.hero-scroll-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.hero-scroll-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--bd-soft);
+  color: var(--blue);
+  font-size: 16px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  animation: scroll-bounce 2.4s ease-in-out infinite;
+}
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+.hero-visual { max-width: 380px; margin: 0 auto; }
+
+/* Pointillism background canvas — sits behind hero content */
+.hero { position: relative; overflow: hidden; }
+.hero-pointillism {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-pointillism svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.hero .container { position: relative; z-index: 2; }
+.point-dot {
+  transition: r 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              fill 0.35s ease,
+              fill-opacity 0.35s ease;
+}
+.hero h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--ink);
+  font-size: clamp(36px, 4.5vw, 60px);
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--brand);
+  font-weight: 400;
+}
+.hero-subheadline {
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--ink-2);
+  margin-bottom: 32px;
+  max-width: 46ch;
+}
+.hero-subheadline em {
+  font-style: italic;
+  color: var(--blue);
+  font-weight: 500;
+}
+.hero-lede { margin-bottom: 40px; max-width: 54ch; }
+.hero-cta-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px;
+  background: var(--blue); color: #FFFFFF;
+  border-radius: var(--r-pill);
+  font-size: 15px; font-weight: 600;
+  letter-spacing: -0.005em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  background: var(--blue-deep);
+  box-shadow: 0 8px 32px var(--blue-glow);
+}
+.btn-primary.purple { background: var(--brand); }
+.btn-primary.purple:hover {
+  background: var(--brand-deep);
+  box-shadow: 0 8px 32px var(--brand-glow);
+}
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 0; color: var(--ink);
+  font-size: 15px; font-weight: 500;
+  border-bottom: 1px solid var(--bd-strong);
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+.btn-secondary:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.btn-arrow { width: 16px; height: 16px; transition: transform 0.18s ease; }
+.btn-primary:hover .btn-arrow,
+.btn-secondary:hover .btn-arrow { transform: translateX(3px); }
+
+.hero-meta {
+  margin-top: 80px; padding-top: 32px;
+  border-top: 1px solid var(--bd-subtle);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+}
+.hero-meta-item { display: flex; flex-direction: column; gap: 6px; }
+.hero-meta-label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.14em;
+  color: var(--ink-3); text-transform: uppercase;
+}
+.hero-meta-value { font-size: 15px; color: var(--ink); }
+
+/* PILLARS (LAVENDER) */
+.pillars {
+  background: linear-gradient(135deg, var(--bg-ice) 0%, var(--bg-lavender) 100%);
+  position: relative;
+  border-top: 1px solid var(--bd-soft);
+}
+.pillars::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 0%, var(--blue-soft) 0%, transparent 40%),
+    radial-gradient(circle at 90% 100%, var(--blue-soft) 0%, transparent 40%);
+  pointer-events: none;
+}
+.pillars .container { position: relative; }
+.pillars-header {
+  display: grid; grid-template-columns: 1fr;
+  gap: 24px; margin-bottom: 56px;
+}
+.pillars-header-text {
+  font-size: 18px; line-height: 1.55;
+  color: var(--ink-2); font-weight: 300;
+  max-width: none;
+}
+.pillars-header-text em {
+  font-style: italic;
+  color: var(--blue);
+  font-weight: 400;
+}
+.pillars-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.pillar-card {
+  background: var(--bg-pure);
+  border: 1px solid var(--bd-subtle);
+  border-radius: var(--r-lg);
+  padding: 36px 32px 40px;
+  position: relative;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pillar-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(30, 63, 227, 0.14);
+}
+.pillar-num {
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 500;
+  color: var(--blue);
+  letter-spacing: 0.08em;
+  margin-bottom: 32px;
+  display: flex; align-items: center; gap: 10px;
+}
+.pillar-num::after {
+  content: ''; flex: 1; height: 1px; background: var(--bd-soft);
+}
+.pillar-title {
+  font-size: 26px; font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+.pillar-body {
+  font-size: 14.5px; line-height: 1.6;
+  color: var(--ink-2); font-weight: 300;
+}
+
+/* SCENARIO PANEL — dark visual hook for the pillars section */
+.scenario-frame {
+  background: var(--bg-deep);
+  color: #fff;
+  border-radius: 24px;
+  padding: 56px;
+  margin-bottom: 64px;
+  position: relative;
+  overflow: hidden;
+}
+.scenario-frame::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 80% 0%, rgba(61, 91, 255, 0.20) 0%, transparent 55%),
+    radial-gradient(circle at 0% 100%, rgba(176, 203, 255, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+.scenario-content { position: relative; z-index: 1; transition: opacity 0.18s ease; }
+.scenario-content.is-fading { opacity: 0.25; }
+
+/* Panel header row — eyebrow + segmented switch share the line */
+.scenario-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: 22px;
+}
+
+/* Segmented switch — single bar with five segments, sliding white thumb */
+.scenario-switch {
+  position: relative;
+  display: inline-flex;
+  background: rgba(176, 203, 255, 0.10);
+  border: 1px solid rgba(176, 203, 255, 0.18);
+  border-radius: 999px;
+  padding: 3px;
+  flex-shrink: 0;
+}
+.scenario-switch-thumb {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  background: #fff;
+  border-radius: 999px;
+  transition: left 0.24s cubic-bezier(0.4, 0.0, 0.2, 1),
+              width 0.24s cubic-bezier(0.4, 0.0, 0.2, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+.scenario-switch.is-init .scenario-switch-thumb { transition: none; }
+/* Fallback: while is-init (before JS positions the thumb), the active button gets a
+   visible white background directly. Prevents any flash of dark text on dark panel. */
+.scenario-switch.is-init button.is-active { background: #fff; border-radius: 999px; }
+.scenario-switch button {
+  position: relative;
+  z-index: 1;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 7px 14px;
+  background: transparent;
+  border: none;
+  color: rgba(176, 203, 255, 0.85);
+  cursor: pointer;
+  border-radius: 999px;
+  transition: color 0.22s ease;
+  white-space: nowrap;
+}
+.scenario-switch button:hover { color: rgba(176, 203, 255, 0.90); }
+.scenario-switch button.is-active,
+.scenario-switch button.is-active:hover { color: var(--ink, #021333); }
+
+.scenario-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--sky, #B0CBFF);
+  margin-bottom: 0;
+  display: flex; align-items: center; gap: 12px;
+}
+.scenario-eyebrow::before {
+  content: ''; width: 24px; height: 1px; background: var(--sky, #B0CBFF);
+}
+.scenario-h {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+  max-width: 38ch;
+  color: #fff;
+}
+.scenario-h em { font-style: italic; font-weight: 400; color: var(--sky, #B0CBFF); }
+.scenario-skills {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin: 24px 0 36px;
+}
+.scenario-skill {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  padding: 8px 14px;
+  background: rgba(176, 203, 255, 0.10);
+  border: 1px solid rgba(176, 203, 255, 0.22);
+  color: var(--sky, #B0CBFF);
+  border-radius: 24px;
+  letter-spacing: 0.06em;
+}
+/* Skill bucket color variants — subtle, just enough to imply different vendor groups */
+.scenario-skill.skill-eng {
+  background: rgba(61, 91, 255, 0.18);
+  border-color: rgba(61, 91, 255, 0.35);
+  color: #C8D8FF;
+}
+.scenario-skill.skill-mkt {
+  background: rgba(176, 203, 255, 0.10);
+  border-color: rgba(176, 203, 255, 0.28);
+  color: #B0CBFF;
+}
+.scenario-skill.skill-ops {
+  background: rgba(110, 138, 255, 0.10);
+  border-color: rgba(110, 138, 255, 0.28);
+  color: #DDE5FF;
+}
+/* Tiny bucket label that prefixes each row of pills */
+.scenario-skills-row {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.scenario-skills-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(176, 203, 255, 0.85);
+  margin-right: 6px;
+  min-width: 92px;
+}
+.scenario-conclusion {
+  font-size: 17px; line-height: 1.65;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 400;
+  padding-top: 32px;
+  border-top: 1px solid rgba(176, 203, 255, 0.22);
+  max-width: 75ch;
+}
+.scenario-conclusion strong { color: #fff; font-weight: 500; }
+
+/* === New scenario panel: discipline cards with capability + responsibility === */
+.scenario-groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0 0 36px;
+}
+.scenario-group {
+  display: flex;
+  flex-direction: column;
+  background: rgba(176, 203, 255, 0.05);
+  border: 1px solid rgba(176, 203, 255, 0.14);
+  border-radius: 14px;
+  padding: 22px 22px 18px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.scenario-group:hover {
+  background: rgba(176, 203, 255, 0.08);
+  border-color: rgba(176, 203, 255, 0.22);
+}
+.scenario-group-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(176, 203, 255, 0.85);
+  margin-bottom: 16px;
+}
+.scenario-group-eng .scenario-group-label { color: #C8D8FF; }
+.scenario-group-exp .scenario-group-label { color: #B0CBFF; }
+.scenario-group-act .scenario-group-label { color: #DDE5FF; }
+
+.scenario-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px 0;
+  border-top: 1px solid rgba(176, 203, 255, 0.08);
+}
+.scenario-item:first-of-type { border-top: 0; padding-top: 0; }
+.scenario-item:last-of-type { padding-bottom: 0; }
+.scenario-item-cap {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.005em;
+  line-height: 1.35;
+}
+.scenario-item-resp {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.62);
+}
+@media (max-width: 920px) {
+  .scenario-groups {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+@media (max-width: 600px) {
+  .scenario-group { padding: 18px 18px 14px; }
+  .scenario-item-cap { font-size: 13.5px; }
+  .scenario-item-resp { font-size: 12.5px; }
+}
+
+/* PRINCIPLE CARDS — three-up resolution after the scenario */
+.principle-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.principle-card {
+  padding: 36px 32px;
+  background: var(--bg-pure);
+  border: 1px solid var(--bd-soft);
+  border-radius: 16px;
+  transition: all 0.22s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(2, 19, 51, 0.04);
+}
+.principle-card:hover {
+  border-color: var(--blue-soft);
+  box-shadow: 0 16px 40px rgba(30, 63, 227, 0.08);
+  transform: translateY(-2px);
+}
+.principle-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  color: var(--blue);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--bd-subtle);
+}
+.principle-h {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px; font-weight: 500;
+  letter-spacing: -0.012em;
+  margin-bottom: 24px;
+  color: var(--ink);
+  line-height: 1.25;
+  /* Reserve space for up to 3 lines so all bodies start on the same baseline */
+  min-height: calc(22px * 1.25 * 3);
+}
+.principle-h em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--blue);
+}
+.principle-body {
+  font-size: 15px; line-height: 1.6;
+  color: var(--ink-2);
+  font-weight: 400;
+}
+.principle-body em {
+  font-style: italic;
+  color: var(--accent-emphasis);
+}
+
+@media (max-width: 900px) {
+  .scenario-frame { padding: 36px 28px; }
+  .scenario-header-row { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .scenario-switch {
+    max-width: 100%;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scenario-switch::-webkit-scrollbar { display: none; }
+  .scenario-switch button { padding: 7px 11px; font-size: 10.5px; }
+  .principle-row { grid-template-columns: 1fr; }
+}
+
+/* PILLARS BRIDGE — the transition from problem to resolution within the section */
+.pillars-bridge {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 64px;
+  align-items: start;
+  padding: 64px 0;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+.pillars-bridge-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--blue);
+  display: flex; align-items: center; gap: 12px;
+  padding-top: 6px;
+}
+.pillars-bridge-arrow {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font-size: 14px; line-height: 1;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+}
+.pillars-bridge-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px; line-height: 1.5;
+  color: var(--ink);
+  font-weight: 400;
+  max-width: none;
+}
+.pillars-bridge-text em {
+  font-style: italic;
+  color: var(--blue);
+  font-weight: 400;
+}
+
+@media (max-width: 900px) {
+  .pillars-bridge { grid-template-columns: 1fr; gap: 16px; padding: 48px 0; }
+  .pillars-bridge-text { font-size: 19px; }
+}
+
+/* ENGAGEMENT MODELS (WHITE) */
+.engagements {
+  background: var(--bg-pure);
+}
+.engagements-header {
+  margin-bottom: 56px;
+  display: grid; grid-template-columns: 1fr;
+  gap: 24px;
+}
+.engagements-list {
+  display: flex; flex-direction: column;
+  border-top: 1px solid var(--bd-soft);
+}
+.engagement-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 1.2fr auto;
+  gap: 32px; align-items: center;
+  padding: 32px 16px;
+  border-bottom: 1px solid var(--bd-soft);
+  transition: background 0.25s ease;
+}
+.engagement-row:hover {
+  background: linear-gradient(90deg, transparent, var(--blue-soft) 50%, transparent);
+}
+.engagement-num,
+.engagement-title {
+  transition: transform 0.25s ease;
+}
+.engagement-row:hover .engagement-num,
+.engagement-row:hover .engagement-title {
+  transform: translateX(16px);
+}
+.engagement-num {
+  font-family: var(--font-mono);
+  font-size: 13px; color: var(--ink-3);
+  letter-spacing: 0.05em;
+}
+.engagement-title {
+  font-size: 22px; font-weight: 500;
+  letter-spacing: -0.015em; color: var(--ink);
+}
+.engagement-desc {
+  font-size: 14.5px; line-height: 1.55;
+  color: var(--ink-2); font-weight: 300;
+}
+.engagement-arrow {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--bd-soft);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink-2);
+  transition: background 0.25s ease, border-color 0.25s ease,
+              color 0.25s ease, transform 0.25s ease;
+  flex-shrink: 0;
+}
+.engagement-row:hover .engagement-arrow {
+  background: var(--blue); border-color: var(--blue);
+  color: #FFFFFF; transform: rotate(-45deg);
+}
+
+/* CAPABILITIES (ICE BLUE) */
+.capabilities {
+  background: var(--bg-ice);
+  position: relative;
+  border-top: 1px solid var(--bd-soft);
+}
+.capabilities::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 80% 0%, var(--blue-soft) 0%, transparent 40%),
+    radial-gradient(circle at 10% 100%, var(--blue-soft) 0%, transparent 40%);
+  pointer-events: none;
+}
+.capabilities .container { position: relative; }
+.cap-header {
+  display: grid; grid-template-columns: 1fr;
+  gap: 24px; margin-bottom: 56px;
+}
+.cap-header-text {
+  font-size: 18px; line-height: 1.55;
+  color: var(--ink-2); font-weight: 300;
+  max-width: none;
+}
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.cap-card {
+  background: var(--bg-pure);
+  border: 1px solid var(--bd-soft);
+  border-radius: var(--r-lg);
+  padding: 36px 32px 32px;
+  position: relative;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(2, 19, 51, 0.04);
+}
+.cap-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(30, 63, 227, 0.12);
+}
+.cap-card-tag {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+.cap-card-title {
+  font-size: 22px; font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 24px;
+  line-height: 1.15;
+}
+.cap-skills {
+  display: flex; flex-direction: column;
+  gap: 0;
+}
+.cap-skill {
+  padding: 12px 0;
+  border-top: 1px solid var(--bd-subtle);
+  font-size: 14px;
+  letter-spacing: -0.005em;
+  color: var(--ink-3);
+  font-weight: 400;
+  display: flex; align-items: center; gap: 10px;
+}
+.cap-skill::before {
+  content: ''; width: 4px; height: 4px;
+  border-radius: 50%; background: var(--blue);
+  flex-shrink: 0;
+}
+.cap-etc {
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-4);
+  letter-spacing: 0.06em;
+  padding-top: 12px;
+  border-top: 1px solid var(--bd-subtle);
+}
+
+/* Platform partner ecosystem */
+.partners {
+  margin-top: 80px;
+  padding-top: 64px;
+  border-top: 1px solid var(--bd-soft);
+}
+.partners-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue-deep);
+  margin-bottom: 40px;
+  font-weight: 500;
+  text-align: center;
+}
+.partner-groups {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.partner-group {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 24px 0;
+  border-top: 1px solid var(--bd-subtle);
+}
+.partner-group:first-child { border-top: 0; }
+.partner-group-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  align-self: center;
+}
+
+/* Logo strip — wordmark placeholder that swaps to real SVG logos later */
+.partner-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+.partner-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 18px;
+  background: var(--bg-pure);
+  border: 1px solid var(--bd-subtle);
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--ink-3);
+  white-space: nowrap;
+  transition: all 0.18s ease;
+  cursor: default;
+}
+.partner-logo:hover {
+  color: var(--blue);
+  border-color: var(--blue-soft);
+  background: var(--bg-pure);
+  box-shadow: 0 4px 12px rgba(30, 63, 227, 0.06);
+  transform: translateY(-1px);
+}
+
+/* Optional: when real SVG logos drop in, add .partner-logo--svg modifier */
+.partner-logo--svg img,
+.partner-logo--svg svg {
+  height: 22px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  filter: grayscale(1) brightness(0.5);
+  transition: filter 0.18s ease;
+}
+.partner-logo--svg:hover img,
+.partner-logo--svg:hover svg {
+  filter: none;
+}
+
+@media (max-width: 900px) {
+  .partner-group { grid-template-columns: 1fr; gap: 16px; padding: 24px 0; }
+  .partner-group-name { font-size: 12px; }
+}
+
+/* OUTCOMES (WHITE — bold KPI panel) */
+.outcomes {
+  background: var(--bg-pure);
+  position: relative;
+}
+.outcomes::before {
+  content: ''; position: absolute;
+  top: 10%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--blue-soft) 0%, transparent 60%);
+  pointer-events: none;
+}
+.outcomes .container { position: relative; }
+.outcomes-header { margin-bottom: 64px; }
+.outcomes-tagline {
+  font-size: 18px; line-height: 1.55;
+  color: var(--ink-2); font-weight: 300;
+  max-width: none; margin-top: 24px;
+}
+.outcomes-tabs {
+  display: flex; flex-wrap: wrap; gap: 0;
+  border-bottom: 1px solid var(--bd-soft);
+  margin-bottom: 48px;
+}
+.outcome-tab {
+  padding: 16px 0; margin-right: 36px;
+  font-size: 14px; font-weight: 400;
+  color: var(--ink-3);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.18s ease, border-color 0.18s ease;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.outcome-tab:hover { color: var(--ink); }
+.outcome-tab.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--blue);
+}
+.outcome-tab-num {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--ink-4);
+}
+.outcome-tab.is-active .outcome-tab-num { color: var(--blue); }
+
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--bd-soft);
+  border: 1px solid var(--bd-soft);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.kpi-cell {
+  background: var(--bg-pure);
+  padding: 36px 32px;
+  display: flex; flex-direction: column; gap: 12px;
+  min-height: 180px;
+  position: relative;
+  transition: background 0.2s ease;
+}
+.kpi-cell:hover { background: var(--bg-paper); }
+.kpi-num {
+  font-family: var(--font-sans);
+  font-size: 56px; font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--ink); line-height: 1;
+}
+.kpi-num em {
+  font-style: normal;
+  color: var(--blue);
+  font-weight: 500;
+}
+.kpi-label {
+  font-size: 14px; line-height: 1.5;
+  color: var(--ink-2);
+  font-weight: 300; margin-top: auto;
+}
+.kpi-cell-marker {
+  position: absolute; top: 24px; right: 24px;
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.08em;
+  color: var(--ink-4); text-transform: uppercase;
+}
+
+/* WHY (LAVENDER) */
+.why {
+  background: var(--bg-ice);
+  position: relative;
+  border-top: 1px solid var(--bd-soft);
+}
+.why::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 80% 20%, var(--blue-soft) 0%, transparent 45%),
+    radial-gradient(circle at 10% 80%, var(--blue-soft) 0%, transparent 40%);
+  pointer-events: none;
+}
+.why .container { position: relative; }
+.why-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start;
+}
+.why-list { display: flex; flex-direction: column; }
+.why-item {
+  display: grid; grid-template-columns: 80px 1fr;
+  gap: 24px; padding: 28px 0;
+  border-top: 1px solid var(--bd-soft);
+}
+.why-item:last-child { border-bottom: 1px solid var(--bd-soft); }
+.why-item-num {
+  font-family: var(--font-mono);
+  font-size: 13px; font-weight: 500;
+  color: var(--blue);
+  letter-spacing: 0.05em;
+}
+.why-item-title {
+  font-size: 19px; font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.why-item-body {
+  font-size: 14.5px; line-height: 1.6;
+  color: var(--ink-2); font-weight: 300;
+}
+
+/* FINAL CTA (BOLD GRADIENT PANEL) */
+.cta {
+  background: var(--bg-pure);
+  position: relative;
+}
+.cta-inner {
+  position: relative;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
+  border-radius: var(--r-xl);
+  padding: 72px 64px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+  overflow: hidden;
+}
+.cta-inner::before {
+  content: ''; position: absolute;
+  top: -50%; right: -20%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta-inner > * { position: relative; }
+.cta .eyebrow { color: rgba(255, 255, 255, 0.85); }
+.cta .eyebrow-dot { background: #FFFFFF; }
+.cta h2 {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400; letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  color: #FFFFFF;
+}
+.cta-lede {
+  font-size: 16px; line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85); font-weight: 300;
+  margin-bottom: 32px; max-width: 48ch;
+}
+.cta .btn-primary {
+  background: #FFFFFF; color: var(--blue-deep);
+}
+.cta .btn-primary:hover {
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.cta .btn-secondary {
+  color: rgba(255, 255, 255, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+.cta .btn-secondary:hover {
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+.cta-form {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.cta-form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.cta-input, .cta-textarea {
+  width: 100%; padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: var(--r-md);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.cta-input:focus, .cta-textarea:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.10);
+}
+.cta-input::placeholder, .cta-textarea::placeholder { color: rgba(255,255,255,0.5); }
+.cta-textarea { resize: vertical; min-height: 100px; }
+.cta-disclaimer {
+  font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5;
+}
+.cta-submit { margin-top: 8px; align-self: flex-start; }
+
+/* FOOTER (DARK) */
+.footer {
+  background: var(--bg-deep);
+  color: var(--td-primary);
+  border-top: 1px solid var(--bd-d-subtle);
+  padding: 80px 0 40px;
+  position: relative;
+}
+.footer .logo { color: #F2F4FA; }
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 64px;
+}
+.footer-tagline {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sky);
+  letter-spacing: 0.04em;
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+.footer-brand {
+  font-size: 14px; color: var(--td-secondary);
+  line-height: 1.6; font-weight: 300;
+  max-width: 36ch;
+}
+.footer-col h4 {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.12em;
+  color: var(--td-muted);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-col a {
+  font-size: 14px; color: var(--td-secondary);
+  font-weight: 300;
+  transition: color 0.18s ease;
+}
+.footer-col a:hover { color: var(--sky); }
+.footer-locations {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 32px; padding-top: 48px;
+  border-top: 1px solid var(--bd-d-subtle);
+}
+.footer-loc h5 {
+  font-size: 14px; font-weight: 500;
+  color: var(--td-primary); margin-bottom: 4px;
+}
+.footer-loc-addr {
+  font-size: 13px; color: var(--td-muted);
+  line-height: 1.55; font-weight: 300;
+}
+.footer-loc-tag {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.1em;
+  color: var(--sky);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.footer-bottom {
+  margin-top: 48px; padding-top: 32px;
+  border-top: 1px solid var(--bd-d-subtle);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--td-muted); font-weight: 300;
+}
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a:hover { color: var(--sky); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  :root { --gutter: 24px; }
+  .section { padding: 64px 0; }
+  .hero { padding: 24px 0 40px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .hero-meta { grid-template-columns: 1fr; gap: 24px; }
+  .pillars-header, .engagements-header,
+  .cap-header, .why-grid, .cta-inner { grid-template-columns: 1fr; gap: 32px; }
+  .pillars-grid, .cap-grid { grid-template-columns: 1fr; gap: 16px; }
+  .partner-groups { grid-template-columns: 1fr; }
+  .partner-group { grid-template-columns: 1fr; gap: 8px; }
+  .engagement-row {
+    grid-template-columns: 40px 1fr 24px;
+    gap: 16px;
+    cursor: pointer;
+    align-items: center;
+  }
+  .engagement-row:hover {
+    background: linear-gradient(90deg, transparent, var(--blue-soft) 50%, transparent);
+  }
+  .engagement-row:hover .engagement-num,
+  .engagement-row:hover .engagement-title {
+    transform: translateX(16px);
+  }
+  .engagement-row::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--ink-3);
+    border-bottom: 2px solid var(--ink-3);
+    transform: rotate(45deg);
+    transition: transform 0.22s ease, border-color 0.22s ease;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: center;
+    align-self: center;
+  }
+  .engagement-row.is-open {
+    background: linear-gradient(90deg, transparent, var(--blue-soft) 50%, transparent);
+  }
+  .engagement-row.is-open::after {
+    border-color: var(--blue);
+    transform: rotate(225deg);
+  }
+  .engagement-desc {
+    display: block;
+    grid-column: 2 / 4;
+    grid-row: 2;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    transition: max-height 0.28s ease, opacity 0.2s ease, margin-top 0.2s ease;
+  }
+  .engagement-row.is-open .engagement-desc {
+    max-height: 180px;
+    opacity: 1;
+    margin-top: 4px;
+  }
+  .kpi-grid { grid-template-columns: 1fr; }
+  .kpi-num { font-size: 44px; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-locations { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .nav-links { display: none; }
+  .cta-form-row { grid-template-columns: 1fr; }
+  .cta-inner { padding: 48px 32px; }
+}
+
+/* ULTRAWIDE — strengthen section backgrounds so they read on wide monitors */
+@media (min-width: 1800px) {
+  :root {
+    --bg-lavender: #EDE6F8;
+    --bg-ice:      #E2ECFF;
+  }
+  .principle-card,
+  .cap-card {
+    box-shadow: 0 2px 12px rgba(2, 19, 51, 0.06);
+  }
+}
+
+/* Hero pointillism canvas — rigid lattice with naturally-faded text boundaries */
+.hero { position: relative; overflow: hidden; min-height: 80vh; display: flex; align-items: center; }
+#hero-pointillism-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero .container { position: relative; z-index: 2; width: 100%; }
+
+/* Assessment CTA panels — mobile optimizations */
+.assessment-cta-panel {
+  padding: 40px;
+  border-radius: 20px;
+  margin-top: 56px;
+}
+.assessment-cta-panel .assessment-cta-headline {
+  font-size: 22px;
+}
+.assessment-cta-panel .assessment-cta-btn {
+  padding: 14px 28px;
+  font-size: 14px;
+}
+@media (max-width: 960px) {
+  .assessment-cta-panel {
+    padding: 28px 24px;
+    border-radius: 16px;
+    margin-top: 36px;
+  }
+  .assessment-cta-panel .assessment-cta-headline {
+    font-size: 19px;
+  }
+  .assessment-cta-panel .assessment-cta-btn {
+    padding: 12px 22px;
+    font-size: 13px;
+    width: 100%;
+    justify-content: center;
+  }
+  .assessment-cta-panel .assessment-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .assessment-cta-panel .assessment-cta-text {
+    max-width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .assessment-cta-panel {
+    padding: 24px 20px;
+    border-radius: 14px;
+  }
+  .assessment-cta-panel .assessment-cta-headline {
+    font-size: 17px;
+    line-height: 1.35;
+  }
+  .assessment-cta-panel .assessment-cta-eyebrow {
+    font-size: 10px;
+  }
+}
+
+/* Mobile touch targets — footer nav links */
+@media (max-width: 600px) {
+  .footer-col a { display: inline-block; padding: 8px 0; }
+  .footer-col li { line-height: 1.2; }
+  .footer-legal a { display: inline-block; padding: 6px 0; }
+}
+
+/* ============================================================
+   MOBILE NAVIGATION — hamburger + slide-in drawer
+   Applies at viewport <= 960px (matches existing nav-links hide)
+   ============================================================ */
+.mobile-nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  z-index: 12;
+  -webkit-tap-highlight-color: transparent;
+}
+.mobile-nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  margin: 4px 0;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+.mobile-nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.mobile-nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.mobile-nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 19, 51, 0.40);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  z-index: 95;
+}
+.mobile-nav-backdrop[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 84vw);
+  max-width: 84vw;
+  background: var(--bg-pure, #FFFFFF);
+  box-shadow: -8px 0 32px rgba(2, 19, 51, 0.18);
+  /* Stay off-screen by default. We translate AND clip-path so it doesn't contribute to scrollWidth. */
+  transform: translate3d(100%, 0, 0);
+  visibility: hidden;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.28s;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 28px 32px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.mobile-nav-drawer[aria-hidden="false"] { transform: translate3d(0, 0, 0); visibility: visible; transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s; }
+.mobile-nav-drawer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mobile-nav-drawer ul li a {
+  display: block;
+  padding: 14px 0;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--ink, #021333);
+  text-decoration: none;
+  border-bottom: 1px solid var(--bd-subtle, rgba(176, 203, 255, 0.20));
+  transition: color 0.18s ease;
+}
+.mobile-nav-drawer ul li a:hover,
+.mobile-nav-drawer ul li a.is-active {
+  color: var(--blue, #1E3FE3);
+}
+.mobile-nav-drawer .mobile-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 14px 22px;
+  background: var(--blue, #1E3FE3);
+  color: #FFFFFF;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.18s ease;
+  white-space: nowrap;
+}
+.mobile-nav-drawer .mobile-nav-cta:hover {
+  background: var(--blue-bright, #2D52FF);
+}
+
+@media (max-width: 960px) {
+  .mobile-nav-toggle { display: block; }
+  /* Show CTA + hamburger together on mobile (user requested) */
+  .logo-text-display { display: none; }  /* Hide 'cxontology' text on mobile */
+  .nav-inner .nav-assessment { 
+    display: inline-flex !important;  /* Keep the CTA visible on mobile */
+    padding: 8px 12px;
+    font-size: 12px;
+    margin-right: 48px;  /* Make room for hamburger to the right */
+  }
+  .mobile-nav-toggle {
+    right: 12px;
+    padding: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .nav-inner .nav-assessment { 
+    padding: 7px 10px;
+    font-size: 11.5px;
+    gap: 5px;
+    margin-right: 44px;
+  }
+  .nav-assessment-icon { width: 12px; height: 12px; }
+}
+@media (max-width: 400px) {
+  /* Very narrow: shrink CTA label or rely on icon-only */
+  .nav-inner .nav-assessment { 
+    padding: 6px 9px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 360px) {
+  /* Extra small: keep hamburger working */
+  .logo-mark { width: 26px; height: 26px; }
+}
+
+/* ============================================================
+   MOBILE TYPOGRAPHY + SPACING + FORMS
+   Applies at viewport <= 600px (most aggressive)
+   ============================================================ */
+@media (max-width: 600px) {
+  /* Forms: prevent iOS zoom on focus by ensuring 16px minimum */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="number"],
+  textarea,
+  select { font-size: 16px !important; }
+  
+  /* Form rows: stack at narrow viewport */
+  .contact-form-row,
+  .cta-form-row,
+  .teaser-form-row {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Section padding scale down */
+  .section-pad { padding: 56px 0 !important; }
+  
+  /* Container padding scale down */
+  .container { padding-left: 20px !important; padding-right: 20px !important; }
+  
+  /* Heading scale down for readability */
+  .h-section { font-size: clamp(28px, 8vw, 36px) !important; line-height: 1.2; letter-spacing: -0.02em; }
+  .page-hero-h1 { font-size: clamp(32px, 9vw, 44px) !important; line-height: 1.15; }
+  h1 { font-size: clamp(28px, 8vw, 36px); line-height: 1.2; }
+  h2 { font-size: clamp(22px, 6vw, 28px); line-height: 1.25; }
+  h3 { font-size: clamp(18px, 5vw, 22px); line-height: 1.3; }
+  
+  /* Body font slightly larger for legibility */
+  body { font-size: 16px; line-height: 1.6; }
+  
+  /* Article body: reduce padding, allow content to breathe */
+  .article-body, .article-content { padding-left: 0 !important; padding-right: 0 !important; }
+}
+
+@media (max-width: 480px) {
+  /* Even tighter at very narrow */
+  .section-pad { padding: 48px 0 !important; }
+  .container { padding-left: 16px !important; padding-right: 16px !important; }
+}
+
+/* ============================================================
+   MOBILE INTERACTION + IMAGE BASELINE
+   ============================================================ */
+/* Image baseline: never overflow */
+img { max-width: 100%; height: auto; }
+
+@media (max-width: 600px) {
+  /* Ensure all interactive elements have minimum tap area
+     Combines with previous footer touch-target fix */
+  button, a {
+    -webkit-tap-highlight-color: rgba(30, 63, 227, 0.10);
+  }
+  
+  /* Card-style links: comfortable tap area */
+  .card a, .article-card a, .insight-card a { padding-block: 4px; }
+  
+  /* Article meta inline links — give them visual heft */
+  .article-meta a, .meta-link {
+    display: inline-block;
+    padding: 4px 0;
+  }
+  
+  /* CTAs/buttons: minimum 44px tall */
+  .btn-primary, .btn-secondary, .nav-assessment, .mobile-nav-cta {
+    min-height: 44px;
+  }
+}
+
+/* Tables: enforce horizontal scroll wrap if not already wrapped */
+@media (max-width: 600px) {
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Mobile: partner-logo chips align to a consistent 2-col grid (not flex-wrap chaos) */
+@media (max-width: 600px) {
+  .partner-logos {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .partner-logo {
+    padding: 0 12px;
+    font-size: 12.5px;
+    height: 40px;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+  }
+}
+@media (max-width: 340px) {
+  .partner-logos {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile: reduce hero top padding for tighter spacing on small screens */
+@media (max-width: 600px) {
+  .hero { padding-top: 24px !important; }
+}
+</style>
+</head>
+<body id="top">
+
+<!-- ========== NAV ========== -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="logo">
+      <img class="logo-mark" src="data:image/png;base64,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" alt="cxontology" />
+      <span class="logo-text-display">cxontology</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/home" class="is-active">Home</a></li>
+        <li><a href="/our-capabilities">Capabilities</a></li>
+        <li><a href="/how-we-deliver">How We Deliver</a></li>
+        <li><a href="/about-us">About Us</a></li>
+        <li><a href="/thought-leadership">Thought Leadership</a></li>
+        <li><a href="/contact-cxo">Contact CXO</a></li>
+      </ul>
+    </nav>
+    <a href="/cxo-assessments" class="nav-assessment">
+      <svg class="nav-assessment-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M2 3h12M2 6.5h8M2 10h10M2 13.5h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="13" cy="11" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M15 13L14.2 12.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      CXO IP: Digital Assessments
+      <svg class="nav-assessment-arrow" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+    <!-- Mobile nav: hamburger + drawer + backdrop -->
+<button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav-drawer" type="button">
+  <span></span><span></span><span></span>
+</button>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <!-- Structured pointillism: rigid lattice, naturally fading near text -->
+  <canvas id="hero-pointillism-canvas" aria-hidden="true"></canvas>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <h1 class="h-display reveal reveal-delay-1">
+          Digital Experience Engineering,<br class="br-desk">
+          Go-to-Market Expertise, and<br class="br-desk">
+          AI &amp; Agentic Activation.
+        </h1>
+        <p class="lede hero-lede reveal reveal-delay-3">
+          We deliver with full awareness of your ecosystem and a culture that stresses awareness of the team roles we play — our differentiated <a href="/how-we-deliver" style="color: var(--blue); text-decoration: none; border-bottom: 1px solid var(--blue-soft); transition: border-color 0.18s ease;" onmouseover="this.style.borderColor='var(--blue)'" onmouseout="this.style.borderColor='var(--blue-soft)'">delivery framework</a> emphasizes outcomes from day one with global delivery capacity calibrated to your preferences, and our <a href="/cxo-assessments" style="color: var(--blue); text-decoration: none; border-bottom: 1px solid var(--blue-soft); transition: border-color 0.18s ease;" onmouseover="this.style.borderColor='var(--blue)'" onmouseout="this.style.borderColor='var(--blue-soft)'">assessment frameworks</a> (pro-bono with managed services &amp; ongoing digital engagements) provide proactive performance visibility and strategic guidance on how to optimize outcomes.
+        </p>
+        <a href="#pillars" class="hero-scroll-cue reveal reveal-delay-4">
+          <span class="hero-scroll-text">Read on to see how</span>
+          <span class="hero-scroll-arrow">↓</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== PILLARS — The silo problem (LAVENDER) ========== -->
+<section class="section pillars" id="pillars">
+  <div class="container">
+    <div class="pillars-header">
+      <div>
+        <div class="eyebrow"><span class="eyebrow-dot"></span>Impacts &amp; Relatedness — How We Think About The Work We Do</div>
+        <h2 class="h-section">A connected ecosystem requires team members who understand <em>connected delivery.</em></h2>
+      </div>
+      <p class="pillars-header-text">
+        Most digital programs fragment because the vendors delivering them are siloed. We're built to overcome that challenge.
+      </p>
+    </div>
+
+    <!-- Scenario panel: the silo problem made concrete, viewable through five deliverable lenses -->
+    <div class="scenario-frame reveal">
+      <div class="scenario-content" id="scenario-content">
+        <div class="scenario-header-row">
+          <div class="scenario-eyebrow">Some familiar scenarios</div>
+          <div class="scenario-switch is-init" role="tablist" aria-label="Scenario by deliverable">
+            <span class="scenario-switch-thumb" aria-hidden="true"></span>
+            <button data-scenario="landing"   type="button" role="tab" class="is-active" aria-selected="true">Landing page</button>
+            <button data-scenario="commerce"  type="button" role="tab">Commerce</button>
+            <button data-scenario="tracking"  type="button" role="tab">Tracking &amp; data</button>
+            <button data-scenario="ai"        type="button" role="tab">AI capability</button>
+            <button data-scenario="migration" type="button" role="tab">Migration</button>
+          </div>
+        </div>
+        <h3 class="scenario-h" id="scenario-h">Shipping <em>a single, mature landing page</em><br>requires coordination across at least these disciplines:</h3>
+        <div class="scenario-groups" id="scenario-groups">
+          <div class="scenario-group scenario-group-eng">
+            <div class="scenario-group-label">Engineering</div>
+            <div class="scenario-item"><div class="scenario-item-cap">CMS &amp; Content Platforms</div><div class="scenario-item-resp">page model, reusable modules</div></div>
+            <div class="scenario-item"><div class="scenario-item-cap">UI &amp; Front-End</div><div class="scenario-item-resp">responsive layout, accessibility, performance</div></div>
+            <div class="scenario-item"><div class="scenario-item-cap">Integrations &amp; APIs</div><div class="scenario-item-resp">form handlers, lead routing, tags</div></div>
+          </div>
+          <div class="scenario-group scenario-group-exp">
+            <div class="scenario-group-label">Experience</div>
+            <div class="scenario-item"><div class="scenario-item-cap">ContentOps</div><div class="scenario-item-resp">copy, assets, governance</div></div>
+            <div class="scenario-item"><div class="scenario-item-cap">SEO, SEM &amp; Paid Media</div><div class="scenario-item-resp">on-page SEO, paid variants, UTM hygiene</div></div>
+            <div class="scenario-item"><div class="scenario-item-cap">BI, Analytics &amp; Attribution</div><div class="scenario-item-resp">event instrumentation, conversion tracking</div></div>
+          </div>
+          <div class="scenario-group scenario-group-act">
+            <div class="scenario-group-label">Activation</div>
+            <div class="scenario-item"><div class="scenario-item-cap">Marketing Automation</div><div class="scenario-item-resp">form-to-nurture handoff, lead scoring</div></div>
+            <div class="scenario-item"><div class="scenario-item-cap">CDP &amp; Personalization</div><div class="scenario-item-resp">audience-based variants, A/B testing</div></div>
+            <div class="scenario-item"><div class="scenario-item-cap">CRM &amp; Customer Data</div><div class="scenario-item-resp">capture standards, dedupe, sync</div></div>
+          </div>
+        </div>
+        <p class="scenario-conclusion" id="scenario-conclusion">At most organizations, those skills are owned across <strong>multiple parties (internal or external)</strong>, with scopes that don't account for how their piece integrates to the outcome. <strong>Poor coordination heavily impacts the outcome</strong> — during projects or in continuous maintenance and improvement cycles. <strong>Quality, speed, and conversion take the hit.</strong> And when something breaks, <strong>nobody owns it</strong>.</p>
+      </div>
+    </div>
+
+    <!-- Bridge: transition from problem to resolution -->
+    <div class="pillars-bridge reveal">
+      <div class="pillars-bridge-eyebrow">
+        <span class="pillars-bridge-arrow">↓</span>
+        Here's what makes us different
+      </div>
+      <p class="pillars-bridge-text">
+        The fragmentation problem isn't a tooling problem — it's an operating model problem, stressed by the nature of the domain. Our pre-engagement activities build a complete picture of your ecosystem, and our delivery culture enables our team to execute holistically, pushing back on those limitations. <em>Here's how we do that, and what that means for you:</em>
+      </p>
+    </div>
+
+    <div class="principle-row">
+      <article class="principle-card reveal">
+        <div class="principle-num">/ 01</div>
+        <h3 class="principle-h">Your ecosystem — mapped <em>before kick off.</em></h3>
+        <p class="principle-body">We start by understanding the components of your ecosystem our scoped team will interact with — stakeholders, collaborators, processes, dependencies, upstream impacts, downstream risks. The <em>ontology</em> of your <em>cx</em> operations — your <em>cxontology</em>. By day one, we already know what's around our scope, and how to deliver as a team player.</p>
+      </article>
+      <article class="principle-card reveal reveal-delay-1">
+        <div class="principle-num">/ 02</div>
+        <h3 class="principle-h">Consultants from our team understand <em>connected delivery is a team effort.</em></h3>
+        <p class="principle-body">Our team is exceptional at their individual crafts. Paired with an organizational culture of <em>connected delivery awareness and collaborative outcome creation</em> — and enabled by <em>your ecosystem map</em> — they break silos instead of working around them.</p>
+      </article>
+      <article class="principle-card reveal reveal-delay-2">
+        <div class="principle-num">/ 03</div>
+        <h3 class="principle-h">We're capable of collaboratively supporting <em>operational maturity gains.</em></h3>
+        <p class="principle-body">The delivery framework we operate within holds us accountable for our performance, but also surfaces patterns of operational friction across your wider stack. <em>We share what we see, and we can support initiatives to improve your operational maturity</em> — collaboratively, at your pace.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ENGAGEMENT MODELS (WHITE) ========== -->
+<section class="section engagements" id="engagements">
+  <div class="container">
+    <div class="engagements-header">
+      <div>
+        <div class="eyebrow blue"><span class="eyebrow-dot"></span>We create outcomes wherever you are on your journey</div>
+        <h2 class="h-section">We engineer ecosystems and maximize go-to-market outcomes along the <em class="blue">digital maturity curve.</em></h2>
+      </div>
+      <p class="pillars-header-text">
+        The maturity curve isn't linear, and you need a holistic partner to meet you where <em>you</em> are as an organization. Here are some of the areas CXO can deliver exceptional value no matter where you are on your journey.
+      </p>
+    </div>
+    <div class="engagements-list">
+      <div class="engagement-row">
+        <span class="engagement-num">/ 01</span>
+        <span class="engagement-title">Digital strategy and roadmaps</span>
+        <span class="engagement-desc">Leadership wants a digital roadmap that connects business vision, customer needs, and the technical landscape — with quantifiable objectives and milestone KPIs the team can actually hold.</span>
+      
+      </div>
+      <div class="engagement-row">
+        <span class="engagement-num">/ 02</span>
+        <span class="engagement-title">Capabilities assessments</span>
+        <span class="engagement-desc">Before committing to a platform, an investment, or an RFP — an outside assessment of the current ecosystem. Validate what's working, identify the gaps, surface the risks before they become budget conversations.</span>
+      
+      </div>
+      <div class="engagement-row">
+        <span class="engagement-num">/ 03</span>
+        <span class="engagement-title">Implementations and migrations</span>
+        <span class="engagement-desc">High-stakes execution where the work has to land cleanly while the business keeps running. Frameworks and a delivery model that compress timelines without sacrificing quality — or letting the seams show.</span>
+      
+      </div>
+      <div class="engagement-row">
+        <span class="engagement-num">/ 04</span>
+        <span class="engagement-title">Managed services for digital growth</span>
+        <span class="engagement-desc">The run-and-grow phase that most vendors walk away from. Scalable, multi-skilled managed services that own ongoing delivery — outcomes-focused, KPI-instrumented, available on demand as priorities shift. Delivered through our global pod model with blended rates designed to maximize coverage and depth.</span>
+      
+      </div>
+      <div class="engagement-row">
+        <span class="engagement-num">/ 05</span>
+        <span class="engagement-title">Conversion rate optimization</span>
+        <span class="engagement-desc">Performance has plateaued and leadership wants to see the funnel improve. We baseline conversion, set quantifiable goals, and bring the right multidisciplinary skills in on demand to drive month-over-month gains.</span>
+      
+      </div>
+    </div>
+
+    <div class="assessment-cta-panel" style="background: linear-gradient(135deg, var(--bg-deep) 0%, #0A1A4A 100%); position: relative; overflow: hidden;">
+      <div style="position: absolute; inset: 0; background: radial-gradient(circle at 80% 30%, rgba(61,91,255,0.20) 0%, transparent 50%); pointer-events: none;"></div>
+      <div class="assessment-cta-inner" style="position: relative; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;">
+        <div class="assessment-cta-text" style="flex: 1 1 0; min-width: 0;">
+          <div class="assessment-cta-eyebrow" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #B0CBFF; margin-bottom: 12px;">Not sure where you stand?</div>
+          <div class="assessment-cta-headline" style="font-weight: 400; color: #FFFFFF; line-height: 1.3; letter-spacing: -0.015em;">Get a complimentary <em style="font-style: italic; color: #B0CBFF;">digital health assessment</em> — we'll audit your ecosystem across 60+ metrics and show you exactly where the opportunities are.</div>
+        </div>
+        <a href="/cxo-assessments" class="assessment-cta-btn" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #1E3FE3 0%, #5B47E8 100%); color: #FFFFFF; border-radius: 9999px; font-weight: 600; text-decoration: none; letter-spacing: -0.01em; white-space: nowrap; transition: all 0.25s ease; box-shadow: 0 0 20px rgba(30,63,227,0.25);">
+          View our assessments
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CAPABILITIES (ICE BLUE) ========== -->
+<section class="section capabilities" id="capabilities">
+  <div class="container">
+    <div class="cap-header">
+      <div>
+        <div class="eyebrow blue"><span class="eyebrow-dot"></span>What we engineer</div>
+        <h2 class="h-section">We serve the core aspects of <em class="blue">holistic</em> digital activation.</h2>
+      </div>
+      <p class="cap-header-text">
+        We work with clients with a mindset of <em>holistic, collaborative digital partnership</em> — not as a list of services defined by contract. CXO can support you with individual skills, but our delivery culture and mindset naturally forces us to challenge siloed operations. Engineering, go-to-market, and AI: three aspects of digital activation we excel in.
+      </p>
+    </div>
+
+    <div class="cap-grid">
+      <article class="cap-card">
+        <h3 class="cap-card-title">Digital Experience Engineering</h3>
+        <div class="cap-skills">
+          <div class="cap-skill">CMS &amp; Content Platforms</div>
+          <div class="cap-skill">Commerce &amp; Catalog Engineering</div>
+          <div class="cap-skill">UI &amp; Front-End Engineering</div>
+          <div class="cap-skill">Integrations &amp; API Architecture</div>
+          <div class="cap-skill">Cloud, DevOps &amp; Infrastructure</div>
+          <div class="cap-etc">and more</div>
+        </div>
+      </article>
+
+      <article class="cap-card">
+        <h3 class="cap-card-title">Go-to-Market Expertise</h3>
+        <div class="cap-skills">
+          <div class="cap-skill">BI, Analytics &amp; Attribution</div>
+          <div class="cap-skill">SEO, SEM &amp; Paid Media</div>
+          <div class="cap-skill">Marketing Automation &amp; Lifecycle</div>
+          <div class="cap-skill">CRM &amp; Customer Data</div>
+          <div class="cap-skill">CDP &amp; Personalization</div>
+          <div class="cap-etc">and more</div>
+        </div>
+      </article>
+
+      <article class="cap-card">
+        <h3 class="cap-card-title">AI &amp; Agentic Activation</h3>
+        <div class="cap-skills">
+          <div class="cap-skill">AI Strategy &amp; Readiness Assessments</div>
+          <div class="cap-skill">ContentOps Modernization</div>
+          <div class="cap-skill">AI Content Creation &amp; Optimization</div>
+          <div class="cap-skill">Custom AI Agents &amp; Workflows</div>
+          <div class="cap-skill">Delivery Experience Agent</div>
+          <div class="cap-etc">and more</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="partners">
+      <div class="partners-eyebrow">Supported by our platforms of expertise</div>
+      <div class="partner-groups">
+        <div class="partner-group">
+          <div class="partner-group-name">Digital Properties &amp; Platforms</div>
+          <div class="partner-logos">
+            <span class="partner-logo">Contentful</span>
+            <span class="partner-logo">Contentstack</span>
+            <span class="partner-logo">Acquia</span>
+            <span class="partner-logo">Adobe Commerce</span>
+            <span class="partner-logo">Shopify</span>
+            <span class="partner-logo">BigCommerce</span>
+            <span class="partner-logo">commercetools</span>
+            <span class="partner-logo">Optimizely</span>
+          </div>
+        </div>
+        <div class="partner-group">
+          <div class="partner-group-name">Cloud &amp; Infrastructure</div>
+          <div class="partner-logos">
+            <span class="partner-logo">AWS</span>
+            <span class="partner-logo">Microsoft Azure</span>
+          </div>
+        </div>
+        <div class="partner-group">
+          <div class="partner-group-name">Data &amp; Business Intelligence</div>
+          <div class="partner-logos">
+            <span class="partner-logo">Snowflake</span>
+            <span class="partner-logo">Power BI</span>
+            <span class="partner-logo">Google Analytics</span>
+            <span class="partner-logo">SQL</span>
+          </div>
+        </div>
+        <div class="partner-group">
+          <div class="partner-group-name">Marketing &amp; MarkOps</div>
+          <div class="partner-logos">
+            <span class="partner-logo">HubSpot</span>
+            <span class="partner-logo">Salesforce</span>
+            <span class="partner-logo">Semrush</span>
+            <span class="partner-logo">Google Ads</span>
+            <span class="partner-logo">Meta</span>
+          </div>
+        </div>
+        <div class="partner-group">
+          <div class="partner-group-name">A.I. &amp; Agentic</div>
+          <div class="partner-logos">
+            <span class="partner-logo">OpenAI</span>
+            <span class="partner-logo">Copilot</span>
+            <span class="partner-logo">Hugging Face</span>
+            <span class="partner-logo">Python</span>
+            <span class="partner-logo">Java</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== OUTCOMES (WHITE) ========== -->
+<section class="section outcomes" id="impact">
+  <div class="container">
+    <div class="outcomes-header">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>We measure ourselves by the impact we make</div>
+      <h2 class="h-section">Led by strategy. Rooted in technology. <em>Focused on the business.</em></h2>
+      <p class="outcomes-tagline">A sample of the outcomes our clients see across engagement models. Every milestone is instrumented; every quarter has a number on it.</p>
+    </div>
+
+    <div class="outcomes-tabs">
+      <div class="outcome-tab is-active" data-tab="strategy"><span class="outcome-tab-num">01</span><span>Strategy &amp; Roadmaps</span></div>
+      <div class="outcome-tab" data-tab="assessment"><span class="outcome-tab-num">02</span><span>Capabilities Assessment</span></div>
+      <div class="outcome-tab" data-tab="implementations"><span class="outcome-tab-num">03</span><span>Implementations</span></div>
+      <div class="outcome-tab" data-tab="managed"><span class="outcome-tab-num">04</span><span>Managed Services</span></div>
+      <div class="outcome-tab" data-tab="cro"><span class="outcome-tab-num">05</span><span>CRO</span></div>
+    </div>
+
+    <div class="kpi-grid" id="kpi-grid">
+      <div class="kpi-cell"><span class="kpi-cell-marker">01</span><span class="kpi-num"><em>15%</em></span><span class="kpi-label">Growth in revenue from digital channels</span></div>
+      <div class="kpi-cell"><span class="kpi-cell-marker">02</span><span class="kpi-num"><em>2x</em></span><span class="kpi-label">Faster return on digital investments</span></div>
+      <div class="kpi-cell"><span class="kpi-cell-marker">03</span><span class="kpi-num"><em>25%</em></span><span class="kpi-label">Increase in customer lifetime value (CLV)</span></div>
+      <div class="kpi-cell"><span class="kpi-cell-marker">04</span><span class="kpi-num"><em>30%</em></span><span class="kpi-label">Reduction in operational costs</span></div>
+      <div class="kpi-cell"><span class="kpi-cell-marker">05</span><span class="kpi-num"><em>3x</em></span><span class="kpi-label">Faster time-to-market for new digital initiatives</span></div>
+      <div class="kpi-cell"><span class="kpi-cell-marker">06</span><span class="kpi-num"><em>50%</em></span><span class="kpi-label">Reduction in technical debt over 2 years</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHY (LAVENDER) ========== -->
+<section class="section why" id="about">
+  <div class="container">
+    <div class="why-grid">
+      <div>
+        <div class="eyebrow"><span class="eyebrow-dot"></span>A different kind of engineering partner</div>
+        <h2 class="h-section">Same disciplines. <em>Different awareness.</em></h2>
+        <p class="lede" style="margin-top: 28px;">Our founders built and scaled digital experience practices at global consultancies before starting this one. We took what we learned about what holds enterprise CX programs back — siloed thinking, scope-bound execution, unclear accountability — and built a delivery culture with cognizance of it.</p>
+      </div>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-item-num">01</div>
+          <div>
+            <div class="why-item-title">Core engineering, built for the whole picture.</div>
+            <div class="why-item-body">Same disciplines as every other vendor — CMS, commerce, data, marketing automation, integrations, DevOps, CRM, UX. The difference: our engineers know how their work ripples into the rest of your ecosystem and proactively flag impact, dependencies, and collaboration paths mid-engagement. Not after.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-num">02</div>
+          <div>
+            <div class="why-item-title">Outcome-driven, not task-driven.</div>
+            <div class="why-item-body">Every consultant thinks strategically, not just operationally — understanding how their work fits the broader business impact, and proactively recommending what aligns with long-term goals.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-num">03</div>
+          <div>
+            <div class="why-item-title">A global delivery framework that absorbs the friction.</div>
+            <div class="why-item-body">A proprietary onboarding and execution model that maps stakeholders, RACI, workflows, tools, and risks before kickoff — so the first month is productive, not exploratory. Invested upfront, at no cost.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-num">04</div>
+          <div>
+            <div class="why-item-title">Global delivery, on your terms.</div>
+            <div class="why-item-body">Global coverage with blended rate models and delivery flexibility — calibrated to optimally support your team.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FINAL CTA (BOLD GRADIENT) ========== -->
+<section class="section cta" id="contact">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <div class="eyebrow"><span class="eyebrow-dot"></span>Let's talk</div>
+        <h2>Curious to see how we fit as a partner for your business? So are we.</h2>
+        <p class="cta-lede">From rebrands and redesigns to migrations, implementations, upgrades, and ongoing managed services — we're interested to know how we can add value. Email us or submit this form and a member of our team will reach out to you soon!</p>
+        <div style="display:flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+          <a href="mailto:sales@cxontology.com" class="btn-primary">
+            sales@cxontology.com
+            <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <form class="cta-form" id="cta-form" novalidate>
+        <div class="cta-form-row">
+          <input type="text" class="cta-input" placeholder="First name*">
+          <input type="text" class="cta-input" placeholder="Last name*">
+        </div>
+        <div class="cta-form-row">
+          <input type="email" class="cta-input" placeholder="Business email*">
+          <input type="text" class="cta-input" placeholder="Company name*">
+        </div>
+        <input type="text" class="cta-input" placeholder="Job title*">
+        <textarea class="cta-textarea" placeholder="What's on your mind?"></textarea>
+        <p class="cta-disclaimer">We won't use this data for marketing or share it with third parties.</p>
+        <button type="submit" class="btn-primary cta-submit">
+          Submit
+          <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </form>
+      <div class="cta-success" id="cta-success" hidden role="status" aria-live="polite" style="margin-top: 16px; padding: 14px 18px; border: 1px solid rgba(30,63,227,0.20); border-radius: 8px; background: rgba(234,240,255,0.50); color: var(--ink); font-size: 14px;">
+        <strong>Thanks — message received.</strong> A member of our team will be in touch shortly.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER (DARK) ========== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="#top" class="logo">
+          <img class="logo-mark" src="/themes/custom/cxontology/assets/footer-logo-mark.svg" alt="cxontology" />
+          <span class="logo-text-display">cxontology</span>
+        </a>
+        <div class="footer-tagline">Digital experiences. Unified.</div>
+        <p class="footer-brand">End-to-end digital and customer experience engineering. Led by strategy. Rooted in technology. Focused on the business.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Capabilities</h4>
+        <ul>
+          <li><a href="/our-capabilities">Engineering</a></li>
+          <li><a href="/our-capabilities">Go-to-Market</a></li>
+          <li><a href="/our-capabilities">AI &amp; Agentic</a></li>
+          <li><a href="/our-capabilities">How we engage</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="/about-us">Leadership team</a></li>
+          <li><a href="/how-we-deliver">How we deliver</a></li>
+          <li><a href="/about-us">Who we serve</a></li>
+          <li><a href="/about-us">Mission &amp; vision</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#pillars">How we engineer</a></li>
+          <li><a href="#impact">Measurable impact</a></li>
+          <li><a href="/thought-leadership">Thought leadership</a></li>
+          <li><a href="/contact-cxo">Contact CXO</a></li>
+          <li><a href="/cxo-assessments">Assessments</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-locations">
+      <div class="footer-loc">
+        <div class="footer-loc-tag">Global HQ</div>
+        <h5>Chicago, Illinois</h5>
+        <p class="footer-loc-addr">445 E Illinois St, Unit 3506<br/>Chicago, IL 60611</p>
+      </div>
+      <div class="footer-loc">
+        <div class="footer-loc-tag">Americas</div>
+        <h5>Austin, Texas</h5>
+        <p class="footer-loc-addr">5900 Balcones Drive, Ste. 100<br/>Austin, TX 78731</p>
+      </div>
+      <div class="footer-loc">
+        <div class="footer-loc-tag">Asia Pacific</div>
+        <h5>Chennai, OMR</h5>
+        <p class="footer-loc-addr">Agnitio IT Park, 141, Rajiv Gandhi Salai,<br/>Perungudi, Chennai 600096</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025–26 cxontology Private Limited. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="https://www.linkedin.com/company/cxontology-inc" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(r => io.observe(r));
+window.addEventListener('load', () => {
+  document.querySelectorAll('.hero .reveal').forEach(r => r.classList.add('is-visible'));
+});
+
+const tabs = document.querySelectorAll('.outcome-tab');
+const kpiData = {
+  strategy: [['15%','Growth in revenue from digital channels'],['2x','Faster return on digital investments'],['25%','Increase in customer lifetime value (CLV)'],['30%','Reduction in operational costs'],['3x','Faster time-to-market for new digital initiatives'],['50%','Reduction in technical debt over 2 years']],
+  assessment: [['30%','Faster identification of capability gaps'],['2x','Increase in alignment between business and IT teams'],['25%','Improvement in digital maturity score'],['40%','Faster decision-making on technology investments'],['50%','Reduction in unplanned digital spend'],['60%','Reduction in redundant or underutilized platforms']],
+  implementations: [['40%','Faster time-to-market for new platforms'],['3x','Reduction in migration-related downtime'],['50%','Decrease in post-migration defects'],['2x','Improvement in data integrity during migrations'],['25%','Increase in user satisfaction post-migration'],['35%','Decrease in migration costs through optimized execution']],
+  managed: [['3x','Faster resolution of critical digital issues'],['40%','Reduction in operational costs through optimized resourcing'],['50%','Improvement in website performance and load times'],['60%','Reduction in downtime through proactive monitoring'],['2x','Increase in deployment speed for new features'],['4x','Improvement in cross-team collaboration efficiency']],
+  cro: [['2%','More qualified impressions'],['1%','More leads across channels'],['25%','Higher customer engagement through optimization'],['45%','Increase in ROI from digital experience investments'],['30%','More efficient content and campaign execution'],['2x','Faster adoption of emerging technologies']]
+};
+const grid = document.getElementById('kpi-grid');
+function renderKPIs(key) {
+  const items = kpiData[key];
+  grid.innerHTML = items.map((it, i) => `<div class="kpi-cell"><span class="kpi-cell-marker">${String(i+1).padStart(2,'0')}</span><span class="kpi-num"><em>${it[0]}</em></span><span class="kpi-label">${it[1]}</span></div>`).join('');
+}
+tabs.forEach(t => {
+  t.addEventListener('click', () => {
+    tabs.forEach(x => x.classList.remove('is-active'));
+    t.classList.add('is-active');
+    renderKPIs(t.dataset.tab);
+  });
+});
+</script>
+
+
+<script>
+// nav auto-hide on scroll-down, reveal on scroll-up
+(function() {
+  var nav = document.querySelector('.nav');
+  if (!nav) return;
+  var lastY = window.scrollY;
+  var ticking = false;
+  function onScroll() {
+    var y = window.scrollY;
+    // Always show near the very top
+    if (y < 80) {
+      nav.classList.remove('is-hidden');
+    } else if (y > lastY + 4) {
+      // Scrolling down past threshold — hide
+      nav.classList.add('is-hidden');
+    } else if (y < lastY - 4) {
+      // Scrolling up — show
+      nav.classList.remove('is-hidden');
+    }
+    lastY = y;
+    ticking = false;
+  }
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+</script>
+
+
+
+<script>
+// Hero pointillism — rigid lattice, naturally fading around text
+(function() {
+  var canvas = document.getElementById('hero-pointillism-canvas');
+  if (!canvas) return;
+  var hero = canvas.closest('.hero');
+  if (!hero) return;
+
+  var ctx = canvas.getContext('2d');
+  var dpr = Math.max(window.devicePixelRatio || 1, 1);
+
+  // Lattice config — perfectly rigid grid
+  var GRID_SPACING = 14;
+  var dots = [];
+  var deadRects = [];
+  var canvasW = 0, canvasH = 0;
+
+  // Soft fade band around text — dot opacity ramps from 0 (inside text) to 1 (FADE_DISTANCE away)
+  var FADE_DISTANCE = 80;
+
+  // Cursor-influence parameters
+  var INFLUENCE_RADIUS = 200;
+  var INFLUENCE_RADIUS_SQ = INFLUENCE_RADIUS * INFLUENCE_RADIUS;
+  var BASE_OPACITY = 0.05;
+  var MAX_OPACITY = 1.0;
+  var BASE_RADIUS = 0.7;
+  var MAX_RADIUS = 2.4;
+  var REST_R = 30,  REST_G = 63,  REST_B = 227;
+  var BLOOM_R = 61, BLOOM_G = 91,  BLOOM_B = 255;
+
+  // Cursor state
+  var targetX = -9999, targetY = -9999;
+  var smoothX = -9999, smoothY = -9999;
+  var active = false;
+  var rafId = null;
+
+  function computeDeadRects() {
+    deadRects = [];
+    var heroRect = hero.getBoundingClientRect();
+    var selectors = ['.hero h1', '.hero-lede', '.hero-scroll-cue'];
+    selectors.forEach(function(sel) {
+      var el = hero.querySelector(sel);
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      deadRects.push({
+        x: r.left - heroRect.left,
+        y: r.top - heroRect.top,
+        w: r.width,
+        h: r.height
+      });
+    });
+  }
+
+  // Distance from a point to the nearest text rect (0 if inside any rect)
+  function distanceToText(x, y) {
+    var minDist = Infinity;
+    for (var i = 0; i < deadRects.length; i++) {
+      var r = deadRects[i];
+      var cx = Math.max(r.x, Math.min(x, r.x + r.w));
+      var cy = Math.max(r.y, Math.min(y, r.y + r.h));
+      var dx = x - cx;
+      var dy = y - cy;
+      var distSq = dx * dx + dy * dy;
+      if (distSq < minDist) minDist = distSq;
+    }
+    return Math.sqrt(minDist);
+  }
+
+  // Fade factor: 0 inside text, smooth ramp to 1 over FADE_DISTANCE
+  function fadeFactor(x, y) {
+    var d = distanceToText(x, y);
+    if (d <= 0) return 0;
+    if (d >= FADE_DISTANCE) return 1;
+    var t = d / FADE_DISTANCE;
+    return t * t * (3 - 2 * t);  // smoothstep
+  }
+
+  function buildDots() {
+    dots = [];
+    var cols = Math.ceil(canvasW / GRID_SPACING);
+    var rows = Math.ceil(canvasH / GRID_SPACING);
+    for (var row = 0; row < rows; row++) {
+      for (var col = 0; col < cols; col++) {
+        var x = col * GRID_SPACING + GRID_SPACING / 2;
+        var y = row * GRID_SPACING + GRID_SPACING / 2;
+        var fade = fadeFactor(x, y);
+        if (fade <= 0.01) continue;
+        dots.push({ x: x, y: y, fade: fade });
+      }
+    }
+  }
+
+  function resize() {
+    var rect = hero.getBoundingClientRect();
+    canvasW = rect.width;
+    canvasH = rect.height;
+    canvas.width = canvasW * dpr;
+    canvas.height = canvasH * dpr;
+    canvas.style.width = canvasW + 'px';
+    canvas.style.height = canvasH + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    computeDeadRects();
+    buildDots();
+    draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvasW, canvasH);
+    var cursorActive = (smoothX > -1000);
+
+    for (var i = 0; i < dots.length; i++) {
+      var d = dots[i];
+      var influence = 0;
+      if (cursorActive) {
+        var dx = smoothX - d.x;
+        var dy = smoothY - d.y;
+        var distSq = dx * dx + dy * dy;
+        if (distSq < INFLUENCE_RADIUS_SQ) {
+          var dist = Math.sqrt(distSq);
+          influence = 1 - dist / INFLUENCE_RADIUS;
+          influence = influence * influence;
+        }
+      }
+
+      var radius = BASE_RADIUS + influence * (MAX_RADIUS - BASE_RADIUS);
+      var alpha = (BASE_OPACITY + influence * (MAX_OPACITY - BASE_OPACITY)) * d.fade;
+      var t = Math.min(influence * 1.5, 1);
+      var r = Math.round(REST_R + (BLOOM_R - REST_R) * t);
+      var g = Math.round(REST_G + (BLOOM_G - REST_G) * t);
+      var b = Math.round(REST_B + (BLOOM_B - REST_B) * t);
+
+      ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + alpha.toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function onMove(e) {
+    var rect = hero.getBoundingClientRect();
+    targetX = e.clientX - rect.left;
+    targetY = e.clientY - rect.top;
+    if (!active) {
+      active = true;
+      if (!rafId) tick();
+    }
+  }
+
+  function onLeave() {
+    active = false;
+    targetX = -9999;
+    targetY = -9999;
+  }
+
+  function tick() {
+    if (active) {
+      smoothX += (targetX - smoothX) * 0.20;
+      smoothY += (targetY - smoothY) * 0.20;
+    } else {
+      smoothX += (targetX - smoothX) * 0.10;
+      smoothY += (targetY - smoothY) * 0.10;
+    }
+    draw();
+    var stillSettling = active ||
+      Math.abs(smoothX - targetX) > 1 ||
+      Math.abs(smoothY - targetY) > 1;
+    if (stillSettling) {
+      rafId = window.requestAnimationFrame(tick);
+    } else {
+      rafId = null;
+    }
+  }
+
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    resize();
+    window.addEventListener('resize', resize);
+    return;
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  hero.addEventListener('mousemove', onMove);
+  hero.addEventListener('mouseleave', onLeave);
+
+  setTimeout(function() {
+    computeDeadRects();
+    buildDots();
+    draw();
+  }, 1200);
+})();
+</script>
+
+<script>
+// Scenario toggle for "Some familiar scenarios" — deliverable-based tabs
+(function() {
+  const SCENARIOS = {
+    landing: {
+      headline: 'Shipping <em>a single, mature landing page</em><br>requires coordination across at least these disciplines:',
+      groups: [
+        { label: 'Engineering', cls: 'scenario-group-eng', items: [
+          { cap: 'CMS & Content Platforms', resp: 'page model, reusable modules' },
+          { cap: 'UI & Front-End', resp: 'responsive layout, accessibility, performance' },
+          { cap: 'Integrations & APIs', resp: 'form handlers, lead routing, tags' }
+        ]},
+        { label: 'Experience', cls: 'scenario-group-exp', items: [
+          { cap: 'ContentOps', resp: 'copy, assets, governance' },
+          { cap: 'SEO, SEM & Paid Media', resp: 'on-page SEO, paid variants, UTM hygiene' },
+          { cap: 'BI, Analytics & Attribution', resp: 'event instrumentation, conversion tracking' }
+        ]},
+        { label: 'Activation', cls: 'scenario-group-act', items: [
+          { cap: 'Marketing Automation', resp: 'form-to-nurture handoff, lead scoring' },
+          { cap: 'CDP & Personalization', resp: 'audience-based variants, A/B testing' },
+          { cap: 'CRM & Customer Data', resp: 'capture standards, dedupe, sync' }
+        ]}
+      ],
+      hit: 'Quality, speed, and conversion take the hit.'
+    },
+    commerce: {
+      headline: 'Shipping <em>a mature product detail page or checkout</em><br>requires coordination across at least these disciplines:',
+      groups: [
+        { label: 'Engineering', cls: 'scenario-group-eng', items: [
+          { cap: 'Commerce & Catalog', resp: 'product data, pricing, inventory rules' },
+          { cap: 'Integrations & APIs', resp: 'payment, tax, shipping, fulfillment' },
+          { cap: 'Cloud, DevOps & Infra', resp: 'peak-traffic resilience, observability' }
+        ]},
+        { label: 'Experience', cls: 'scenario-group-exp', items: [
+          { cap: 'UI & Front-End', resp: 'checkout flow, error states, mobile parity' },
+          { cap: 'CMS & Content Platforms', resp: 'merchandising surfaces, blended content' },
+          { cap: 'BI, Analytics & Attribution', resp: 'funnel instrumentation, drop-off diagnostics' }
+        ]},
+        { label: 'Activation', cls: 'scenario-group-act', items: [
+          { cap: 'CDP & Personalization', resp: 'segment-aware merchandising, recommendations' },
+          { cap: 'Marketing Automation', resp: 'abandoned-cart, post-purchase journeys' },
+          { cap: 'CRM & Customer Data', resp: 'order history, loyalty, service handoffs' }
+        ]}
+      ],
+      hit: 'Conversion, AOV, and operational reliability take the hit.'
+    },
+    tracking: {
+      headline: 'Shipping <em>a clean tracking implementation</em><br>requires coordination across at least these disciplines:',
+      groups: [
+        { label: 'Engineering', cls: 'scenario-group-eng', items: [
+          { cap: 'UI & Front-End', resp: 'data layer, event firing in app code' },
+          { cap: 'Integrations & APIs', resp: 'server-side events, vendor pipes' },
+          { cap: 'Cloud, DevOps & Infra', resp: 'consent management, log retention' }
+        ]},
+        { label: 'Experience', cls: 'scenario-group-exp', items: [
+          { cap: 'ContentOps', resp: 'event taxonomy, naming, documentation' },
+          { cap: 'CMS & Content Platforms', resp: 'instrumentation in content models' },
+          { cap: 'BI, Analytics & Attribution', resp: 'schema design, QA, dashboards' }
+        ]},
+        { label: 'Activation', cls: 'scenario-group-act', items: [
+          { cap: 'CDP & Personalization', resp: 'audience pipelines, real-time segments' },
+          { cap: 'CRM & Customer Data', resp: 'identity resolution, suppression rules' },
+          { cap: 'Marketing Automation', resp: 'trigger logic, campaign instrumentation' }
+        ]}
+      ],
+      hit: 'Data trust, attribution accuracy, and decision speed take the hit.'
+    },
+    ai: {
+      headline: 'Shipping <em>a mature, customer-facing AI feature</em><br>requires coordination across at least these disciplines:',
+      groups: [
+        { label: 'Engineering', cls: 'scenario-group-eng', items: [
+          { cap: 'AI Strategy & Readiness', resp: 'model selection, architecture, guardrails' },
+          { cap: 'Integrations & APIs', resp: 'orchestration, retrieval, fallback paths' },
+          { cap: 'Cloud, DevOps & Infra', resp: 'cost controls, latency, observability' }
+        ]},
+        { label: 'Experience', cls: 'scenario-group-exp', items: [
+          { cap: 'Custom AI Agents', resp: 'prompt design, evals, edge cases' },
+          { cap: 'AI Content Creation', resp: 'voice, style, brand-safety patterns' },
+          { cap: 'UI & Front-End', resp: 'conversational UX, fallback states' }
+        ]},
+        { label: 'Activation', cls: 'scenario-group-act', items: [
+          { cap: 'ContentOps Modernization', resp: 'knowledge curation, refresh cadence' },
+          { cap: 'CDP & Personalization', resp: 'context routing, segment-aware responses' },
+          { cap: 'CRM & Customer Data', resp: 'human escalation, conversation logging' }
+        ]}
+      ],
+      hit: 'Trust, accuracy, and adoption take the hit.'
+    },
+    migration: {
+      headline: 'Shipping <em>a successful platform migration</em><br>requires coordination across at least these disciplines:',
+      groups: [
+        { label: 'Engineering', cls: 'scenario-group-eng', items: [
+          { cap: 'CMS & Content Platforms', resp: 'content model translation, redirect mapping' },
+          { cap: 'Commerce & Catalog', resp: 'catalog migration, pricing/tax parity' },
+          { cap: 'Integrations & APIs', resp: 'endpoint reroutes, parallel-run validation' }
+        ]},
+        { label: 'Experience', cls: 'scenario-group-exp', items: [
+          { cap: 'UI & Front-End', resp: 'visual parity, regression coverage' },
+          { cap: 'ContentOps', resp: 'content audit, IA cleanup pre-cutover' },
+          { cap: 'SEO, SEM & Paid Media', resp: 'URL preservation, ranking protection' }
+        ]},
+        { label: 'Activation', cls: 'scenario-group-act', items: [
+          { cap: 'BI, Analytics & Attribution', resp: 're-instrumentation, parity validation' },
+          { cap: 'Marketing Automation', resp: 're-connect campaigns, trigger continuity' },
+          { cap: 'CRM & Customer Data', resp: 'identity continuity, segment recreation' }
+        ]}
+      ],
+      hit: 'Timeline, business continuity, and post-launch performance take the hit.'
+    }
+  };
+
+  const CONCLUSION_TEMPLATE = (hit) =>
+    `At most organizations, those skills are owned across <strong>multiple parties (internal or external)</strong>, with scopes that don't account for how their piece integrates to the outcome. <strong>Poor coordination heavily impacts the outcome</strong> — during projects or in continuous maintenance and improvement cycles. <strong>${hit}</strong> And when something breaks, <strong>nobody owns it</strong>.`;
+
+  const content      = document.getElementById('scenario-content');
+  const headerEl     = document.getElementById('scenario-h');
+  const groupsEl     = document.getElementById('scenario-groups');
+  const conclusionEl = document.getElementById('scenario-conclusion');
+  const switchEl     = document.querySelector('.scenario-switch');
+  const thumb        = document.querySelector('.scenario-switch-thumb');
+  const buttons      = document.querySelectorAll('.scenario-switch button');
+
+  if (!content || !switchEl || !thumb || !buttons.length) return;
+
+  function renderScenario(key) {
+    const data = SCENARIOS[key];
+    if (!data) return;
+    headerEl.innerHTML = data.headline;
+    groupsEl.innerHTML = data.groups.map(g => `
+      <div class="scenario-group ${g.cls}">
+        <div class="scenario-group-label">${g.label}</div>
+        ${g.items.map(it => `
+          <div class="scenario-item">
+            <div class="scenario-item-cap">${it.cap}</div>
+            <div class="scenario-item-resp">${it.resp}</div>
+          </div>
+        `).join('')}
+      </div>
+    `).join('');
+    conclusionEl.innerHTML = CONCLUSION_TEMPLATE(data.hit);
+  }
+
+  function positionThumb() {
+    const active = switchEl.querySelector('button.is-active');
+    if (!active) return;
+    thumb.style.left  = active.offsetLeft + 'px';
+    thumb.style.width = active.offsetWidth + 'px';
+  }
+
+  function setScenario(key) {
+    buttons.forEach(b => {
+      const active = b.dataset.scenario === key;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    positionThumb();
+    content.classList.add('is-fading');
+    setTimeout(() => {
+      renderScenario(key);
+      content.classList.remove('is-fading');
+    }, 180);
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => setScenario(b.dataset.scenario));
+  });
+
+  // Initial thumb placement, then enable transitions for subsequent moves
+  requestAnimationFrame(() => {
+    positionThumb();
+    requestAnimationFrame(() => switchEl.classList.remove('is-init'));
+  });
+
+  // Re-position on resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(positionThumb, 100);
+  });
+})();
+</script>
+
+<script>
+(function initCtaForm() {
+  const form = document.getElementById('cta-form');
+  if (!form) return;
+  const formInitMs = Date.now();
+  const formStartedAt = Math.floor(formInitMs / 1000);
+  const inputs = form.querySelectorAll('input, textarea');
+  const submitBtn = form.querySelector('.cta-submit');
+  const emailInput = form.querySelector('input[type="email"]');
+
+  function isPlaceholderText(value) {
+    const compact = String(value || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '');
+    if (!compact) return false;
+    if (['test', 'testing', 'tester', 'fake', 'dummy', 'demo', 'sample', 'asdf', 'qwerty', 'abc', 'abcd', 'na', 'none', 'null'].includes(compact)) {
+      return true;
+    }
+    return /^(test|testing|tester|fake|dummy|demo|sample|asdf|qwerty)[a-z0-9]*$/.test(compact) || /^(.)\1{2,}$/.test(compact);
+  }
+
+  function isStrictBusinessEmail(value) {
+    const email = String(value || '').trim().toLowerCase();
+    if (!/^[^\s@]+@(?:[a-z0-9-]+\.)+[a-z]{2,63}$/i.test(email)) return false;
+    const parts = email.split('@');
+    const local = (parts[0] || '').replace(/[^a-z0-9]+/g, '');
+    const domain = parts[1] || '';
+    const firstLabel = domain.split('.')[0] || '';
+    if (/^(test|testing|tester|fake|dummy|demo|sample|asdf|qwerty|noreply|donotreply)\d*$/.test(local)) return false;
+    if (/^(test|testing|tester|fake|dummy|demo|sample|asdf|qwerty)[a-z0-9-]*$/.test(firstLabel)) return false;
+    return !['example.com', 'example.org', 'example.net', 'test.com', 'fake.com', 'invalid.com', 'mailinator.com', 'tempmail.com', '10minutemail.com', 'guerrillamail.com', 'yopmail.com'].includes(domain);
+  }
+
+  function cxoUrlAttribution() {
+    const params = new URLSearchParams(window.location.search || '');
+    const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'campaign', 'campaign_id', 'client_id', 'report_id', 'share_token', 'recipient_id'];
+    const data = { source_url: window.location.href };
+    keys.forEach(function (key) {
+      const value = (params.get(key) || '').trim();
+      if (value) data[key] = value;
+    });
+    const attributionName = (params.get('name') || params.get('utm_name') || params.get('sender_name') || '').trim();
+    const attributionEmail = (params.get('email') || params.get('utm_email') || params.get('sender_email') || '').trim();
+    if (attributionName) data.attribution_name = attributionName;
+    if (attributionEmail) data.attribution_email = attributionEmail;
+    return data;
+  }
+
+  function buildPayload() {
+    const textFields = form.querySelectorAll('input[type="text"]');
+    const messageInput = form.querySelector('textarea');
+    return Object.assign(cxoUrlAttribution(), {
+      form_id: 'homepage_contact',
+      firstname: textFields[0] ? textFields[0].value.trim() : '',
+      lastname: textFields[1] ? textFields[1].value.trim() : '',
+      email: emailInput ? emailInput.value.trim() : '',
+      company: textFields[2] ? textFields[2].value.trim() : '',
+      jobtitle: textFields[3] ? textFields[3].value.trim() : '',
+      message: messageInput ? messageInput.value.trim() : '',
+      source_path: window.location.pathname,
+      source_title: document.title,
+      website: '',
+      cxo_form_started_at: String(formStartedAt)
+    });
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    let invalidField = null;
+    for (const el of inputs) {
+      const isRequired = el.placeholder && el.placeholder.indexOf('*') !== -1;
+      if (isRequired && !el.value.trim()) {
+        invalidField = el;
+        break;
+      }
+      if (el === emailInput && !isStrictBusinessEmail(el.value)) {
+        invalidField = el;
+        break;
+      }
+      if (el !== emailInput && isRequired && isPlaceholderText(el.value)) {
+        invalidField = el;
+        break;
+      }
+    }
+    if (!invalidField && emailInput && !isStrictBusinessEmail(emailInput.value)) invalidField = emailInput;
+    if (invalidField) {
+      invalidField.focus();
+      return;
+    }
+    const originalButtonHtml = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+    }
+    try {
+      const waitMs = Math.max(0, 2100 - (Date.now() - formInitMs));
+      if (waitMs) {
+        await new Promise(function (resolve) { setTimeout(resolve, waitMs); });
+      }
+      const response = await fetch('/cxo-static-contact-submit', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify(buildPayload())
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Please check the form and try again.');
+      }
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'contact_intent',
+          source: 'homepage_cta'
+        });
+      }
+      inputs.forEach(function (el) { el.disabled = true; });
+      form.style.display = 'none';
+      var success = document.getElementById('cta-success');
+      if (success) success.hidden = false;
+    } catch (error) {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalButtonHtml;
+      }
+      alert(error.message || 'Please check the form and try again.');
+    }
+  });
+})();
+</script>
+
+<script src="/website-revamp/v6/cxo-analytics.js?v=20260514-v6-home1"></script>
+
+<script>
+
+function initEngagementAccordion() {
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.engagement-row'));
+  if (!rows.length) return;
+  var mobileQuery = window.matchMedia('(max-width: 960px)');
+
+  function setOpen(row, open) {
+    row.classList.toggle('is-open', open);
+    row.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  function syncMode() {
+    rows.forEach(function(row, index) {
+      if (mobileQuery.matches) {
+        row.setAttribute('role', 'button');
+        row.setAttribute('tabindex', '0');
+        row.setAttribute('aria-expanded', row.classList.contains('is-open') ? 'true' : 'false');
+      } else {
+        row.removeAttribute('role');
+        row.removeAttribute('tabindex');
+        row.removeAttribute('aria-expanded');
+        row.classList.remove('is-open');
+      }
+    });
+  }
+
+  rows.forEach(function(row) {
+    row.addEventListener('click', function() {
+      if (!mobileQuery.matches) return;
+      var willOpen = !row.classList.contains('is-open');
+      rows.forEach(function(item) { setOpen(item, false); });
+      setOpen(row, willOpen);
+    });
+    row.addEventListener('keydown', function(event) {
+      if (!mobileQuery.matches) return;
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        row.click();
+      }
+    });
+  });
+
+  if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', syncMode);
+  else mobileQuery.addListener(syncMode);
+  syncMode();
+}
+
+function initMobileNav() {
+  var toggle = document.getElementById('mobile-nav-toggle');
+  var drawer = document.getElementById('mobile-nav-drawer');
+  var backdrop = document.getElementById('mobile-nav-backdrop');
+  if (!toggle || !drawer || !backdrop) return;
+  
+  var scrollY = 0;
+  var isOpen = false;
+  
+  function openNav() {
+    if (isOpen) return;
+    scrollY = window.scrollY;
+    drawer.setAttribute('aria-hidden', 'false');
+    backdrop.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + scrollY + 'px';
+    document.body.style.width = '100%';
+    isOpen = true;
+  }
+  
+  function closeNav() {
+    if (!isOpen) return;
+    drawer.setAttribute('aria-hidden', 'true');
+    backdrop.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollY);
+    isOpen = false;
+  }
+  
+  toggle.addEventListener('click', function() {
+    if (isOpen) closeNav();
+    else openNav();
+  });
+  backdrop.addEventListener('click', closeNav);
+  // Close on any nav link tap (so navigation feels right)
+  drawer.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      // Slight delay so visual transition starts before navigation
+      setTimeout(closeNav, 50);
+    });
+  });
+  // ESC key closes
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && isOpen) closeNav();
+  });
+  // Close on resize above 960
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 960 && isOpen) closeNav();
+  });
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    initMobileNav();
+    initEngagementAccordion();
+  });
+} else {
+  initMobileNav();
+  initEngagementAccordion();
+}
+</script>
+
+<div class="mobile-nav-backdrop" id="mobile-nav-backdrop" aria-hidden="true"></div>
+<aside class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true" aria-label="Mobile navigation">
+  <ul>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/our-capabilities">Capabilities</a></li>
+    <li><a href="/how-we-deliver">How We Deliver</a></li>
+    <li><a href="/about-us">About Us</a></li>
+    <li><a href="/thought-leadership">Thought Leadership</a></li>
+    <li><a href="/contact-cxo">Contact CXO</a></li>
+  </ul>
+</aside>
+</body>
+</html>

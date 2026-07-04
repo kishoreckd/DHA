@@ -1,8 +1,9 @@
 export type PropertyStatus = "active" | "draft" | "archived";
-export type CompetitorStatus = "suggested" | "approved" | "rejected";
+export type CompetitorStatus = "suggested" | "approved" | "rejected" | "archived";
 export type DiscoveryJobStatus = "queued" | "running" | "completed" | "partial" | "failed" | "cancelled";
 export type PageType = "homepage" | "pdp" | "plp" | "landing" | "article" | "other";
 export type PageStatus = "discovered" | "selected" | "excluded";
+export type PageScopeStatus = "pending" | "included" | "excluded";
 export type PageSource = "sitemap" | "crawl" | "manual";
 
 export type WebsiteProperty = {
@@ -10,6 +11,7 @@ export type WebsiteProperty = {
   workspace_id: string;
   name: string;
   url: string;
+  root_url?: string;
   normalized_domain: string;
   status: PropertyStatus;
   created_at: string;
@@ -19,8 +21,10 @@ export type WebsiteProperty = {
 export type Competitor = {
   id: string;
   workspace_id: string;
+  property_id?: string | null;
   name: string;
   url: string;
+  root_url?: string;
   normalized_domain: string;
   status: CompetitorStatus;
   source?: string | null;
@@ -51,6 +55,8 @@ export type DiscoveredPage = {
   source: PageSource;
   depth: number;
   status: PageStatus;
+  scope_status?: PageScopeStatus;
+  excluded_reason?: string | null;
   selected_for_assessment: boolean;
   last_discovered_at: string;
 };
@@ -60,6 +66,8 @@ export type AssessmentScope = {
   workspace_id: string;
   version_number: number;
   status: "draft" | "approved";
+  property_id?: string;
+  notes?: string | null;
   property_page_ids: string[];
   competitor_page_ids: string[];
   locked_at?: string | null;

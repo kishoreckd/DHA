@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle2, ExternalLink, LoaderCircle, Play, RefreshCw, XCircle } from "lucide-react";
+import { CheckCircle2, ExternalLink, LoaderCircle, Play, RefreshCw, Save, XCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { appToast } from "@/lib/toast";
 import { z } from "zod";
 import { useState } from "react";
@@ -12,6 +13,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const tools: Array<{ key: ToolKey; label: string; description: string }> = [
   { key: "crawl", label: "Core crawler", description: "Primary site crawl and discovery" },
@@ -44,6 +53,30 @@ export function ToolSyncPage() {
   const [runs, setRuns] = useState<ToolRun[]>(
     tools.map((tool) => ({ tool: tool.key, label: tool.label, state: "idle" })),
   );
+  const [outputFormat, setOutputFormat] = useState<"html" | "json" | "screenshot">("html");
+  const [uploadToSharepoint, setUploadToSharepoint] = useState(true);
+  const [includeRaw, setIncludeRaw] = useState(false);
+  const [ocrBody, setOcrBody] = useState('{\n  "image_url": "https://example.com/screenshot.png"\n}');
+  const crawlerToolsQuery = useQuery({
+    queryKey: ["crawler", "tools"],
+    queryFn: () => crawlerApi.tools(true),
+  });
+  const jobsQuery = useQuery({
+    queryKey: ["crawler", "jobs"],
+    queryFn: () => crawlerApi.jobs(20),
+  });
+  const updateCrawlerTool = useMutation({
+    mutationFn: ({ key, status }: { key: string; status: string }) =>
+      crawlerApi.updateTool(key, { status }),
+    onSuccess: async () => {
+      await crawlerToolsQuery.refetch();
+      appToast.success("Crawler tool updated");
+    },
+  });
+  const ocrExtract = useMutation({
+    mutationFn: () => crawlerApi.ocrExtract(JSON.parse(ocrBody)),
+    onSuccess: () => appToast.success("OCR extract completed"),
+  });
 
   async function start({ url, selected }: z.infer<typeof schema>) {
     const chosen = selected as ToolKey[];
@@ -57,7 +90,7 @@ export function ToolSyncPage() {
         cur.map((run) => (run.tool === tool ? { ...run, state: "running", startedAt } : run)),
       );
       try {
-        const result = await crawlerApi.run(tool, url);
+        const result = await crawlerApi.run(tool, url, { output_format: outputFormat, upload_to_sharepoint: uploadToSharepoint, include_raw: includeRaw });
         const artifacts = extractArtifacts(result);
         setRuns((cur) =>
           cur.map((run) =>
@@ -85,10 +118,7 @@ export function ToolSyncPage() {
         eyebrow="EVIDENCE COLLECTION"
         title="Tool synchronization"
       />
-      <form
-        className="grid grid-cols-1 md:grid-cols-[minmax(420px,.9fr)_minmax(500px,1.1fr)] gap-4"
-        onSubmit={form.handleSubmit(start)}
-      >
+      <form className="grid grid-cols-1 md:grid-cols-[minmax(420px,.9fr)_minmax(500px,1.1fr)] gap-4" onSubmit={form.handleSubmit(start)}>
         {/* Config panel */}
         <Card>
           <CardHeader>
@@ -104,6 +134,32 @@ export function ToolSyncPage() {
               {form.formState.errors.url && (
                 <p className="text-[11px] text-destructive">{form.formState.errors.url.message}</p>
               )}
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              <div className="flex flex-col gap-1.5">
+                <Label>Output format</Label>
+                <Select value={outputFormat} onValueChange={(value: "html" | "json" | "screenshot") => setOutputFormat(value)}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="html">html</SelectItem>
+                      <SelectItem value="json">json</SelectItem>
+                      <SelectItem value="screenshot">screenshot</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <label className="flex items-center gap-2 rounded-md border px-3 py-2 text-sm">
+                <input type="checkbox" checked={uploadToSharepoint} onChange={(event) => setUploadToSharepoint(event.target.checked)} />
+                Upload to SharePoint
+              </label>
+              <label className="flex items-center gap-2 rounded-md border px-3 py-2 text-sm">
+                <input type="checkbox" checked={includeRaw} onChange={(event) => setIncludeRaw(event.target.checked)} />
+                Include raw
+              </label>
             </div>
 
             <div className="grid grid-cols-2 gap-2">
@@ -229,8 +285,96 @@ export function ToolSyncPage() {
           </CardContent>
         </Card>
       </form>
+      <div className="mt-4 grid gap-4 xl:grid-cols-3">
+        <Card>
+          <CardHeader>
+            <CardTitle>Crawler tools</CardTitle>
+          </CardHeader>
+          <CardContent className="flex max-h-[460px] flex-col gap-2 overflow-auto">
+            {crawlerToolsQuery.isError && <p className="text-sm text-destructive">Unable to load crawler tools.</p>}
+            {crawlerToolsQuery.data?.map((tool) => {
+              const key = tool.key || tool.tool_key || "";
+              const status = tool.status || "active";
+              return (
+                <div key={key || tool.display_name} className="rounded-md border px-3 py-2 text-sm">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      <strong className="block truncate">{tool.display_name || tool.name || key}</strong>
+                      <span className="text-xs text-muted-foreground">{key}</span>
+                    </div>
+                    <Select
+                      value={status}
+                      onValueChange={(next) => key && updateCrawlerTool.mutate({ key, status: next })}
+                    >
+                      <SelectTrigger className="w-[118px]">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="active">active</SelectItem>
+                          <SelectItem value="inactive">inactive</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              );
+            })}
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex-row items-center justify-between space-y-0">
+            <CardTitle>Crawler jobs</CardTitle>
+            <Button type="button" variant="outline" size="icon" onClick={() => void jobsQuery.refetch()}>
+              <RefreshCw className="h-4 w-4" />
+            </Button>
+          </CardHeader>
+          <CardContent className="flex max-h-[460px] flex-col gap-2 overflow-auto">
+            {jobsQuery.isError && <p className="text-sm text-destructive">Unable to load jobs.</p>}
+            {(jobsQuery.data ?? []).map((job, index) => (
+              <pre key={extractId(job) || index} className="rounded-md bg-muted p-3 text-xs">
+                {JSON.stringify(job, null, 2)}
+              </pre>
+            ))}
+            {jobsQuery.data?.length === 0 && <p className="text-sm text-muted-foreground">No crawler jobs yet.</p>}
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>OCR extract</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-3">
+            <Label htmlFor="ocr-body">Request JSON</Label>
+            <textarea
+              id="ocr-body"
+              className="min-h-44 rounded-md border bg-background p-3 font-mono text-xs"
+              value={ocrBody}
+              onChange={(event) => setOcrBody(event.target.value)}
+            />
+            <Button
+              type="button"
+              onClick={() => ocrExtract.mutate()}
+              disabled={ocrExtract.isPending}
+            >
+              {ocrExtract.isPending ? <LoaderCircle data-icon="inline-start" className="animate-spin" /> : <Save data-icon="inline-start" />}
+              Extract text
+            </Button>
+            {ocrExtract.data !== undefined && (
+              <pre className="max-h-52 overflow-auto rounded-md bg-muted p-3 text-xs">
+                {JSON.stringify(ocrExtract.data, null, 2)}
+              </pre>
+            )}
+            {ocrExtract.isError && <p className="text-sm text-destructive">OCR request failed. Check the JSON body and backend response.</p>}
+          </CardContent>
+        </Card>
+      </div>
     </>
   );
+}
+
+function extractId(value: unknown) {
+  if (value && typeof value === "object" && "id" in value) return String((value as { id?: unknown }).id ?? "");
+  return "";
 }
 
 function extractArtifacts(result: unknown) {

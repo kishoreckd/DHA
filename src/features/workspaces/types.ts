@@ -37,7 +37,7 @@ export type Workspace = {
   updated_at: string;
 };
 
-export type WorkspaceMemberRole = "owner" | "admin" | "analyst" | "viewer";
+export type WorkspaceMemberRole = "owner" | "admin" | "editor" | "analyst" | "viewer";
 export type WorkspaceMemberStatus = "active" | "invited" | "disabled";
 
 export type WorkspaceMember = {

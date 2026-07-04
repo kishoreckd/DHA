@@ -22,14 +22,24 @@ import { MethodologyCreatePage } from "@/pages/admin/methodologies/MethodologyCr
 import { MethodologyDetailPage } from "@/pages/admin/methodologies/MethodologyDetailPage";
 import { MethodologyMetricsPage } from "@/pages/admin/methodologies/MethodologyMetricsPage";
 import { AdminToolsPage } from "@/pages/admin/tools/AdminToolsPage";
+import { PermissionsPage } from "@/pages/admin/permissions/PermissionsPage";
+import { AssessmentDetailPage } from "@/pages/assessments/AssessmentDetailPage";
+import { AssessmentsPage } from "@/pages/assessments/AssessmentsPage";
+import { BaselineDetailPage } from "@/pages/baselines/BaselineDetailPage";
+import { BaselinesPage } from "@/pages/baselines/BaselinesPage";
 import { CompetitorsPage } from "@/pages/competitors/CompetitorsPage";
+import { CrawlerConsolePage } from "@/pages/crawler/CrawlerConsolePage";
 import { DiscoveryPage } from "@/pages/discovery/DiscoveryPage";
 import { ScopeReviewPage } from "@/pages/discovery/ScopeReviewPage";
 import { PropertiesListPage } from "@/pages/properties/PropertiesListPage";
 import { PropertyDetailPage } from "@/pages/properties/PropertyDetailPage";
+import { ReportsPage } from "@/pages/reports/ReportsPage";
+import { ReviewsPage } from "@/pages/reviews/ReviewsPage";
 import { ToolRunDetailPage } from "@/pages/tools/ToolRunDetailPage";
 import { ToolRunsPage } from "@/pages/tools/ToolRunsPage";
 import { ToolsCatalogPage } from "@/pages/tools/ToolsCatalogPage";
+import { SystemHealthPage } from "@/pages/system/SystemHealthPage";
+import { OperationsPage } from "@/pages/system/OperationsPage";
 import { WorkspaceCreatePage } from "@/pages/workspaces/WorkspaceCreatePage";
 import { WorkspaceMembersPage } from "@/pages/workspaces/WorkspaceMembersPage";
 import { WorkspaceOverviewPage } from "@/pages/workspaces/WorkspaceOverviewPage";
@@ -89,6 +99,12 @@ export function AppRouter() {
         <Route element={<AuthGuard />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/workspaces" element={<WorkspacesListPage />} />
+          <Route path="/system/health" element={<SystemHealthPage />} />
+          <Route path="/system/operations" element={<OperationsPage />} />
+          <Route path="/crawler" element={<CrawlerConsolePage />} />
+          <Route path="/reviews" element={<ReviewsPage />} />
+          <Route path="/baselines" element={<BaselinesPage />} />
+          <Route path="/baselines/:baselineId" element={<BaselineDetailPage />} />
           <Route path="/workspaces/new" element={<WorkspaceCreatePage />} />
           <Route path="/workspaces/:workspaceId" element={<WorkspaceOverviewPage />} />
           <Route path="/workspaces/:workspaceId/settings" element={<WorkspaceSettingsPage />} />
@@ -98,9 +114,12 @@ export function AppRouter() {
           <Route path="/workspaces/:workspaceId/discovery" element={<DiscoveryPage />} />
           <Route path="/workspaces/:workspaceId/competitors" element={<CompetitorsPage />} />
           <Route path="/workspaces/:workspaceId/scope" element={<ScopeReviewPage />} />
+          <Route path="/workspaces/:workspaceId/assessments" element={<AssessmentsPage />} />
+          <Route path="/workspaces/:workspaceId/assessments/:assessmentId" element={<AssessmentDetailPage />} />
           <Route path="/workspaces/:workspaceId/tools" element={<ToolsCatalogPage />} />
           <Route path="/workspaces/:workspaceId/tool-runs" element={<ToolRunsPage />} />
           <Route path="/workspaces/:workspaceId/tool-runs/:runId" element={<ToolRunDetailPage />} />
+          <Route path="/workspaces/:workspaceId/reports" element={<ReportsPage />} />
           <Route path="/tools/sync" element={<ToolSyncPage />} />
           <Route path="/settings/profile" element={<ProfilePage />} />
           <Route path="/settings/security" element={<SecurityPage />} />
@@ -110,6 +129,7 @@ export function AppRouter() {
           <Route path="/admin/methodologies/:methodologyId" element={<MethodologyDetailPage />} />
           <Route path="/admin/methodologies/:methodologyId/metrics" element={<MethodologyMetricsPage />} />
           <Route path="/admin/tools" element={<AdminToolsPage />} />
+          <Route path="/admin/permissions" element={<PermissionsPage />} />
         </Route>
 
         {/* 404 fallback */}
